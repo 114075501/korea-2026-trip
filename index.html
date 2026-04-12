@@ -51,9 +51,13 @@
         }
 
         #dayTabs { -webkit-overflow-scrolling: touch; }
+        
+        /* 錯誤警告提示樣式 */
+        #env-warning { display: none; background: #fee2e2; color: #991b1b; padding: 10px; text-align: center; font-size: 12px; border-bottom: 1px solid #fecaca; }
     </style>
 </head>
 <body class="text-gray-800">
+    <div id="env-warning">⚠️ 偵測到代碼運行於外部環境，雲端同步功能將無法運作。</div>
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4">
@@ -91,14 +95,22 @@
         import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
         import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        
-        // --- 全域變數定義 ---
+        // --- 安全性與環境保護處理 ---
+        let firebaseConfig = null;
+        try {
+            firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        } catch(e) { console.error("Firebase Config Error"); }
+
         const MASTER_SYNC_ID = "52404280d0702694"; 
-        const appId = MASTER_SYNC_ID;
+        const envAppId = typeof __app_id !== 'undefined' ? __app_id : MASTER_SYNC_ID;
+        const appId = envAppId;
+
+        // 如果不在 Gemini 環境，顯示警告
+        if (!firebaseConfig) {
+            document.getElementById('env-warning').style.display = 'block';
+            document.getElementById('syncStatus').innerHTML = '<i class="fas fa-eye-slash mr-1"></i>僅供預覽 (無雲端)';
+            document.getElementById('syncStatus').className = 'text-[10px] bg-gray-100 text-gray-500 px-2 py-1 rounded-full font-bold flex items-center';
+        }
 
         window.appState = { user: null, imageOverrides: {}, currentDay: 1, currentSubTab: 'itinerary' };
 
@@ -124,7 +136,7 @@
                 checkOut: "4/19 (日) 12:00 PM",
                 note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。抵達後請先入住休息。",
                 img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
-                map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
+                map: "https://map.naver.com/v5/search/호텔더디자이너斯홍대"
             },
             flight: {
                 code: "K6VFNM",
@@ -148,12 +160,13 @@
             3: { reminders: ["13:40 一定停下來吃午餐", "16:05 前後一定去 Brandy Melville，不要再往後拖", "19:40 一到就吃晚餐，不要硬塞更多店", "20:40 後若腿痠，就直接回弘大"], events: [
                 { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-home", note: "B1~3F 共四層,主打居家服飾、配件、收納包等。定位偏 home/lifestyle。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/v5/search/뉴뉴하우스성수" },
                 { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：義大利麵 / 燉飯 / 漢堡 / 早午餐 / 韓式湯飯 / 麵包咖啡店。" },
-                { id: "d3-6", time: "16:05", title: "Brandy Melville Seongsu", stay: "45～75 分鐘", icon: "fa-star", note: "韓國首店。one size 偏小版型, 建議務必現場試穿。Jennie、Rosé 同款話題店。", img: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800", map: "https://map.naver.com/v5/search/브랜디멜빌" },
+                { id: "d3-6", time: "16:05", title: "Brandy Melville Seongsu", stay: "45～75 分鐘", location: "聖水洞 272-3", icon: "fa-star", note: "韓國首店。one size 偏小版型, 建議務必現場試穿。Jennie、Rosé 同款話題店。", img: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800", map: "https://map.naver.com/v5/search/브랜디멜빌" },
                 { id: "d3-dinner", time: "19:40", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 鍋物 / 湯飯 / 炸豬排 / 餐酒館。" }
             ] },
             4: { reminders: ["13:40 一定停下來吃午餐或補小吃", "17:40 前一定進入最後一段飾品區", "19:00 若前面已逛太久，後面服飾鞋店直接砍掉", "20:30 後就回弘大，不留太晚"], events: [
                 { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", location: "明洞站地下街 B-10", icon: "fa-music", note: "主打 K-pop 專輯挖寶。價格常比大店便宜。新舊專輯皆有。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://map.naver.com/v5/search/씨티레코드" },
                 { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃時間", stay: "1 小時", icon: "fa-utensils", note: "建議：刀削麵 / 參雞湯 / 湯飯。或糖餅 / 熱狗 / 魚板 / 雞蛋糕。" },
+                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35～60 分鐘", location: "明洞 4 路 22", icon: "fa-ring", note: "飾品、襪子、帽子天堂。東大門人氣店分店。規模極大。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/v5/search/뉴뉴명동" },
                 { id: "d4-dinner", time: "20:00", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 炸雞 / 豬腳 / 部隊鍋 / 牛骨湯 / 拉麵。" }
             ] },
             5: { reminders: ["11:20 一定完成退房寄行李", "17:30 一定停止購物", "18:00 一定開始吃飯", "18:40 一定回飯店拿行李", "20:10 這班 AREX 不要錯過"], events: [
@@ -164,7 +177,7 @@
         };
 
         window.saveImage = async (spotId, base64) => {
-            if (!window.appState.user) return;
+            if (!window.appState.user || !firebaseConfig) return;
             const statusEl = document.getElementById('syncStatus');
             statusEl.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>同步中...';
             try {
@@ -263,6 +276,13 @@
         };
 
         const startApp = async () => {
+            // 如果沒有 Firebase Config，則跳過初始化直接渲染
+            if (!firebaseConfig) {
+                window.renderContent();
+                window.showDay(1);
+                return;
+            }
+
             const initAuth = async () => {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
