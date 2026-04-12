@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 韓國追星購物行程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        :root { --primary-blue: #3b82f6; --food-orange: #fb923c; }
+        
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.6;
+        }
+
+        /* 確保全頁面流暢滾動，解決手機小框滑動問題 */
+        html, body { height: auto; overflow-x: hidden; scroll-behavior: smooth; }
+
+        .tab-active { border-bottom: 3px solid var(--primary-blue); color: var(--primary-blue); font-weight: bold; }
+        .sub-tab-active { background-color: var(--primary-blue); color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        
+        .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; z-index: 0; }
+        
+        .spot-card { transition: transform 0.2s; border-radius: 1.25rem; overflow: hidden; background: white; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        .boarding-pass { background: white; border-top: 10px solid #FFB800; position: relative; }
+        .boarding-pass::after { content: ''; position: absolute; left: 70%; top: 0; bottom: 0; width: 1px; border-left: 1px dashed #e5e7eb; }
+        .hotel-ticket { background: #fff; border-left: 10px solid var(--primary-blue); }
+
+        .change-img-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            border-radius: 99px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        #dayTabs { -webkit-overflow-scrolling: touch; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between mb-3">
+                <h1 class="text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
+                <div id="syncStatus" class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-1 rounded-full font-bold flex items-center">
+                    <i class="fas fa-cloud mr-1"></i>雲端已同步
+                </div>
+            </div>
+            <div class="flex space-x-6 overflow-x-auto no-scrollbar border-b border-gray-100" id="dayTabs">
+                <button onclick="window.showDay(1)" id="tab1" class="tab-btn pb-2 whitespace-nowrap text-sm tab-active">4/15 (三)</button>
+                <button onclick="window.showDay(2)" id="tab2" class="tab-btn pb-2 whitespace-nowrap text-sm">4/16 (四)</button>
+                <button onclick="window.showDay(3)" id="tab3" class="tab-btn pb-2 whitespace-nowrap text-sm">4/17 (五)</button>
+                <button onclick="window.showDay(4)" id="tab4" class="tab-btn pb-2 whitespace-nowrap text-sm">4/18 (六)</button>
+                <button onclick="window.showDay(5)" id="tab5" class="tab-btn pb-2 whitespace-nowrap text-sm">4/19 (日)</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6">
+        <div id="subTabContainer" class="hidden flex justify-center space-x-1 mb-6 bg-gray-200 p-1 rounded-xl w-full max-w-xs mx-auto">
+            <button onclick="window.switchSubTab('itinerary')" id="subTab-itinerary" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all sub-tab-active">行程</button>
+            <button onclick="window.switchSubTab('hotel')" id="subTab-hotel" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all">Hotel</button>
+            <button onclick="window.switchSubTab('flight')" id="subTab-flight" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all">Flight</button>
+        </div>
+
+        <div id="itineraryWrapper" class="relative">
+            <div class="timeline-line" id="timelineLine"></div>
+            <div id="dayContent" class="space-y-6 pb-32"></div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // --- 全域變數定義 ---
+        const MASTER_SYNC_ID = "52404280d0702694"; 
+        const appId = MASTER_SYNC_ID;
+
+        window.appState = { user: null, imageOverrides: {}, currentDay: 1, currentSubTab: 'itinerary' };
+
+        const compressImage = (base64Str, maxWidth = 1000) => {
+            return new Promise((resolve) => {
+                const img = new Image(); img.src = base64Str;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width; let height = img.height;
+                    if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; }
+                    canvas.width = width; canvas.height = height;
+                    const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', 0.6));
+                };
+            });
+        };
+
+        const tripCommonData = {
+            hotel: {
+                name: "Hotel The Designers Hongdae",
+                addr: "서울 마포구 양화로 86 (373-9 Seogyo-dong)",
+                checkIn: "4/15 (三) 3:00 PM",
+                checkOut: "4/19 (日) 12:00 PM",
+                note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。抵達後請先入住休息。",
+                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
+                map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
+            },
+            flight: {
+                code: "K6VFNM",
+                out: { no: "IT 602", date: "4/15", dep: "TPE 20:00", arr: "ICN 23:30" },
+                ret: { no: "IT 603", date: "4/20", dep: "ICN 00:30", arr: "TPE 02:15" }
+            }
+        };
+
+        const itineraryData = {
+            1: { reminders: ["一出機場直接往巴士月台走", "飯店入住後直接休息，不要再逛街"], events: [
+                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。建議先在機場航廈內尋找售票機。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
+                { id: "d1-2", time: "23:50", title: "宵夜補給", location: "機場/飯店旁便利商店", icon: "fa-cookie-bite", note: "推薦：飯糰、香蕉牛奶、泡麵。今日不排正式晚餐。", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800" },
+                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "費用 17,000 韓元。目標搭乘 00:10 或 00:40 班次。", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
+            ], ...tripCommonData },
+            2: { reminders: ["12:30 一定開始吃午餐", "13:30 一定往 Color of You 方向移動", "15:10 Color of You 結束後，不回頭，直接接 7 號出口 K-pop 線", "20:30 後若已累，就 CHAAKAN 跟美妝二選一，不再全逛"], events: [
+                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1～2 小時", location: "弘大入口站 4 號出口", icon: "fa-shopping-bag", note: "這裡是弘大逛街起點。週末早開30分。若要逛限定快閃店、拍照建議抓1~2小時。這家是百貨複合空間。", img: "https://drive.google.com/uc?export=view&id=16t8tW_9AO6bs6x5XCRuW1leXXG3nN1LO", map: "https://map.naver.com/v5/search/AK플라자홍대" },
+                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：炸豬排 / 湯飯 / 拌飯 / 拉麵 / 咖哩 / 貝果咖啡店。原則：看到排隊短的就吃。" },
+                { id: "d2-4", time: "14:00", title: "Color of You 鑑定", stay: "50 分鐘", location: "東校路 209 3F", icon: "fa-palette", note: "預約 #26KK239040517。確認適合妝容。若兩人都要挑卡或DIY可抓至2小時。", map: "https://map.naver.com/v5/search/컬러오브유" },
+                { id: "d2-dinner", time: "19:30", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 辣炒雞排 / 部隊鍋 / 紫菜飯捲＋辣炒年糕 / 炸雞 / 湯飯。" }
+            ] },
+            3: { reminders: ["13:40 一定停下來吃午餐", "16:05 前後一定去 Brandy Melville，不要再往後拖", "19:40 一到就吃晚餐，不要硬塞更多店", "20:40 後若腿痠，就直接回弘大"], events: [
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-home", note: "B1~3F 共四層,主打居家服飾、配件、收納包等。定位偏 home/lifestyle。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/v5/search/뉴뉴하우스성수" },
+                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：義大利麵 / 燉飯 / 漢堡 / 早午餐 / 韓式湯飯 / 麵包咖啡店。" },
+                { id: "d3-6", time: "16:05", title: "Brandy Melville Seongsu", stay: "45～75 分鐘", icon: "fa-star", note: "韓國首店。one size 偏小版型, 建議務必現場試穿。Jennie、Rosé 同款話題店。", img: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800", map: "https://map.naver.com/v5/search/브랜디멜빌" },
+                { id: "d3-dinner", time: "19:40", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 鍋物 / 湯飯 / 炸豬排 / 餐酒館。" }
+            ] },
+            4: { reminders: ["13:40 一定停下來吃午餐或補小吃", "17:40 前一定進入最後一段飾品區", "19:00 若前面已逛太久，後面服飾鞋店直接砍掉", "20:30 後就回弘大，不留太晚"], events: [
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", location: "明洞站地下街 B-10", icon: "fa-music", note: "主打 K-pop 專輯挖寶。價格常比大店便宜。新舊專輯皆有。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://map.naver.com/v5/search/씨티레코드" },
+                { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃時間", stay: "1 小時", icon: "fa-utensils", note: "建議：刀削麵 / 參雞湯 / 湯飯。或糖餅 / 熱狗 / 魚板 / 雞蛋糕。" },
+                { id: "d4-dinner", time: "20:00", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 炸雞 / 豬腳 / 部隊鍋 / 牛骨湯 / 拉麵。" }
+            ] },
+            5: { reminders: ["11:20 一定完成退房寄行李", "17:30 一定停止購物", "18:00 一定開始吃飯", "18:40 一定回飯店拿行李", "20:10 這班 AREX 不要錯過"], events: [
+                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", location: "Hotel", icon: "fa-suitcase", note: "11:20 必完成。寄放行李於飯店櫃檯。記得清點隨身物品。", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800", map: "https://map.naver.com/v5/search/호텔더디자이너斯홍대" },
+                { id: "d5-lunch", time: "12:00", title: "早午餐時間", stay: "1 小時", icon: "fa-bread-slice", note: "選項：炸豬排 / 湯飯 / 咖哩 / 拉麵 / 早午餐盤。" },
+                { id: "d5-arex", time: "20:10", title: "AREX 首爾站 → 仁川 T1", stay: "43 分鐘", location: "首爾站 B7F", icon: "fa-train", note: "發車死線：20:10。請務必提早抵達換票上車。", img: "https://images.unsplash.com/photo-1532105956691-164993510522?q=80&w=800", map: "https://www.airportrailroad.com/ticket/rsv" }
+            ], ...tripCommonData }
+        };
+
+        window.saveImage = async (spotId, base64) => {
+            if (!window.appState.user) return;
+            const statusEl = document.getElementById('syncStatus');
+            statusEl.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>同步中...';
+            try {
+                const compressed = await compressImage(base64);
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'customImages', spotId), { data: compressed }, { merge: true });
+                statusEl.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
+            } catch (err) { statusEl.innerHTML = '同步失敗'; }
+        };
+
+        window.updateSpotImage = (input, spotId) => {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => window.saveImage(spotId, e.target.result);
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        window.showDay = (dayNum) => {
+            window.appState.currentDay = dayNum; window.appState.currentSubTab = 'itinerary';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            const tab = document.getElementById(`tab${dayNum}`);
+            if (tab) tab.classList.add('tab-active');
+            const subTabContainer = document.getElementById('subTabContainer');
+            subTabContainer.className = (dayNum === 1 || dayNum === 5) ? 'flex justify-center space-x-1 mb-6 bg-gray-200 p-1 rounded-xl w-full max-w-xs mx-auto' : 'hidden';
+            window.renderContent(); window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.switchSubTab = (type) => {
+            window.appState.currentSubTab = type;
+            document.querySelectorAll('.sub-tab').forEach(btn => btn.classList.remove('sub-tab-active'));
+            document.getElementById(`subTab-${type}`).classList.add('sub-tab-active');
+            window.renderContent();
+        };
+
+        window.renderContent = () => {
+            const dayData = itineraryData[window.appState.currentDay];
+            const content = document.getElementById('dayContent');
+            const timeline = document.getElementById('timelineLine');
+            if (!dayData) return;
+            timeline.classList.toggle('hidden', (window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab !== 'itinerary');
+
+            if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'hotel') {
+                const h = dayData.hotel;
+                content.innerHTML = `<div class="hotel-ticket rounded-2xl p-6 shadow-md border bg-white">
+                    <div class="flex justify-between items-start mb-4"><h2 class="text-xl font-bold">${h.name}</h2><i class="fas fa-hotel text-blue-500 text-2xl"></i></div>
+                    <div class="space-y-4 text-sm"><p class="text-gray-500 font-bold">${h.addr}</p><div class="grid grid-cols-2 gap-3"><div class="bg-blue-50 p-3 rounded-xl"><strong>入住：</strong><br>${h.checkIn}</div><div class="bg-orange-50 p-3 rounded-xl"><strong>退房：</strong><br>${h.checkOut}</div></div>
+                    <div class="relative group mt-4"><img src="${window.appState.imageOverrides['hotel'] || h.img}" class="w-full h-44 object-cover rounded-xl shadow-inner">
+                    <label class="change-img-btn"><i class="fas fa-camera"></i>更換憑證<input type="file" class="hidden" accept="image/*" onchange="window.updateSpotImage(this, 'hotel')"></label></div>
+                    <p class="text-xs text-gray-500 italic p-3 bg-gray-50 rounded-lg mt-3">${h.note}</p></div></div>`;
+            } else if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'flight') {
+                const f = tripCommonData.flight;
+                content.innerHTML = `<div class="space-y-4"><div class="boarding-pass rounded-2xl p-5 shadow-md border bg-white">
+                    <div class="flex justify-between mb-4"><span class="text-orange-500 font-black">Tigerair</span><span class="bg-black text-white px-2 py-0.5 rounded text-[10px]">${f.code}</span></div>
+                    <div class="flex justify-between text-center items-center"><div class="flex-1"><p class="text-2xl font-black">TPE</p><p class="text-[10px]">Taipei T1</p></div><div class="text-orange-400 px-4"><i class="fas fa-plane"></i></div><div class="flex-1"><p class="text-2xl font-black">ICN</p><p class="text-[10px]">Seoul T1</p></div></div>
+                    <div class="mt-4 pt-4 border-t flex justify-between text-[11px]"><span>去程 ${f.out.date} ${f.out.no}</span><span>起飛 ${f.out.dep}</span></div></div>
+                    <div class="mt-2 text-center">${window.appState.imageOverrides['flight-memo'] ? `<img src="${window.appState.imageOverrides['flight-memo']}" class="inline-block max-w-full rounded-2xl shadow">` : ''}</div></div>`;
+            } else {
+                let html = `<div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-xl shadow-sm">
+                    <h2 class="text-[10px] font-bold text-amber-900 mb-2 uppercase tracking-widest">何時該硬停手去下一站</h2>
+                    <ul class="space-y-2">${dayData.reminders.map(r => {
+                        const isD2Special = (window.appState.currentDay === 2 && r.startsWith("13:30"));
+                        const isD5Special = (window.appState.currentDay === 5 && (r.startsWith("11:20") || r.startsWith("20:10")));
+                        const style = (isD2Special || isD5Special) ? "font-size: 1.1em; font-weight: 700; color: red;" : "text-amber-800 text-xs";
+                        return `<li class="flex items-start" style="${style}"><i class="fas fa-stopwatch mt-1 mr-2 text-amber-400"></i>${r}</li>`;
+                    }).join('')}</ul>
+                </div>`;
+
+                dayData.events.forEach((event) => {
+                    const isFood = event.icon.includes('utensils') || event.icon.includes('bowl') || event.icon.includes('cookie') || event.icon.includes('bread');
+                    const currentImg = window.appState.imageOverrides[event.id] || event.img;
+                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full ${isFood ? 'bg-orange-400' : 'bg-blue-500'} border-4 border-white z-10 shadow-sm"></div>
+                        <div class="bg-white rounded-2xl shadow-sm border ${isFood ? 'border-orange-100' : 'border-gray-100'} flex flex-col spot-card">
+                            <div class="h-44 relative group">
+                                <img src="${currentImg}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'">
+                                <label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" accept="image/*" onchange="window.updateSpotImage(this, '${event.id}')"></label>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>
+                                    ${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖連結</a>` : ''}
+                                </div>
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    <span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>
+                                    ${event.stay ? `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">建議：${event.stay}</span>` : ''}
+                                </div>
+                                <div class="${isFood ? 'bg-orange-50' : 'bg-gray-50'} p-3 rounded-xl">
+                                    <p class="text-[10px] ${isFood ? 'text-orange-400' : 'text-gray-400'} font-bold uppercase mb-1 flex items-center"><i class="fas fa-info-circle mr-1"></i>資訊與美食建議</p>
+                                    <p class="text-xs text-gray-700 leading-relaxed">${event.note}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                content.innerHTML = html;
+            }
+        };
+
+        const startApp = async () => {
+            const initAuth = async () => {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            };
+            
+            await initAuth();
+
+            onAuthStateChanged(auth, (u) => {
+                window.appState.user = u;
+                if (u) {
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'customImages'), (snap) => {
+                        const news = {}; snap.forEach(d => news[d.id] = d.data().data);
+                        window.appState.imageOverrides = news; window.renderContent(); 
+                    }, (error) => {
+                        console.error("Firestore Listener Error:", error);
+                    });
+                }
+            });
+            window.showDay(1);
+        };
+        
+        startApp();
+    </script>
+</body>
+</html>
