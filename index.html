@@ -423,7 +423,7 @@
     import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
     import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-    // 這是你截圖中的金鑰資訊
+    // Firebase Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78",
         authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
@@ -433,20 +433,19 @@
         appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
     };
 
-    const MASTER_SYNC_ID = "seoul-family-trip-2026-sync-v1"; 
+    // Use a simpler ID for your own database to avoid deep nesting issues
+    const MASTER_SYNC_ID = "seoul-2026"; 
 
-    // 初始化
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const syncStatus = document.getElementById('syncStatus');
 
-    // 1. 處理圖片上傳的進入點 (讓 HTML 上的 onchange 抓得到)
     window.handleUpload = (input, spotId) => {
         if (window.cloudSaveImage) { 
             window.cloudSaveImage(input, spotId); 
         } else { 
-            alert("雲端還在熱機中，請稍候再試！"); 
+            alert("雲端同步初始化中，請稍後再試！"); 
         }
     };
 
@@ -454,18 +453,21 @@
         try {
             await signInAnonymously(auth);
             
-            // 2. 監聽雲端數據：當資料庫有新圖，立刻更新畫面
-            onSnapshot(collection(db, 'artifacts', MASTER_SYNC_ID, 'public', 'data', 'customImages'), (snap) => {
+            // Listen for changes in the 'customImages' collection
+            onSnapshot(collection(db, MASTER_SYNC_ID), (snap) => {
                 const news = {};
-                snap.forEach(d => news[d.id] = d.data().data);
+                snap.forEach(d => {
+                    news[d.id] = d.data().data;
+                });
+                // Update the app's global state and force a re-render
                 window.appState.imageOverrides = news; 
-                window.renderContent(); // 重新渲染畫面
+                window.renderContent(); 
+                syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
             });
 
-            // 3. 定義上傳函數
             window.cloudSaveImage = async (input, spotId) => {
                 if (!input.files[0]) return;
-                syncStatus.innerText = '處理中...';
+                syncStatus.innerText = '正在處理圖片...';
                 
                 const reader = new FileReader();
                 reader.onload = async (e) => {
@@ -473,22 +475,21 @@
                     const img = new Image(); 
                     img.src = e.target.result;
                     img.onload = async () => {
-                        // 壓縮圖片避免超出資料庫限制
                         let w = img.width; let h = img.height;
                         if (w > 1000) { h *= 1000 / w; w = 1000; }
                         canvas.width = w; canvas.height = h;
                         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        const compressed = canvas.toDataURL('image/jpeg', 0.6);
+                        // Compress to JPEG to stay under Firestore document size limits
+                        const compressed = canvas.toDataURL('image/jpeg', 0.5);
                         
                         try {
-                            // 寫入你的專屬 Firestore 路徑
-                            await setDoc(doc(db, 'artifacts', MASTER_SYNC_ID, 'public', 'data', 'customImages', spotId), 
+                            // Save directly into the collection named after your trip
+                            await setDoc(doc(db, MASTER_SYNC_ID, spotId), 
                                 { data: compressed }, 
                                 { merge: true }
                             );
-                            syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>已同步';
                         } catch (err) { 
-                            console.error(err);
+                            console.error("Upload error:", err);
                             syncStatus.innerText = '同步失敗'; 
                         }
                     };
@@ -496,7 +497,7 @@
                 reader.readAsDataURL(input.files[0]);
             };
         } catch (e) {
-            console.error("連線錯誤:", e);
+            console.error("Connection Error:", e);
         }
     }
 
