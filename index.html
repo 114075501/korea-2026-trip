@@ -1,3 +1,1246 @@
-<html>
-    
-</html>
+<!DOCTYPE html>
+<html lang="zh-TW"><head><script>(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6IjU1ODA5YzI0OTlhNDMxNDcyMjY2ZDljOTY0ZWRiZjAyZTJhMjYwNjgiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIwMDA5NzQwMDk3ODQzMjg0NDE1NSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjXzI0OTU0MzYwMzRiNWE1ODhfY2FudmFzX2FwcC5odG1sLTY2OSJ9LCJleHAiOjE3NzYwNTg2MzIsImlhdCI6MTc3NjA1NTAzMiwiYWxnIjoiUlMyNTYifQ.yEdV2TNS2Qbm6OL-3qafK_iUBr_7atQDWxXgHMiISZVqd0dnBzdtT0tTGo8nQh-pk8FYP1S57R984wtOGiroLHm_kUKrkir3yXP-q1wbymr_envVwdki_zZUOtL2qGU-WVuUr9jZUro9elavvDHMSb6Vca5sZon0YCe8-F_yHKZ1oF3FFFCIDsDu0PXhbIdgH-q3TO-G2GEynLBhwGTVCqdnzttwedFnKPBAeNNS7V84IeHp1W78gr3AX7UiVYDyojUlIdQOMC0yMI3xQ1luIj2vaRcPPKp7kNZMIyOj8mm_1_iy2rkOJcO1KMUAnzCsYsKvGaoo8l3aJwkFc5pbKA","c_2495436034b5a588_canvas_app.html-669")</script><script>(function(){'use strict';var h=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,d){if(a==Array.prototype||a==Object.prototype)return a;a[b]=d.value;return a};function l(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var d=a[b];if(d&&d.Math==Math)return d}throw Error("Cannot find global object");}var n=l(this);
+function p(a,b){if(b)a:{var d=n;a=a.split(".");for(var c=0;c<a.length-1;c++){var e=a[c];if(!(e in d))break a;d=d[e]}a=a[a.length-1];c=d[a];b=b(c);b!=c&&b!=null&&h(d,a,{configurable:!0,writable:!0,value:b})}}function r(a){function b(c){return a.next(c)}function d(c){return a.throw(c)}return new Promise(function(c,e){function f(g){g.done?c(g.value):Promise.resolve(g.value).then(b,d).then(f,e)}f(a.next())})}function t(a){return r(a())}
+p("Object.values",function(a){return a?a:function(b){var d=[],c;for(c in b)Object.prototype.hasOwnProperty.call(b,c)&&d.push(b[c]);return d}});p("Array.prototype.includes",function(a){return a?a:function(b,d){var c=this;c instanceof String&&(c=String(c));var e=c.length;d=d||0;for(d<0&&(d=Math.max(d+e,0));d<e;d++){var f=c[d];if(f===b||Object.is(f,b))return!0}return!1}});/*
+
+ MIT License
+
+ Copyright (c) 2017-2023 W.Y.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+*/
+function u(a,b){const d=a.style;b.backgroundColor&&(d.backgroundColor=b.backgroundColor);b.width&&(d.width=`${b.width}px`);b.height&&(d.height=`${b.height}px`);const c=b.style;c!=null&&Object.keys(c).forEach(e=>{d[e]=c[e]})};var v=(()=>{let a=0;return()=>{a+=1;return`u${`0000${(Math.random()*1679616<<0).toString(36)}`.slice(-4)}${a}`}})();function w(a){const b=[];for(let d=0,c=a.length;d<c;d++)b.push(a[d]);return b}let x=null;function y(a={}){return x?x:a.l?x=a.l:x=w(window.getComputedStyle(document.documentElement))}function z(a,b){return(a=(a.ownerDocument.defaultView||window).getComputedStyle(a).getPropertyValue(b))?parseFloat(a.replace("px","")):0}
+function A(a,b={}){var d;if(!(d=b.width)){d=z(a,"border-left-width");var c=z(a,"border-right-width");d=a.clientWidth+d+c}(b=b.height)||(b=z(a,"border-top-width"),c=z(a,"border-bottom-width"),b=a.clientHeight+b+c);return{width:d,height:b}}function B(a){return new Promise((b,d)=>{const c=new Image;c.onload=()=>{c.decode().then(()=>{requestAnimationFrame(()=>b(c))})};c.onerror=d;c.crossOrigin="anonymous";c.decoding="async";c.src=a})}
+function C(a){return t(function*(){return Promise.resolve().then(()=>(new XMLSerializer).serializeToString(a)).then(encodeURIComponent).then(b=>`data:image/svg+xml;charset=utf-8,${b}`)})}
+function D(a,b,d){return t(function*(){const c=document.createElementNS("http://www.w3.org/2000/svg","svg"),e=document.createElementNS("http://www.w3.org/2000/svg","foreignObject");c.setAttribute("width",`${b}`);c.setAttribute("height",`${d}`);c.setAttribute("viewBox",`0 0 ${b} ${d}`);e.setAttribute("width","100%");e.setAttribute("height","100%");e.setAttribute("x","0");e.setAttribute("y","0");e.setAttribute("externalResourcesRequired","true");c.appendChild(e);e.appendChild(a);return C(c)})}
+var E=(a,b)=>{if(a instanceof b)return!0;a=Object.getPrototypeOf(a);return a===null?!1:a.constructor.name===b.name||E(a,b)};function F(a,b){return y(b).map(d=>{const c=a.getPropertyValue(d),e=a.getPropertyPriority(d);return`${d}: ${c}${e?" !important":""};`}).join(" ")}
+function G(a,b,d,c){a=window.getComputedStyle(a,d);var e=a.getPropertyValue("content");if(e!==""&&e!=="none"){var f=v();try{b.className=`${b.className} ${f}`}catch(k){return}e=document.createElement("style");var g=e.appendChild;d=`.${f}:${d}`;a.cssText?(c=a.getPropertyValue("content"),c=`${a.cssText} content: '${c.replace(/'|"/g,"")}';`):c=F(a,c);g.call(e,document.createTextNode(`${d}{${c}}`));b.appendChild(e)}};function H(a){return a.search(/^(data:)/)!==-1}function I(a,b,d){return t(function*(){const c=yield fetch(a,b);if(c.status===404)throw Error(`Resource "${c.url}" not found`);const e=yield c.blob();return new Promise((f,g)=>{const k=new FileReader;k.onerror=g;k.onloadend=()=>{try{f(d({o:c,result:k.result}))}catch(m){g(m)}};k.readAsDataURL(e)})})}const J={};function K(a,b,d){let c=a.replace(/\?.*/,"");d&&(c=a);/ttf|otf|eot|woff2?/i.test(c)&&(c=c.replace(/.*\//,""));return b?`[${b}]${c}`:c}
+function L(a,b,d){return t(function*(){const c=K(a,b,d.C);if(J[c]!=null)return J[c];d.u&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime());let e;try{const f=yield I(a,d.i,({o:g,result:k})=>{b||(b=g.headers.get("Content-Type")||"");return k.split(/,/)[1]});e=`data:${b};base64,${f}`}catch(f){e=d.B||""}return J[c]=e})};const M={P:"application/font-woff",R:"application/font-woff",N:"application/font-truetype",v:"application/vnd.ms-fontobject",H:"image/png",F:"image/jpeg",D:"image/jpeg",A:"image/gif",M:"image/tiff",L:"image/svg+xml",O:"image/webp"};function N(a){return(a=/\.([^./]*?)$/g.exec(a))?a[1]:""};function O(a){return t(function*(){const b=a.toDataURL();return b==="data:,"?a.cloneNode(!1):B(b)})}function aa(a,b){return t(function*(){if(a.currentSrc){var d=document.createElement("canvas");const c=d.getContext("2d");d.width=a.clientWidth;d.height=a.clientHeight;c==null||c.drawImage(a,0,0,d.width,d.height);d=d.toDataURL();return B(d)}d=a.poster;d=yield L(d,M[N(d).toLowerCase()]||"",b);return B(d)})}
+function ba(a,b){return t(function*(){try{let d;if(a==null?0:(d=a.contentDocument)==null?0:d.body)return yield P(a.contentDocument.body,b,!0)}catch(d){}return a.cloneNode(!1)})}function ca(a,b){return t(function*(){return E(a,HTMLCanvasElement)?O(a):E(a,HTMLVideoElement)?aa(a,b):E(a,HTMLIFrameElement)?ba(a,b):a.cloneNode(a.tagName!=null&&a.tagName.toUpperCase()==="SVG")})}
+function da(a,b,d){return t(function*(){if(b.tagName!=null&&b.tagName.toUpperCase()==="SVG")return b;let c=[];if(a.tagName!=null&&a.tagName.toUpperCase()==="SLOT"&&a.assignedNodes)c=w(a.assignedNodes());else{let e;if(E(a,HTMLIFrameElement)&&((e=a.contentDocument)==null?0:e.body))c=w(a.contentDocument.body.childNodes);else{let f;c=w(((f=a.shadowRoot)!=null?f:a).childNodes)}}if(c.length===0||E(a,HTMLVideoElement))return b;yield c.reduce((e,f)=>e.then(()=>P(f,d)).then(g=>{g&&b.appendChild(g)}),Promise.resolve());
+return b})}function ea(a,b,d){const c=b.style;if(c){var e=window.getComputedStyle(a);e.cssText?(c.cssText=e.cssText,c.transformOrigin=e.transformOrigin):y(d).forEach(f=>{let g=e.getPropertyValue(f);f==="font-size"&&g.endsWith("px")&&(g=`${Math.floor(parseFloat(g.substring(0,g.length-2)))-.1}px`);E(a,HTMLIFrameElement)&&f==="display"&&g==="inline"&&(g="block");f==="d"&&b.getAttribute("d")&&(g=`path(${b.getAttribute("d")})`);c.setProperty(f,g,e.getPropertyPriority(f))})}}
+function fa(a,b){E(a,HTMLSelectElement)&&(b=Array.from(b.children).find(d=>a.value===d.getAttribute("value")))&&b.setAttribute("selected","")}
+function ha(a,b){return t(function*(){var d=a.querySelectorAll?a.querySelectorAll("use"):[];if(d.length===0)return a;var c={};for(var e=0;e<d.length;e++){var f=d[e].getAttribute("xlink:href");if(f){const g=document.querySelector(f);a.querySelector(f)||!g||c[f]||(c[f]=yield P(g,b,!0))}}d=Object.values(c);if(d.length){c=document.createElementNS("http://www.w3.org/1999/xhtml","svg");c.setAttribute("xmlns","http://www.w3.org/1999/xhtml");c.style.position="absolute";c.style.width="0";c.style.height="0";
+c.style.overflow="hidden";c.style.display="none";e=document.createElementNS("http://www.w3.org/1999/xhtml","defs");c.appendChild(e);for(f=0;f<d.length;f++)e.appendChild(d[f]);a.appendChild(c)}return a})}
+function P(a,b,d){return t(function*(){return d||!b.filter||b.filter(a)?Promise.resolve(a).then(c=>ca(c,b)).then(c=>da(a,c,b)).then(c=>{E(c,Element)&&(ea(a,c,b),G(a,c,":before",b),G(a,c,":after",b),E(a,HTMLTextAreaElement)&&(c.textContent=a.value),E(a,HTMLInputElement)&&c.setAttribute("value",a.value),fa(a,c));return c}).then(c=>ha(c,b)):null})};const Q=/url\((['"]?)([^'"]+?)\1\)/g,ia=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,ja=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function ka(a){const b=[];a.replace(Q,(d,c,e)=>{b.push(e);return d});return b.filter(d=>!H(d))}
+function la(a,b,d,c){return t(function*(){try{const e=d?(new URL(b,d||void 0)).toString():b;let f;f=yield L(e,M[N(b).toLowerCase()]||"",c);return a.replace(new RegExp(`(url\\(['"]?)(${b.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")})(['"]?\\))`,"g"),`$1${f}$3`)}catch(e){}return a})}function ma(a,{I:b}){return b?a.replace(ja,d=>{for(;;){const [c,,e]=ia.exec(d)||[],f=c,g=e;if(!g)return"";if(g===b)return`src: ${f};`}}):a}
+function R(a,b,d){return t(function*(){if(a.search(Q)===-1)return a;const c=ma(a,d);return ka(c).reduce((e,f)=>e.then(g=>la(g,f,b,d)),Promise.resolve(c))})};function S(a,b,d){return t(function*(){var c;const e=(c=b.style)==null?void 0:c.getPropertyValue(a);return e?(c=yield R(e,null,d),b.style.setProperty(a,c,b.style.getPropertyPriority(a)),!0):!1})}function na(a,b){return t(function*(){(yield S("background",a,b))||(yield S("background-image",a,b));(yield S("mask",a,b))||(yield S("-webkit-mask",a,b))||(yield S("mask-image",a,b))||(yield S("-webkit-mask-image",a,b))})}
+function oa(a,b){return t(function*(){const d=E(a,HTMLImageElement);if(d&&!H(a.src)||E(a,SVGImageElement)&&!H(a.href.baseVal)){var c=d?a.src:a.href.baseVal,e=yield L(c,M[N(c).toLowerCase()]||"",b);yield new Promise((f,g)=>{a.onload=f;a.onerror=b.m?(...k)=>{try{f(b.m(...k))}catch(m){g(m)}}:g;a.decode&&(a.decode=f);a.loading==="lazy"&&(a.loading="eager");d?(a.srcset="",a.src=e):a.href.baseVal=e})}})}
+function pa(a,b){return t(function*(){const d=w(a.childNodes).map(c=>T(c,b));yield Promise.all(d).then(()=>a)})}function T(a,b){return t(function*(){E(a,Element)&&(yield na(a,b),yield oa(a,b),yield pa(a,b))})};const U={};function V(a){return t(function*(){var b=U[a];if(b!=null)return b;b=yield(yield fetch(a)).text();b={url:a,cssText:b};return U[a]=b})}function W(a,b){return t(function*(){let d=a.cssText;const c=/url\(["']?([^"')]+)["']?\)/g,e=(d.match(/url\([^)]+\)/g)||[]).map(f=>t(function*(){let g=f.replace(c,"$1");g.startsWith("https://")||(g=(new URL(g,a.url)).href);return I(g,b.i,({result:k})=>{d=d.replace(f,`url(${k})`);return[f,k]})}));return Promise.all(e).then(()=>d)})}
+function X(a){if(a==null)return[];const b=[];a=a.replace(/(\/\*[\s\S]*?\*\/)/gi,"");for(var d=RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){var c=d.exec(a);if(c===null)break;b.push(c[0])}a=a.replace(d,"");d=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;for(c=RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){let e=d.exec(a);if(e===null)if(e=c.exec(a),e===null)break;else d.lastIndex=c.lastIndex;else c.lastIndex=
+d.lastIndex;b.push(e[0])}return b}
+function qa(a,b){return t(function*(){const d=[],c=[];a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach((f,g)=>{if(f.type===CSSRule.IMPORT_RULE){let k=g+1;f=V(f.href).then(m=>W(m,b)).then(m=>X(m).forEach(q=>{try{e.insertRule(q,q.startsWith("@import")?k+=1:e.cssRules.length)}catch(Da){}})).catch(()=>{});c.push(f)}})}catch(f){const g=a.find(k=>k.href==null)||document.styleSheets[0];e.href!=null&&c.push(V(e.href).then(k=>W(k,b)).then(k=>X(k).forEach(m=>{g.insertRule(m,g.cssRules.length)})).catch(()=>
+{}))}});return Promise.all(c).then(()=>{a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach(f=>{d.push(f)})}catch(f){}});return d})})}function ra(a){return a.filter(b=>b.type===CSSRule.FONT_FACE_RULE).filter(b=>b.style.getPropertyValue("src").search(Q)!==-1)}function sa(a,b){return t(function*(){if(a.ownerDocument==null)throw Error("Provided element is not within a Document");var d=w(a.ownerDocument.styleSheets);d=yield qa(d,b);return ra(d)})}
+function ta(a){function b(c){(c.style.fontFamily||getComputedStyle(c).fontFamily).split(",").forEach(e=>{d.add(e.trim().replace(/["']/g,""))});Array.from(c.children).forEach(e=>{e instanceof HTMLElement&&b(e)})}const d=new Set;b(a);return d}function ua(a,b){return t(function*(){const d=yield sa(a,b),c=ta(a);return(yield Promise.all(d.filter(e=>c.has(e.style.fontFamily.trim().replace(/["']/g,""))).map(e=>R(e.cssText,e.parentStyleSheet?e.parentStyleSheet.href:null,b)))).join("\n")})}
+function va(a,b){return t(function*(){const d=b.j!=null?b.j:b.K?null:yield ua(a,b);if(d){const c=document.createElement("style");c.appendChild(document.createTextNode(d));a.firstChild?a.insertBefore(c,a.firstChild):a.appendChild(c)}})};function wa(a,b={}){return t(function*(){const {width:d,height:c}=A(a,b),e=yield P(a,b,!0);yield va(e,b);yield T(e,b);u(e,b);return yield D(e,d,c)})}
+function xa(a,b={}){return t(function*(){const {width:d,height:c}=A(a,b);var e=yield wa(a,b);e=yield B(e);const f=document.createElement("canvas"),g=f.getContext("2d"),k=b.G||window.devicePixelRatio||1,m=b.h||d,q=b.g||c;f.width=m*k;f.height=q*k;!b.J&&(f.width>16384||f.height>16384)&&(f.width>16384&&f.height>16384?f.width>f.height?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384):f.width>16384?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=
+16384));f.style.width=`${m}`;f.style.height=`${q}`;b.backgroundColor&&(g.fillStyle=b.backgroundColor,g.fillRect(0,0,f.width,f.height));g.drawImage(e,0,0,f.width,f.height);return f})}function ya(a,b={}){return t(function*(){return(yield xa(a,b)).toDataURL()})};const za=["gemini.google.com","corp.google.com","proxy.googlers.com"];function Y(){return document.body.querySelectorAll('[class*="animate"]').length>0}function Z(a){return t(function*(){try{return yield ya(a,{h:a.offsetWidth,g:a.offsetHeight})}catch(d){var b=a.offsetHeight;const c=document.createElement("canvas");c.width=a.offsetWidth;c.height=b;return c.toDataURL("image/png")}})}
+function Aa(){return t(function*(){const a=document.body.offsetWidth,b=document.body.offsetHeight,d=document.body.cloneNode(!0);d.querySelectorAll('[class*="animate"]').forEach(c=>{c.classList.remove(...Array.from(c.classList).filter(e=>e.startsWith("animate")))});d.style.width=`${a}px`;d.style.height=`${b}px`;return d})}
+function Ba(a){return t(function*(){let b=document.body;if(Y()){var d=yield Aa();b=d;document.body.appendChild(d)}d=yield Z(b);Y()&&document.body.removeChild(b);window.parent.postMessage({type:"SEND_SCREENSHOT",image:d,topOffset:document.documentElement.scrollTop},a.origin)})}function Ca(a){return t(function*(){const b={type:"SEND_SCREENSHOT_FOR_DATA_VISUALIZATION",image:yield Z(document.body),topOffset:0};window.parent.postMessage(b,a.origin)})}
+window.addEventListener("message",a=>t(function*(){if(za.some(d=>a.origin.includes(d))){var b=a.data;b&&(b.type==="MAKE_SCREENSHOT"&&(yield Ba(a)),b.type==="MAKE_SCREENSHOT_FOR_DATA_VISUALIZATION"&&(yield Ca(a)))}}));
+})();</script><script>(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script>
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script>((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-2.5-flash-image-preview","imageTransformModelName":"gemini-3-pro-image-preview-11-2025","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"]})</script><script>(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script>(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 首爾行程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        :root { --primary-blue: #3b82f6; --food-orange: #fb923c; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f3f4f6; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
+        html, body { height: auto; overflow-x: hidden; scroll-behavior: smooth; }
+        .tab-active { border-bottom: 3px solid var(--primary-blue); color: var(--primary-blue); font-weight: bold; }
+        .sub-tab-active { background-color: var(--primary-blue); color: white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; z-index: 0; }
+        .spot-card { transition: transform 0.2s; border-radius: 1.25rem; overflow: hidden; background: white; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .change-img-btn { position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.75); color: white; border-radius: 99px; padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; z-index: 10; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+        #env-warning { display: none; background: #fff7ed; color: #9a3412; padding: 10px; text-align: center; font-size: 11px; border-bottom: 1px solid #ffedd5; font-weight: bold; }
+        .comic-border { border: 2px solid #1f2937; box-shadow: 3px 3px 0px 0px #1f2937; }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.-bottom-2{bottom:-0.5rem}.-bottom-4{bottom:-1rem}.-left-2{left:-0.5rem}.-right-2{right:-0.5rem}.-right-4{right:-1rem}.-top-3{top:-0.75rem}.-top-3\.5{top:-0.875rem}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-10{z-index:10}.mx-auto{margin-left:auto;margin-right:auto}.mx-0\.5{margin-left:0.125rem;margin-right:0.125rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-6{margin-bottom:1.5rem}.ml-auto{margin-left:auto}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.mt-1{margin-top:0.25rem}.mt-3{margin-top:0.75rem}.mb-8{margin-bottom:2rem}.mt-4{margin-top:1rem}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-7{height:1.75rem}.max-h-\[85vh\]{max-height:85vh}.w-7{width:1.75rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-md{max-width:28rem}.max-w-xs{max-width:20rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-rotate-3{--tw-rotate:-3deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.rotate-12{--tw-rotate:12deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-95{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-b-2{border-bottom-width:2px}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254 / var(--tw-border-opacity, 1))}.border-blue-200{--tw-border-opacity:1;border-color:rgb(191 219 254 / var(--tw-border-opacity, 1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255 / var(--tw-border-opacity, 1))}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.border-red-100{--tw-border-opacity:1;border-color:rgb(254 226 226 / var(--tw-border-opacity, 1))}.border-teal-100{--tw-border-opacity:1;border-color:rgb(204 251 241 / var(--tw-border-opacity, 1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-yellow-200{--tw-border-opacity:1;border-color:rgb(254 240 138 / var(--tw-border-opacity, 1))}.bg-\[\#0090d2\]{--tw-bg-opacity:1;background-color:rgb(0 144 210 / var(--tw-bg-opacity, 1))}.bg-\[\#00a1e9\]{--tw-bg-opacity:1;background-color:rgb(0 161 233 / var(--tw-bg-opacity, 1))}.bg-\[\#00a84d\]{--tw-bg-opacity:1;background-color:rgb(0 168 77 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-teal-50{--tw-bg-opacity:1;background-color:rgb(240 253 250 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-\[\#E3000F\]{--tw-bg-opacity:1;background-color:rgb(227 0 15 / var(--tw-bg-opacity, 1))}.bg-\[\#FFD100\]{--tw-bg-opacity:1;background-color:rgb(255 209 0 / var(--tw-bg-opacity, 1))}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-yellow-100{--tw-bg-opacity:1;background-color:rgb(254 249 195 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.p-1{padding:0.25rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.pb-2{padding-bottom:0.5rem}.pb-32{padding-bottom:8rem}.pl-2{padding-left:0.5rem}.pb-1{padding-bottom:0.25rem}.pb-10{padding-bottom:2.5rem}.text-center{text-align:center}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-6xl{font-size:3.75rem;line-height:1}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-black{font-weight:900}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:0.025em}.tracking-widest{letter-spacing:0.1em}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-indigo-500{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity, 1))}.text-indigo-800{--tw-text-opacity:1;color:rgb(55 48 163 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-teal-700{--tw-text-opacity:1;color:rgb(15 118 110 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-gray-100{--tw-text-opacity:1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-yellow-600{--tw-text-opacity:1;color:rgb(202 138 4 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.opacity-50{opacity:0.5}.opacity-80{opacity:0.8}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-sm{--tw-drop-shadow:drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-indigo-100:hover{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-teal-100:hover{--tw-bg-opacity:1;background-color:rgb(204 251 241 / var(--tw-bg-opacity, 1))}.hover\:text-indigo-200:hover{--tw-text-opacity:1;color:rgb(199 210 254 / var(--tw-text-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}@media (min-width: 640px){.sm\:block{display:block}}</style></head>
+<body class="text-gray-800">
+    <div id="env-warning"><i class="fas fa-info-circle mr-2"></i>當前為預覽模式，雲端同步功能受限。</div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between mb-3">
+                <h1 class="text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.toggleModal('subwayModal')" class="text-[11px] bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold border border-indigo-100 shadow-sm transition hover:bg-indigo-100 flex items-center">
+                        <i class="fas fa-subway mr-1"></i>地鐵指南
+                    </button>
+                    <button onclick="window.downloadApp()" class="text-[11px] bg-teal-50 text-teal-700 px-3 py-1 rounded-full font-bold border border-teal-100 shadow-sm transition hover:bg-teal-100 flex items-center">
+                        <i class="fas fa-download mr-1"></i>下載App
+                    </button>
+                    <div id="syncStatus" class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-1.5 rounded-full font-bold shadow-sm hidden sm:block">
+                        <i class="fas fa-cloud mr-1"></i>已同步
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-6 overflow-x-auto no-scrollbar border-b border-gray-100" id="dayTabs">
+                <button onclick="window.showDay(0)" id="tab0" class="tab-btn pb-2 whitespace-nowrap text-sm flex items-center gap-1 tab-active"><i class="fas fa-paw"></i> 總覽</button>
+                <button onclick="window.showDay(1)" id="tab1" class="tab-btn pb-2 whitespace-nowrap text-sm">4/15 (三)</button>
+                <button onclick="window.showDay(2)" id="tab2" class="tab-btn pb-2 whitespace-nowrap text-sm">4/16 (四)</button>
+                <button onclick="window.showDay(3)" id="tab3" class="tab-btn pb-2 whitespace-nowrap text-sm">4/17 (五)</button>
+                <button onclick="window.showDay(4)" id="tab4" class="tab-btn pb-2 whitespace-nowrap text-sm">4/18 (六)</button>
+                <button onclick="window.showDay(5)" id="tab5" class="tab-btn pb-2 whitespace-nowrap text-sm">4/19 (日)</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6">
+        <div id="subTabContainer" class="hidden flex justify-center space-x-1 mb-6 bg-gray-200 p-1 rounded-xl w-full max-w-xs mx-auto" style="display: none;">
+            <button onclick="window.switchSubTab('itinerary')" id="subTab-itinerary" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all sub-tab-active">行程</button>
+            <button onclick="window.switchSubTab('hotel')" id="subTab-hotel" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all">Hotel</button>
+            <button onclick="window.switchSubTab('flight')" id="subTab-flight" class="sub-tab flex-1 py-2 rounded-lg text-xs font-bold transition-all">Flight</button>
+        </div>
+
+        <div id="itineraryWrapper" class="relative">
+            <div class="timeline-line" id="timelineLine" style="display: none;"></div>
+            <div id="dayContent" class="space-y-6 pb-32">
+                    <div class="mb-6 bg-white p-4 rounded-2xl comic-border flex items-center gap-4 relative overflow-hidden">
+                        <div class="text-4xl drop-shadow-md">🐶</div>
+                        <div>
+                            <h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2>
+                            <p class="text-xs font-bold text-gray-500 mt-1">跟著 Snoopy 一起出發吧！🐾</p>
+                        </div>
+                        <i class="fas fa-bone absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
+                    </div>
+
+                    <!-- 超短版總覽 -->
+                    <div class="mb-8 bg-yellow-50 p-4 rounded-2xl comic-border relative">
+                        <div class="absolute -top-3 -right-2 text-2xl rotate-12 drop-shadow-sm">📌</div>
+                        <h3 class="text-sm font-black text-gray-800 mb-2 border-b-2 border-yellow-200 pb-1 inline-block">行程超短版 ⚡</h3>
+                        <ul class="text-[13px] font-bold text-gray-700 space-y-1.5 mt-1">
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/15</span> 弘大入住休息</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/16</span> 弘大：AK / WITHMUU / Color of You / K-pop 周邊線 / 晚上鞋店美妝</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/17</span> 聖水：美妝旗艦店＋服飾旗艦店</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：唱片＋小卡＋美妝＋配件</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/19</span> 弘大服飾收尾＋18:55 AREX 提早去機場</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-8 pb-10">
+                
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 bg-[#FFD100] text-black font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">DAY 1 (4/15) 啟程</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">✈️</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">機場</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">弘大飯店</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">休息</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 bg-[#E3000F] text-white font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">DAY 2 (4/16) 弘大</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">🛍️</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">AK PLAZA</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">WITHMUU</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">午餐</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Color of You 14:00</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Ducky World</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">KiTbetter</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">idOLSTORE</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">POCA SPOT</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">My Jam</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">晚上補 CHAAKAN / CHICOR / HEMEKO</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 bg-[#00a84d] text-white font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">DAY 3 (4/17) 聖水</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">☕</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">nyu nyu House</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Fwee</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Heart Percent</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">午餐</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">rom&amp;nd</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">ROLAROLA</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Brandy Melville</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Rockfish</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Verish</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">BANILA CO</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">有體力再加 AMUSE / CUBE / Daiso</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 bg-[#00a1e9] text-white font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">DAY 4 (4/18) 明洞</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">💄</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">C.T RECORD</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Myeong-dong CD SHOP</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">Buruttrak</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">K-MECCA</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">午餐 / 小吃</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">CHICOR</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">HEMEKO</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">BiBiANG</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">nyu nyu</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">NYUNYU HOUSE</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">MIMILINE</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">視體力補 M Playground / SHOE MARKER / adidas / JUUNEEDU</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 bg-purple-500 text-white font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">DAY 5 (4/19) 賦歸</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">🎒</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">退房寄行李</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">早午餐</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">COVERNAT</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">COYSEIO</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">UNDERSTAR</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">OR MUSEA</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">LOOF</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">視情況補 CHAAKAN / CHICOR / HEMEKO</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">回飯店拿行李</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">首爾站</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">18:55 AREX</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">仁川機場 T1</span>
+                                    <i class="fas fa-caret-right text-gray-300 mx-0.5"></i>
+                                
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">逛機場 / 晚餐 / 候機</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    </div></div>
+        </div>
+    </main>
+
+    <!-- 地鐵指南 Modal -->
+    <div id="subwayModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-md max-h-[85vh] overflow-hidden shadow-2xl flex flex-col transform scale-95 transition-transform duration-300" id="subwayModalContent">
+            <!-- Modal Header -->
+            <div class="bg-indigo-600 text-white p-4 flex justify-between items-center shrink-0">
+                <h2 class="text-lg font-bold flex items-center"><i class="fas fa-subway mr-2"></i>韓國地鐵小常識</h2>
+                <button onclick="window.toggleModal('subwayModal')" class="text-white hover:text-indigo-200 focus:outline-none"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-5 overflow-y-auto space-y-6 text-gray-800 text-sm">
+                
+                <!-- 專屬無腦搭乘法 (Highly Custom for User) -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 shadow-sm">
+                    <h3 class="text-amber-800 font-bold mb-2 flex items-center text-base"><i class="fas fa-star text-amber-500 mr-2"></i>專屬無腦搭乘密技</h3>
+                    <p class="text-amber-900 leading-relaxed text-[13px] font-medium">你這趟住弘大、第一次去首爾，<strong class="text-red-500 font-bold bg-white px-1 rounded border border-red-100">真的不用背全部！</strong><br>只要認得以下三條線，就能應付多數觀光移動：</p>
+                    <div class="mt-3 space-y-2">
+                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
+                            <div class="w-7 h-7 rounded-full bg-[#00a84d] text-white flex items-center justify-center font-bold text-xs">2</div>
+                            <span class="font-bold text-[13px] text-gray-800">2號線 (綠色)</span>
+                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">弘大 / 聖水</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
+                            <div class="w-7 h-7 rounded-full bg-[#00a1e9] text-white flex items-center justify-center font-bold text-xs">4</div>
+                            <span class="font-bold text-[13px] text-gray-800">4號線 (淺藍)</span>
+                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">明洞商圈</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
+                            <div class="w-7 h-7 rounded-full bg-[#0090d2] text-white flex items-center justify-center font-bold text-[8px] leading-none text-center">AREX</div>
+                            <span class="font-bold text-[13px] text-gray-800">機場快線 (藍)</span>
+                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">機場 / 首爾站</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 辨識三步驟 -->
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3 border-l-4 border-indigo-500 pl-2">初次到訪 3 秒辨別法</h3>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="bg-gray-50 p-3 rounded-xl text-center border border-gray-100 shadow-sm">
+                            <i class="fas fa-palette text-indigo-400 text-xl mb-2"></i>
+                            <div class="font-bold text-[11px]">1. 看顏色</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl text-center border border-gray-100 shadow-sm">
+                            <i class="fas fa-route text-indigo-400 text-xl mb-2"></i>
+                            <div class="font-bold text-[11px]">2. 看線名</div>
+                        </div>
+                        <div class="bg-indigo-50 p-3 rounded-xl text-center border border-indigo-100 shadow-sm">
+                            <i class="fas fa-list-ol text-indigo-600 text-xl mb-1"></i>
+                            <div class="font-bold text-[11px] text-indigo-800">3. 看站號</div>
+                            <div class="text-[9px] text-indigo-500 font-bold leading-tight mt-1">外國人救星</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 轉乘指標 -->
+                <div class="bg-blue-50 text-blue-800 p-4 rounded-xl flex items-start gap-3 border border-blue-100">
+                    <i class="fas fa-walking mt-1 text-blue-500 text-lg"></i>
+                    <div>
+                        <div class="font-bold mb-1">轉乘找什麼？</div>
+                        <p class="text-[12px] leading-relaxed">首爾地鐵指標設計很清楚，轉乘時不要慌，只要跟著標示 <span class="bg-white px-1.5 py-0.5 rounded text-blue-600 font-bold border border-blue-200">Transfer / 환승</span> 一直走就對了！</p>
+                    </div>
+                </div>
+
+                <!-- 地鐵分級 -->
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3 border-l-4 border-indigo-500 pl-2">首爾地鐵怎麼分？</h3>
+                    <ul class="space-y-3">
+                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
+                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 1 層：市區主幹線</div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed">就是 1~9 號線（深藍/綠/橘/淺藍/紫/棕/橄欖綠/粉紅/金），串連市中心最密集區域。</p>
+                        </li>
+                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
+                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 2 層：通勤/區域線</div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed">這類有自己的名字（如 AREX、Suin-Bundang Line 等），不是單純號碼，一樣都在官方地鐵圖裡可轉乘。</p>
+                        </li>
+                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
+                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 3 層：輕軌/支線</div>
+                            <p class="text-[11px] text-gray-600 leading-relaxed">包含區域性的小型軌道，原則都一樣：看顏色、線名、轉乘圈就對了！</p>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- Modal Footer -->
+            <div class="p-4 border-t bg-gray-50 shrink-0">
+                <button onclick="window.toggleModal('subwayModal')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition shadow-md">我準備好搭車了！</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.appState = { currentDay: 0, currentSubTab: 'itinerary', imageOverrides: {} };
+
+        const overviewData = [
+            { title: "DAY 1 (4/15) 啟程", emoji: "✈️", color: "bg-[#FFD100] text-black", steps: ["機場", "弘大飯店", "休息"] },
+            { title: "DAY 2 (4/16) 弘大", emoji: "🛍️", color: "bg-[#E3000F] text-white", steps: ["AK PLAZA", "WITHMUU", "午餐", "Color of You 14:00", "Ducky World", "KiTbetter", "idOLSTORE", "POCA SPOT", "My Jam", "晚上補 CHAAKAN / CHICOR / HEMEKO"] },
+            { title: "DAY 3 (4/17) 聖水", emoji: "☕", color: "bg-[#00a84d] text-white", steps: ["nyu nyu House", "Fwee", "Heart Percent", "午餐", "rom&nd", "ROLAROLA", "Brandy Melville", "Rockfish", "Verish", "BANILA CO", "有體力再加 AMUSE / CUBE / Daiso"] },
+            { title: "DAY 4 (4/18) 明洞", emoji: "💄", color: "bg-[#00a1e9] text-white", steps: ["C.T RECORD", "Myeong-dong CD SHOP", "Buruttrak", "K-MECCA", "午餐 / 小吃", "CHICOR", "HEMEKO", "BiBiANG", "nyu nyu", "NYUNYU HOUSE", "MIMILINE", "視體力補 M Playground / SHOE MARKER / adidas / JUUNEEDU"] },
+            { title: "DAY 5 (4/19) 賦歸", emoji: "🎒", color: "bg-purple-500 text-white", steps: ["退房寄行李", "早午餐", "COVERNAT", "COYSEIO", "UNDERSTAR", "OR MUSEA", "LOOF", "視情況補 CHAAKAN / CHICOR / HEMEKO", "回飯店拿行李", "首爾站", "18:55 AREX", "仁川機場 T1", "逛機場 / 晚餐 / 候機"] }
+        ];
+
+        const tripCommonData = {
+            hotel: {
+                name: "Hotel The Designers Hongdae",
+                addr: "서울 마포구 양화로 86 (373-9 Seogyo-dong)",
+                checkIn: "4/15 (三) 3:00 PM",
+                checkOut: "4/19 (日) 12:00 PM",
+                note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。抵達後先入住休息。",
+                img: "https://i.imgur.com/1VzW6Qy.png",
+                map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
+            },
+            flight: {
+                code: "K6VFNM",
+                out: { no: "IT 602", date: "2026/04/15", dep: "20:00", arr: "23:30", depAir: "台北(桃園) T1", arrAir: "首爾(仁川) T1", duration: "2小時 30分" },
+                ret: { no: "IT 603", date: "2026/04/20", dep: "00:30", arr: "02:15", depAir: "首爾(仁川)", arrAir: "台北(桃園)", duration: "2小時 45分" }
+            }
+        };
+
+        const itineraryData = {
+            1: { reminders: ["一出機場直接往巴士月台走", "飯店入住後直接休息，不要再逛街"], events: [
+                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。建議先在機場航廈內尋找售票機。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
+                { id: "d1-2", time: "23:50", title: "宵夜補給", location: "機場/飯店旁便利商店", icon: "fa-cookie-bite", note: "推薦：飯糰、香蕉牛奶、泡麵。今日不排正式晚餐。", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800" },
+                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "費用 17,000 韓元。目標搭乘 00:10 或 00:40 班次。", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
+            ], ...tripCommonData },
+            2: { reminders: ["09:20 前從飯店出門", "12:30 一定開始吃午餐", "13:30 一定往 Color of You 方向移動", "13:50 Color of You 準時報到", "21:00 後為弘大美妝/生活購物補時"], events: [
+                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1～2 小時", location: "弘大入口站 4 號出口", icon: "fa-shopping-bag", note: "如果你們要順逛快閃店、拍照、吃點東西，抓 1~2 小時比較剛好。這裡就在弘大商圈核心，適合當作起點或中繼點；週末會早開 30 分鐘，想逛限定快閃建議早點到。", img: "https://drive.google.com/file/d/16t8tW_9AO6bs6x5XCRuW1leXXG3nN1LO/view?usp=drive_link", map: "https://naver.me/xuCpV92L" },
+                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA 弘大店", stay: "35～60 分鐘", location: "AK PLAZA 2樓", icon: "fa-compact-disc", note: "這家是 AK PLAZA 弘大 2F 約 118 坪的 K-pop 社群型店鋪。主要賣專輯、手燈、官方周邊，也常有快閃活動。逛專輯周邊會比小店久一些。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90/place/1569002974" },
+                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：看到排隊短的就吃。周邊有湯飯、炸豬排、拉麵等多樣選擇。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
+                { id: "d2-color-check", time: "13:50", title: "Color of You 報到", icon: "fa-clipboard-check", note: "務必準時抵達進行預約確認。地點：東校路 209 3F。", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-4", time: "14:00", title: "Color of You 鑑定", stay: "50 分鐘", location: "東校路 209 3F", icon: "fa-palette", note: "已訂位：訂單編號 #26KK239040517 (2026/4/16 14:00)。確認個人色彩與適合妝容。", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20～35 分鐘", icon: "fa-duck", note: "目前公開定位是以偶像小卡收納、卡冊、娃包等 K-pop 周邊收納用品為主，不是大型多樓層百貨，若要買收納用品這家很對題。", img: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=800", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C29%EA%B8%B8%2060" },
+                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship Store", stay: "45 分鐘～1.5 小時", icon: "fa-box-open", note: "這間比較偏 K-pop / KiT Album / 周邊選物型店舖，也有體驗與展示空間，適合排在弘大商圈順逛。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://naver.me/5yPsUODj" },
+                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45 分鐘～1.5 小時", icon: "fa-microphone", note: "屬於弘大很適合追星順逛的店，專輯、周邊、抽卡機一次看。有雜誌、留言牆與專區，慢慢挑選抓 1 小時左右很剛好。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://naver.me/5z52kl9b" },
+                { id: "d2-8", time: "17:40", title: "POCA SPOT Hongdae", stay: "45 分鐘～1.5 小時", icon: "fa-search", note: "主打 K-pop 小卡現場選購與當日取貨，還有 DIY 體驗。常見規則是 16:00 前下單可當日取貨，兩人慢慢挑卡或做 DIY 可抓到 1.5~2 小時。", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800", map: "https://naver.me/IFgVIEGd" },
+                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30～60 分鐘", icon: "fa-music", note: "店鋪性質偏 K-pop 推活小物/卡套/鑰匙圈配件選物店。如果你們兩人想慢慢挑卡套、掛飾、拍照，抓到 1 小時會比較剛好。", img: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A7%88%EC%9D%B4%EC%9E%BC%20%ED%99%8D%EB%8C%80" },
+                { id: "d2-dinner", time: "19:30", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 辣炒雞排 / 部隊鍋 / 炸雞。在弘大商圈內選擇豐富。", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800" },
+                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN Hongdae", stay: "30～45 分鐘", icon: "fa-shoe-prints", note: "這家是弘大很順路的女鞋店。一般快速挑款約 30~45 分鐘；如果兩人想分樓層慢慢試穿多雙鞋款，抓 1~1.5 小時比較保險。", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800", map: "https://naver.me/59U9dYPZ" },
+                { id: "d2-beauty", time: "21:15", title: "CHICOR / HEMEKO 弘大", stay: "45～75 分鐘", icon: "fa-spray-can", note: "CHICOR 是 1~3 層大店(約230品牌)，慢慢試色/看香氛約 1 小時；HEMEKO 是 1~2 層門市，集中韓國小眾美妝，試色看保養品約 40 分鐘。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://map.naver.com/v5/search/서울 마포구 홍익로 25" }
+            ] },
+            3: { reminders: ["13:40 一定停下來吃午餐", "16:05 前後一定去 Brandy Melville，不要再往後拖", "19:40 一定吃晚餐", "20:40 後若腿痠，就直接回弘大"], events: [
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-home", note: "這家是 B1~3F 共四層，主打居家服飾、髮飾、收納包、浴室用品等，不是單一品類小店。定位偏 home/lifestyle。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
+                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-tint", note: "這家是 fwee 在聖水的品牌體驗空間，主打從氣墊到唇彩的多色展示與試用。不是單純買彩妝就走，重點是試色、依膚色挑色、體驗類活動。", img: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?q=80&w=800", map: "https://map.naver.com/p/search/%ED%93%8C%EC%95%84%EC%A7%80%ED%8A%B8%20%EC%84%B1%EC%88%98" },
+                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45 分鐘～1.5 小時", location: "聖水站 3 號出口", icon: "fa-heart", note: "若你們兩人會慢慢試色、拍照、逛兩層空間，可抓到 1~1.5 小時較剛好。這是依店型與現場體驗型空間推估。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://naver.me/G6RYOX1r" },
+                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：義大利麵 / 燉飯 / 漢堡 / 早午餐 / 韓式湯飯 / 麵包咖啡店。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
+                { id: "d3-5", time: "14:40", title: "rom&nd Pink Office", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-palette", note: "這家不只是買彩妝，還有個人色彩測試、調色/color mixing 等體驗。店內主打約 300+ 色號展示，還有 13 個聖水限定色。", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A1%AC%EC%95%A4%20%ED%95%91%ED%81%AC%EC%98%A4%ED%94%BC%EC%8A%A4/place/1256921738" },
+                { id: "d3-6", time: "15:30", title: "ROLAROLA Petit Maison Seongsu", stay: "20～35 分鐘", location: "聖水站 3 號出口", icon: "fa-tshirt", note: "這家是 2025/7/11 正式開幕的聖水店，屬於 ROLAROLA 第二個旗艦空間。店型重點是以季節主題策展方式呈現品牌精選單品。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A1%9C%EB%9D%BC%EB%A1%9C%EB%9D%BC%20%EC%81%98%EB%9D%A0%EB%A9%94%EC%A2%85%EC%84%B1%EC%88%98" },
+                { id: "d3-7", time: "16:05", title: "Brandy Melville Seongsu", stay: "45～75 分鐘", location: "聖水站 3 號出口", icon: "fa-star", note: "韓國首店，因 BLACKPINK 穿搭話題而很紅。品牌以 onesize、偏小版型著名，建議現場一定要試穿，店內有試衣區。", img: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" },
+                { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear Seongsu", stay: "35～60 分鐘", location: "聖水站 4 號出口", icon: "fa-shoe-prints", note: "公開資料提到是 1~3 層的旗艦店，1 樓到 3 樓都有不同空間配置。逛鞋款、包款與季節商品通常不會太快。", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%EC%A0%90" },
+                { id: "d3-9", time: "18:10", title: "Verish Seongsu", stay: "30～50 分鐘", location: "聖水站 4 號出口", icon: "fa-shopping-bag", note: "Verish 聖水旗艦店，主打從 underwear 到 apparel 的完整線下體驗。如果會慢慢挑尺寸、材質、版型，抓到 50 分鐘比較剛好。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B2%A0%EB%A6%AC%EC%8B%9C%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
+                { id: "d3-10", time: "18:50", title: "BANILA CO Seongsu", stay: "30～45 分鐘", location: "聖水站 4 號出口", icon: "fa-spray-can", note: "品牌旗艦店，除了基本購物，也主打 BANILA CO 品牌識別的粉色空間與拍照感，通常會比一般小型美妝店多待一點時間。", img: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%BD%94%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4/place/20" },
+                { id: "d3-dinner", time: "19:40", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 鍋物 / 湯飯 / 炸豬排 / 餐酒館。", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800" },
+                { id: "d3-11", time: "20:40", title: "彈性加碼 (視體力)", stay: "依體力", icon: "fa-plus-circle", note: "AMUSE (30~50分)：有粉色主題空間、體驗區與拍照元素。<br>CUBE (10~20分)：經紀公司大樓朝聖，可去 1F 咖啡空間。<br>Daiso (15~25分)：臨時補買旅行用品、收納很方便。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EC%96%B4%EB%AE%A4%EC%A6%88%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" }
+            ] },
+            4: { reminders: ["13:40 一定吃午餐或補小吃", "17:40 前一定進入最後一段飾品區", "19:00 若前面已逛太久，後面服飾鞋店直接砍掉", "20:30 後就回弘大，不留太晚"], events: [
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", location: "明洞站地下街 B-10", icon: "fa-music", note: "這家在明洞地下街，主打 K-pop 專輯、DVD、黑膠、禮盒。新舊專輯都有，而且常被提到價格比一些大店更便宜。店面不算大，但周邊密度高，很適合快速掃貨。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
+                { id: "d4-2", time: "11:30", title: "Myeong-dong CD SHOP", stay: "20～35 分鐘", location: "明洞站地下街 B-16,17", icon: "fa-compact-disc", note: "這家就在 C.T RECORD 附近，很適合一起比價再買。除了專輯也有周邊、小卡，店面不大但密度高，適合快速挖寶。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5?c=18.00.0.0.0.dh" },
+                { id: "d4-3", time: "12:00", title: "Buruttrak / Buru's Ddeurak", stay: "30～50 分鐘", location: "明洞站 4 號出口", icon: "fa-record-vinyl", note: "1979年開業的老店，算明洞很有代表性的唱片店之一。這家不是只賣當紅專輯，還常被提到有舊專輯、海報、周邊，甚至稀有品，比較容易久逛。", img: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD%EB%AA%85%EB%8F%99" },
+                { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35～60 分鐘", location: "明洞站 步行 3~5 分鐘", icon: "fa-store", note: "這家公開介紹就是兩層樓的大型 K-pop 周邊店，賣專輯、手燈、周邊、海報等，通常不會是10分鐘快閃型。外部評論普遍提到它品項很齊全。", img: "https://images.unsplash.com/photo-1578335345758-c0b7d722428f?q=80&w=800", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
+                { id: "d4-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：刀削麵 / 餃子 / 參雞湯 / 拌飯 / 湯飯。或糖餅 / 熱狗 / 魚板等小吃。", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" },
+                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25～40 分鐘", location: "明洞站 8 號出口", icon: "fa-spray-can", note: "這家是明洞街邊1樓美妝店，適合快速逛熱門韓妝、香氛與伴手禮型採買；如果你會慢慢試色，就抓到 40 分鐘較穩。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
+                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25～40 分鐘", location: "明洞站 6 號出口", icon: "fa-magic", note: "明洞店是 1~2 層的大型美妝店，主打可試色、可慢慢逛，但不像百貨型旗艦館需要待太久。集中多個韓國小眾美妝品牌。", img: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?q=80&w=800", map: "https://map.naver.com/p/search/%ED%97%A4%EB%A9%94%EC%BD%94%EB%AA%85%EB%8F%99%EC%A0%90/place/2086658338" },
+                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦店", stay: "20～35 分鐘", location: "明洞站 步行 3 分鐘", icon: "fa-wind", note: "2025年8月開出的新店。這家看起來是以香水試聞、選香、拍照型門市為主，不像大型百貨式慢逛店。", img: "https://images.unsplash.com/photo-1595425970377-c9703c48657a?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B9%84%EB%B9%84%EC%95%99%EB%AA%85%EB%8F%99%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%BD%EC%8A%A4%ED%86%A0%EC%96%B4" },
+                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35～60 分鐘", location: "明洞 4 路 22", icon: "fa-ring", note: "東大門人氣飾品店在明洞開的分店。這家不是只賣耳環的小店，還有襪子、包包、帽子、服飾等大量配件，通常會比一般單一品類店待更久。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%EB%AA%85%EB%8F%99%EC%A0%90/place/1319879223" },
+                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE 明洞站店", stay: "20～45 分鐘", location: "明洞站 6 號出口", icon: "fa-home", note: "位在 2F~3F，主打飾品、雜貨與服飾。就在明洞商圈核心，離明洞站很近。如果你們兩人會慢慢挑選，抓 1.5~2 小時會更剛好。", img: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?q=80&w=800", map: "https://naver.me/FXn6wHWL" },
+                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1～2 小時", location: "明洞站 6 號出口", icon: "fa-gem", note: "這間就在明洞站出口前，位置非常方便，看地址樓層資訊應該是 2F~4F 的多層賣場。慢慢挑飾品、襪子、小物、服飾配件，可抓久一點。", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800", map: "https://map.naver.com/p/search/미미라인 명동점" },
+                { id: "d4-flex", time: "19:00", title: "視體力補：M Playground / 鞋店 / 服飾", stay: "依體力", icon: "fa-plus-circle", note: "M Playground (1-1.5時)：平價潮流服飾。<br>SHOE MARKER (25-40分)：看熱門鞋款。<br>adidas (30-50分)：大型旗艦，有客製區。<br>JUUNEEDU (20-35分)：主打睡衣、居家服。", img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800", map: "https://naver.me/xWTIV9ia" },
+                { id: "d4-dinner", time: "20:00", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 炸雞 / 豬腳 / 部隊鍋 / 牛骨湯 / 拉麵。", img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=800" }
+            ] },
+            5: { reminders: ["11:20 一定完成退房寄行李", "17:10 一定停止購物", "17:30 一定回到飯店拿行李", "17:50 一定出發去首爾站", "18:25 一定到首爾站 AREX 區", "18:55 這班車不要錯過"], events: [
+                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", location: "Hotel The Designers Hongdae", icon: "fa-suitcase", note: "11:20 必完成。將行李寄放於櫃檯後，出門把握最後的逛街時間。", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
+                { id: "d5-lunch", time: "12:00", title: "早午餐", stay: "50 分鐘", icon: "fa-bread-slice", note: "建議選項：弘大周邊的炸豬排 / 湯飯 / 咖哩 / 拉麵 / 早午餐盤。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
+                { id: "d5-covernat", time: "12:50", title: "COVERNAT Flagship Hongdae", stay: "45 分鐘～1.5 小時", location: "弘大站 3 號出口", icon: "fa-tshirt", note: "這間是弘大很熱門的韓系休閒服飾旗艦店，店面有 1F 和 B1 兩層，適合排進合井—弘大一路順逛的購物行程。", img: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800", map: "https://naver.me/5giFTV55" },
+                { id: "d5-coyseio", time: "13:50", title: "COYSEIO Flagship Hapjeong", stay: "45 分鐘～1.5 小時", location: "弘大站 3 號出口", icon: "fa-shopping-bag", note: "這間偏女生服飾+生活選物型旗艦店，適合排在合井、弘大一帶一起順逛。", img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800", map: "https://map.naver.com/p/search/코이세이오 플래그쉽 합정" },
+                { id: "d5-understar", time: "14:50", title: "UNS STATION [by understar]", stay: "40～70 分鐘", location: "弘大站 9 號出口", icon: "fa-female", note: "這間是弘大很適合順逛的服飾店，店面是多層女性服飾店。偏韓系女裝選品，也有鞋、包等品項，若會試穿可抓久一點。", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800", map: "https://map.naver.com/p/search/언더스타서울 서교" },
+                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA 弘大2店", stay: "25～40 分鐘", location: "弘大站 9 號出口", icon: "fa-shopping-basket", note: "這家是以基本款女裝、外掛陳列、狹長型店面為主；若是快速掃基本款約 25 分鐘，若要慢慢挑尺寸和搭配可抓到 40 分鐘。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%EB%A7%88%ED%8F%AC%EA%B5%AC%EC%84%9C%EA%B5%90%EB%8F%99%20358-67/place/1371757291" },
+                { id: "d5-loof", time: "16:30", title: "LOOF Hongdae", stay: "35～60 分鐘", location: "弘大站 9 號出口", icon: "fa-compact-disc", note: "這間有兩層樓，1F以K-pop周邊/新商品/抽卡機為主，2F有專輯、雜誌、留言牆與部分團體專區。這間屬於弘大很適合追星順逛的店，專輯、周邊、抽卡機一次看。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://naver.me/GkR3c9XW" },
+                { id: "d5-flex", time: "17:20", title: "視情況補：CHAAKAN / CHICOR / HEMEKO", stay: "10 分鐘", icon: "fa-plus-circle", note: "若時間允許最後補貨：<br>CHAAKAN (30-45分)：女鞋旗艦店。<br>CHICOR (45-75分)：大型美妝店。<br>HEMEKO (45-60分)：小眾美妝。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://naver.me/59U9dYPZ" },
+                { id: "d5-bag", time: "17:30", title: "回飯店拿行李", stay: "20 分鐘", location: "Hotel The Designers Hongdae", icon: "fa-suitcase-rolling", note: "請務必遵守時間，領完行李準備前往首爾站。", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
+                { id: "d5-go", time: "17:50", title: "出發去首爾站", stay: "35 分鐘", icon: "fa-walking", note: "搭乘地鐵前往首爾站。請預留轉乘及拖著行李步行的時間。" },
+                { id: "d5-arex-wait", time: "18:25", title: "首爾站 AREX 區，準備進站", stay: "30 分鐘", location: "首爾站 B7F", icon: "fa-ticket-alt", note: "AREX 官方提醒：直達車可在發車前 30 分鐘進閘，最晚發車前 3 分鐘到月台。搭 18:55 抓 18:25 前到會最安心。", img: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=800", map: "https://map.naver.com/p/search/서울역" },
+                { id: "d5-arex", time: "18:55", title: "AREX 直達車", stay: "43 分鐘", location: "首爾站 B7F → 仁川機場", icon: "fa-train", note: "發車死線：18:55。你想逛得更鬆、更穩，搭這班最剛好！", img: "https://images.unsplash.com/photo-1532105956691-164993510522?q=80&w=800", map: "https://www.airportrailroad.com/ticket/rsv" },
+                { id: "d5-airport", time: "19:38", title: "抵達仁川機場 T1", stay: "登機", location: "인천국제공항 T1", icon: "fa-plane-departure", note: "抵達機場後，進行報到 / 托運 / 安檢 / 逛機場 / 候機。<br>若原本想在機場多逛 1~2 小時需搭 19:36 的車，現在搭 18:55 班次，你的機場免稅時間會非常充裕穩妥！回程航班 IT 603 將於 4/20 00:30 起飛。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/p/search/인천국제공항" }
+            ], ...tripCommonData }
+        };
+
+        window.renderContent = () => {
+            const content = document.getElementById('dayContent');
+            const timeline = document.getElementById('timelineLine');
+            
+            if (window.appState.currentDay === 0) {
+                timeline.style.display = 'none';
+                let html = `
+                    <div class="mb-6 bg-white p-4 rounded-2xl comic-border flex items-center gap-4 relative overflow-hidden">
+                        <div class="text-4xl drop-shadow-md">🐶</div>
+                        <div>
+                            <h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2>
+                            <p class="text-xs font-bold text-gray-500 mt-1">跟著 Snoopy 一起出發吧！🐾</p>
+                        </div>
+                        <i class="fas fa-bone absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
+                    </div>
+
+                    <!-- 超短版總覽 -->
+                    <div class="mb-8 bg-yellow-50 p-4 rounded-2xl comic-border relative">
+                        <div class="absolute -top-3 -right-2 text-2xl rotate-12 drop-shadow-sm">📌</div>
+                        <h3 class="text-sm font-black text-gray-800 mb-2 border-b-2 border-yellow-200 pb-1 inline-block">行程超短版 ⚡</h3>
+                        <ul class="text-[13px] font-bold text-gray-700 space-y-1.5 mt-1">
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/15</span> 弘大入住休息</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/16</span> 弘大：AK / WITHMUU / Color of You / K-pop 周邊線 / 晚上鞋店美妝</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/17</span> 聖水：美妝旗艦店＋服飾旗艦店</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：唱片＋小卡＋美妝＋配件</li>
+                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/19</span> 弘大服飾收尾＋18:55 AREX 提早去機場</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-8 pb-10">
+                `;
+                overviewData.forEach((day, idx) => {
+                    html += `
+                        <div class="bg-white rounded-2xl p-5 comic-border relative">
+                            <div class="absolute -top-3.5 -left-2 ${day.color} font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">${day.title}</div>
+                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">${day.emoji}</div>
+                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                                ${day.steps.map((step, sIdx) => `
+                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">${step}</span>
+                                    ${sIdx < day.steps.length - 1 ? `<i class="fas fa-caret-right text-gray-300 mx-0.5"></i>` : ''}
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                content.innerHTML = html;
+                return;
+            }
+
+            const dayData = itineraryData[window.appState.currentDay];
+            if (!dayData) return;
+            
+            timeline.style.display = (window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab !== 'itinerary' ? 'none' : 'block';
+
+            if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'hotel') {
+                const h = dayData.hotel;
+                content.innerHTML = `<div class="spot-card p-6 border bg-white"><div class="flex justify-between items-start mb-4"><h2 class="text-xl font-bold">${h.name}</h2><i class="fas fa-hotel text-blue-500 text-2xl"></i></div><div class="space-y-4 text-sm"><p class="text-gray-500 font-bold">${h.addr}</p><div class="grid grid-cols-2 gap-3"><div class="bg-blue-50 p-3 rounded-xl">入住：${h.checkIn}</div><div class="bg-orange-50 p-3 rounded-xl">退房：${h.checkOut}</div></div><div class="relative group mt-4"><img src="${window.appState.imageOverrides['hotel'] || h.img}" class="w-full h-44 object-cover rounded-xl shadow-inner"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, 'hotel')"></label></div><p class="text-xs text-gray-500 italic p-3 bg-gray-50 rounded-lg mt-3">${h.note}</p></div></div>`;
+            } else if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'flight') {
+                const f = tripCommonData.flight;
+                content.innerHTML = `
+                <div class="space-y-5">
+                    <!-- 去程航班 -->
+                    <div class="boarding-pass rounded-2xl p-5 shadow-md border bg-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">去程</div>
+                        <div class="flex justify-between mb-3 items-center">
+                            <span class="text-orange-500 font-black italic text-lg">Tigerair</span>
+                            <span class="bg-black text-white px-2 py-1 rounded text-xs font-bold tracking-wider shadow-sm">訂位代號: ${f.code}</span>
+                        </div>
+                        <div class="flex justify-between text-center items-center mb-2">
+                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500 font-medium">${f.out.depAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.out.dep}</div></div>
+                            <div class="text-orange-400 px-2 flex flex-col items-center justify-center w-24">
+                                <span class="text-[10px] text-gray-400 font-bold mb-1">${f.out.duration}</span>
+                                <div class="w-full relative flex items-center justify-center">
+                                    <div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div>
+                                    <i class="fas fa-plane text-orange-500 bg-white px-1 z-10"></i>
+                                </div>
+                                <span class="text-[10px] text-gray-500 font-bold mt-1">${f.out.no}</span>
+                            </div>
+                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500 font-medium">${f.out.arrAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.out.arr}</div></div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold">
+                            <span class="bg-orange-50 text-orange-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.out.date}</span>
+                        </div>
+                    </div>
+
+                    <!-- 回程航班 -->
+                    <div class="boarding-pass rounded-2xl p-5 shadow-md border bg-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">回程</div>
+                        <div class="flex justify-between mb-3 items-center">
+                            <span class="text-blue-500 font-black italic text-lg">Tigerair</span>
+                            <span class="bg-black text-white px-2 py-1 rounded text-xs font-bold tracking-wider shadow-sm">訂位代號: ${f.code}</span>
+                        </div>
+                        <div class="flex justify-between text-center items-center mb-2">
+                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500 font-medium">${f.ret.depAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.ret.dep}</div></div>
+                            <div class="text-blue-400 px-2 flex flex-col items-center justify-center w-24">
+                                <span class="text-[10px] text-gray-400 font-bold mb-1">${f.ret.duration}</span>
+                                <div class="w-full relative flex items-center justify-center">
+                                    <div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div>
+                                    <i class="fas fa-plane text-blue-500 bg-white px-1 z-10"></i>
+                                </div>
+                                <span class="text-[10px] text-gray-500 font-bold mt-1">${f.ret.no}</span>
+                            </div>
+                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500 font-medium">${f.ret.arrAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.ret.arr}</div></div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold">
+                            <span class="bg-blue-50 text-blue-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.ret.date}</span>
+                        </div>
+                    </div>
+                </div>`;
+            } else {
+                let html = `<div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-xl shadow-sm"><h2 class="text-[10px] font-bold text-amber-900 mb-2 uppercase tracking-widest">停損提醒</h2><ul class="space-y-2">${dayData.reminders.map(r => {
+                    const isRed = r.includes("一定") || r.includes("不要錯過");
+                    return `<li class="flex items-start" style="${isRed ? 'color:red; font-weight:bold; font-size:1.1em;' : 'text-xs text-amber-800'}"><i class="fas fa-stopwatch mt-1 mr-2 text-amber-400"></i>${r}</li>`;
+                }).join('')}</ul></div>`;
+
+                dayData.events.forEach((event) => {
+                    const isFood = event.icon.includes('utensils') || event.icon.includes('bowl') || event.icon.includes('cookie') || event.icon.includes('bread');
+                    const currentImg = window.appState.imageOverrides[event.id] || event.img;
+                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full ${isFood ? 'bg-orange-400' : 'bg-blue-500'} border-4 border-white z-10 shadow-sm"></div><div class="spot-card border flex flex-col"><div class="h-44 relative group"><img src="${currentImg}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, '${event.id}')"></label></div><div class="p-4"><div class="flex items-start justify-between mb-2"><h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}</div><div class="flex flex-wrap items-center gap-2 mb-3"><span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>${event.stay ? `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">建議：${event.stay}</span>` : ''}</div><div class="${isFood ? 'bg-orange-50' : 'bg-gray-50'} p-3 rounded-xl"><p class="text-[10px] ${isFood ? 'text-orange-400' : 'text-gray-400'} font-bold uppercase mb-1 flex items-center"><i class="fas fa-info-circle mr-1"></i>備註</p><p class="text-xs text-gray-700 leading-relaxed">${event.note}</p></div></div></div></div>`;
+                });
+                content.innerHTML = html;
+            }
+        };
+
+        window.showDay = (dayNum) => {
+            window.appState.currentDay = dayNum; window.appState.currentSubTab = 'itinerary';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById(`tab${dayNum}`).classList.add('tab-active');
+            document.getElementById('subTabContainer').style.display = (dayNum === 1 || dayNum === 5) ? 'flex' : 'none';
+            window.renderContent(); window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.switchSubTab = (type) => {
+            window.appState.currentSubTab = type;
+            document.querySelectorAll('.sub-tab').forEach(btn => btn.classList.remove('sub-tab-active'));
+            document.getElementById(`subTab-${type}`).classList.add('sub-tab-active');
+            window.renderContent();
+        };
+
+        // Modal Toggle 控制
+        window.toggleModal = (id) => {
+            const modal = document.getElementById(id);
+            const content = document.getElementById(id + 'Content');
+            if (modal.classList.contains('opacity-0')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                content.classList.remove('scale-95');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                content.classList.add('scale-95');
+            }
+        };
+
+        window.downloadApp = () => {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '2026首爾家族旅遊.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
+
+        window.showDay(0);
+    </script>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+
+        // 家族專屬的固定同步 ID
+        const MASTER_SYNC_ID = "seoul-family-trip-2026-sync-v1"; 
+        
+        window.handleUpload = (input, spotId) => {
+            if (window.cloudSaveImage) { window.cloudSaveImage(input, spotId); }
+            else { alert("雲端連線中，請稍後再試！"); }
+        };
+
+        try {
+            const fbStr = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
+            if (!fbStr) throw new Error();
+            const config = JSON.parse(fbStr);
+            const appId = typeof __app_id !== 'undefined' ? __app_id : MASTER_SYNC_ID;
+
+            const app = initializeApp(config);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else { await signInAnonymously(auth); }
+
+            onAuthStateChanged(auth, (u) => {
+                if (u) {
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'customImages'), (snap) => {
+                        const news = {}; snap.forEach(d => news[d.id] = d.data().data);
+                        window.appState.imageOverrides = news; window.renderContent(); 
+                    });
+                    
+                    window.cloudSaveImage = async (input, spotId) => {
+                        if (!input.files[0]) return;
+                        document.getElementById('syncStatus').innerText = '處理中...';
+                        const reader = new FileReader();
+                        reader.onload = async (e) => {
+                            const canvas = document.createElement('canvas');
+                            const img = new Image(); img.src = e.target.result;
+                            img.onload = async () => {
+                                let w = img.width; let h = img.height;
+                                if (w > 1000) { h *= 1000 / w; w = 1000; }
+                                canvas.width = w; canvas.height = h;
+                                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                                const compressed = canvas.toDataURL('image/jpeg', 0.6);
+                                try {
+                                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'customImages', spotId), { data: compressed }, { merge: true });
+                                    document.getElementById('syncStatus').innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
+                                } catch (err) { document.getElementById('syncStatus').innerText = '同步失敗'; }
+                            };
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    };
+                }
+            });
+        } catch (e) {
+            document.getElementById('env-warning').style.display = 'block';
+            document.getElementById('syncStatus').innerText = '離線預覽';
+        }
+    </script>
+
+</body></html>
