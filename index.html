@@ -295,75 +295,76 @@
         window.showDay(0);
     </script>
 
-<script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-    import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
-    import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+        import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78",
-        authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
-        projectId: "seoul-trip-2026-a715f",
-        storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
-        messagingSenderId: "1022754455381",
-        appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
-    };
+        // ⚠️ 請再次確認此金鑰與 Firebase Console 中的完全一致
+        const firebaseConfig = {
+          apiKey: "AIzaSyCjwIwbJwVI6vy7VOXwuz_ngNcFySgcW78",
+          authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
+          projectId: "seoul-trip-2026-a715f",
+          storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
+          messagingSenderId: "1022754455381",
+          appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
+        };
 
-    const MASTER_SYNC_ID = "seoul-2026"; 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const syncStatus = document.getElementById('syncStatus');
+        const MASTER_SYNC_ID = "seoul-2026"; 
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const syncStatus = document.getElementById('syncStatus');
 
-    window.handleUpload = async (input, spotId) => {
-        if (!input.files[0]) return;
-        
-        try {
-            // 確保操作前已登入
-            if (!auth.currentUser) await signInAnonymously(auth);
-
-            syncStatus.innerText = '正在處理圖片...';
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image(); 
-                img.src = e.target.result;
-                img.onload = async () => {
-                    const canvas = document.createElement('canvas');
-                    let w = img.width; let h = img.height;
-                    if (w > 1000) { h *= 1000 / w; w = 1000; }
-                    canvas.width = w; canvas.height = h;
-                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                    const compressed = canvas.toDataURL('image/jpeg', 0.5);
-                    
-                    try {
+        window.handleUpload = async (input, spotId) => {
+            if (!input.files[0]) return;
+            try {
+                if (!auth.currentUser) await signInAnonymously(auth);
+                syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>處理中...';
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image(); 
+                    img.src = e.target.result;
+                    img.onload = async () => {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width; let h = img.height;
+                        if (w > 1000) { h *= 1000 / w; w = 1000; }
+                        canvas.width = w; canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        const compressed = canvas.toDataURL('image/jpeg', 0.5);
                         await setDoc(doc(db, MASTER_SYNC_ID, spotId), { data: compressed }, { merge: true });
                         syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
-                    } catch (err) { 
-                        alert("寫入失敗：請確認 Firestore 規則已發佈為測試模式");
-                        syncStatus.innerText = '同步失敗'; 
-                    }
+                    };
                 };
-            };
-            reader.readAsDataURL(input.files[0]);
-        } catch (e) {
-            alert("登入失敗：請確認 Firebase Console 已啟用「匿名登入」且已授權 github.io 網域");
+                reader.readAsDataURL(input.files[0]);
+            } catch (e) { 
+                console.error("Upload Error Details:", e);
+                alert("目前無法連線至雲端。常見原因：API金鑰限制或瀏覽器快取。請檢查 Console 報錯。"); 
+            }
+        };
+
+        async function initListener() {
+            try {
+                await signInAnonymously(auth);
+                onSnapshot(collection(db, MASTER_SYNC_ID), (snap) => {
+                    const news = {};
+                    snap.forEach(d => { news[d.id] = d.data().data; });
+                    window.appState.imageOverrides = news; 
+                    window.renderContent(); 
+                    syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
+                    syncStatus.classList.replace('bg-gray-50', 'bg-emerald-50');
+                    syncStatus.classList.replace('text-gray-400', 'text-emerald-700');
+                }, (err) => {
+                    console.error("Firebase Listener Error:", err);
+                    syncStatus.innerText = '同步失敗';
+                });
+            } catch (e) { 
+                console.error("Firebase Init Error:", e); 
+                syncStatus.innerText = '金鑰無效';
+            }
         }
-    };
-
-    async function initListener() {
-        try {
-            await signInAnonymously(auth);
-            onSnapshot(collection(db, MASTER_SYNC_ID), (snap) => {
-                const news = {};
-                snap.forEach(d => { news[d.id] = d.data().data; });
-                window.appState.imageOverrides = news; 
-                window.renderContent(); 
-                syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
-            });
-        } catch (e) { console.error("Listener Error:", e); }
-    }
-
-    initListener();
-</script>
+        initListener();
+        console.log("App Version 1.1 Loaded - Firebase Connection Started.");
+    </script>
 </body>
 </html>
