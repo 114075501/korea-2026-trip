@@ -6,7 +6,7 @@
     <title>2026 首爾行程</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style> 
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         :root { --primary-blue: #3b82f6; --food-orange: #fb923c; }
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f3f4f6; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
@@ -17,26 +17,21 @@
         .spot-card { transition: transform 0.2s; border-radius: 1.25rem; overflow: hidden; background: white; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .change-img-btn { position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.75); color: white; border-radius: 99px; padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; z-index: 10; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
-        #env-warning { display: none; background: #fff7ed; color: #9a3412; padding: 10px; text-align: center; font-size: 11px; border-bottom: 1px solid #ffedd5; font-weight: bold; }
         .comic-border { border: 2px solid #1f2937; box-shadow: 3px 3px 0px 0px #1f2937; }
     </style>
 </head>
 <body class="text-gray-800">
-    <div id="env-warning"><i class="fas fa-info-circle mr-2"></i>當前為預覽模式，雲端同步功能受限。</div>
-
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between mb-3">
                 <h1 class="text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
                 <div class="flex items-center gap-2">
-                    <button onclick="window.toggleModal('subwayModal')" class="text-[11px] bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold border border-indigo-100 shadow-sm transition hover:bg-indigo-100 flex items-center">
+                    <span id="version-tag" class="text-[9px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded">v1.1</span>
+                    <button onclick="window.toggleModal('subwayModal')" class="text-[11px] bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold border border-indigo-100 shadow-sm flex items-center">
                         <i class="fas fa-subway mr-1"></i>地鐵指南
                     </button>
-                    <button onclick="window.downloadApp()" class="text-[11px] bg-teal-50 text-teal-700 px-3 py-1 rounded-full font-bold border border-teal-100 shadow-sm transition hover:bg-teal-100 flex items-center">
-                        <i class="fas fa-download mr-1"></i>下載App
-                    </button>
-                    <div id="syncStatus" class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-1.5 rounded-full font-bold shadow-sm hidden sm:block">
-                        <i class="fas fa-cloud mr-1"></i>已同步
+                    <div id="syncStatus" class="text-[10px] bg-gray-50 text-gray-400 px-2 py-1.5 rounded-full font-bold shadow-sm">
+                        <i class="fas fa-circle-notch fa-spin mr-1"></i>連線中...
                     </div>
                 </div>
             </div>
@@ -67,87 +62,37 @@
     <!-- 地鐵指南 Modal -->
     <div id="subwayModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[85vh] overflow-hidden shadow-2xl flex flex-col transform scale-95 transition-transform duration-300" id="subwayModalContent">
-            <!-- Modal Header -->
             <div class="bg-indigo-600 text-white p-4 flex justify-between items-center shrink-0">
                 <h2 class="text-lg font-bold flex items-center"><i class="fas fa-subway mr-2"></i>韓國地鐵小常識</h2>
-                <button onclick="window.toggleModal('subwayModal')" class="text-white hover:text-indigo-200 focus:outline-none"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="window.toggleModal('subwayModal')" class="text-white hover:text-indigo-200"><i class="fas fa-times text-xl"></i></button>
             </div>
-            <!-- Modal Body -->
             <div class="p-5 overflow-y-auto space-y-6 text-gray-800 text-sm">
-                
-                <!-- 專屬無腦搭乘法 (Highly Custom for User) -->
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 shadow-sm">
                     <h3 class="text-amber-800 font-bold mb-2 flex items-center text-base"><i class="fas fa-star text-amber-500 mr-2"></i>專屬無腦搭乘密技</h3>
-                    <p class="text-amber-900 leading-relaxed text-[13px] font-medium">你這趟住弘大、第一次去首爾，<strong class="text-red-500 font-bold bg-white px-1 rounded border border-red-100">真的不用背全部！</strong><br>只要認得以下三條線，就能應付多數觀光移動：</p>
+                    <p class="text-amber-900 leading-relaxed text-[13px] font-medium">認得以下三條線即可應付多數移動：</p>
                     <div class="mt-3 space-y-2">
                         <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
                             <div class="w-7 h-7 rounded-full bg-[#00a84d] text-white flex items-center justify-center font-bold text-xs">2</div>
-                            <span class="font-bold text-[13px] text-gray-800">2號線 (綠色)</span>
-                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">弘大 / 聖水</span>
+                            <span class="font-bold text-[13px]">2號線 (綠色): 弘大 / 聖水</span>
                         </div>
                         <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
                             <div class="w-7 h-7 rounded-full bg-[#00a1e9] text-white flex items-center justify-center font-bold text-xs">4</div>
-                            <span class="font-bold text-[13px] text-gray-800">4號線 (淺藍)</span>
-                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">明洞商圈</span>
+                            <span class="font-bold text-[13px]">4號線 (淺藍): 明洞商圈</span>
                         </div>
                         <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
-                            <div class="w-7 h-7 rounded-full bg-[#0090d2] text-white flex items-center justify-center font-bold text-[8px] leading-none text-center">AREX</div>
-                            <span class="font-bold text-[13px] text-gray-800">機場快線 (藍)</span>
-                            <span class="text-[11px] text-gray-500 ml-auto font-bold bg-gray-50 px-2 py-0.5 rounded">機場 / 首爾站</span>
+                            <div class="w-7 h-7 rounded-full bg-[#0090d2] text-white flex items-center justify-center font-bold text-[8px]">AREX</div>
+                            <span class="font-bold text-[13px]">機場快線 (藍): 機場 / 首爾站</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- 辨識三步驟 -->
-                <div>
-                    <h3 class="font-bold text-gray-900 mb-3 border-l-4 border-indigo-500 pl-2">初次到訪 3 秒辨別法</h3>
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="bg-gray-50 p-3 rounded-xl text-center border border-gray-100 shadow-sm">
-                            <i class="fas fa-palette text-indigo-400 text-xl mb-2"></i>
-                            <div class="font-bold text-[11px]">1. 看顏色</div>
-                        </div>
-                        <div class="bg-gray-50 p-3 rounded-xl text-center border border-gray-100 shadow-sm">
-                            <i class="fas fa-route text-indigo-400 text-xl mb-2"></i>
-                            <div class="font-bold text-[11px]">2. 看線名</div>
-                        </div>
-                        <div class="bg-indigo-50 p-3 rounded-xl text-center border border-indigo-100 shadow-sm">
-                            <i class="fas fa-list-ol text-indigo-600 text-xl mb-1"></i>
-                            <div class="font-bold text-[11px] text-indigo-800">3. 看站號</div>
-                            <div class="text-[9px] text-indigo-500 font-bold leading-tight mt-1">外國人救星</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 轉乘指標 -->
                 <div class="bg-blue-50 text-blue-800 p-4 rounded-xl flex items-start gap-3 border border-blue-100">
                     <i class="fas fa-walking mt-1 text-blue-500 text-lg"></i>
                     <div>
                         <div class="font-bold mb-1">轉乘找什麼？</div>
-                        <p class="text-[12px] leading-relaxed">首爾地鐵指標設計很清楚，轉乘時不要慌，只要跟著標示 <span class="bg-white px-1.5 py-0.5 rounded text-blue-600 font-bold border border-blue-200">Transfer / 환승</span> 一直走就對了！</p>
+                        <p class="text-[12px] leading-relaxed">請跟著標示 <span class="bg-white px-1.5 py-0.5 rounded text-blue-600 font-bold border border-blue-200">Transfer / 환승</span> 一直走就對了！</p>
                     </div>
                 </div>
-
-                <!-- 地鐵分級 -->
-                <div>
-                    <h3 class="font-bold text-gray-900 mb-3 border-l-4 border-indigo-500 pl-2">首爾地鐵怎麼分？</h3>
-                    <ul class="space-y-3">
-                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
-                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 1 層：市區主幹線</div>
-                            <p class="text-[11px] text-gray-600 leading-relaxed">就是 1~9 號線（深藍/綠/橘/淺藍/紫/棕/橄欖綠/粉紅/金），串連市中心最密集區域。</p>
-                        </li>
-                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
-                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 2 層：通勤/區域線</div>
-                            <p class="text-[11px] text-gray-600 leading-relaxed">這類有自己的名字（如 AREX、Suin-Bundang Line 等），不是單純號碼，一樣都在官方地鐵圖裡可轉乘。</p>
-                        </li>
-                        <li class="bg-gray-50 p-3.5 rounded-xl border border-gray-100">
-                            <div class="font-bold text-[13px] mb-1 text-gray-800">📍 第 3 層：輕軌/支線</div>
-                            <p class="text-[11px] text-gray-600 leading-relaxed">包含區域性的小型軌道，原則都一樣：看顏色、線名、轉乘圈就對了！</p>
-                        </li>
-                    </ul>
-                </div>
-
             </div>
-            <!-- Modal Footer -->
             <div class="p-4 border-t bg-gray-50 shrink-0">
                 <button onclick="window.toggleModal('subwayModal')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition shadow-md">我準備好搭車了！</button>
             </div>
@@ -168,12 +113,12 @@
         const tripCommonData = {
             hotel: {
                 name: "Hotel The Designers Hongdae",
-                addr: "서울 마포구 양화로 86 (373-9 Seogyo-dong)",
+                addr: "서울 마포구 양화로 86",
                 checkIn: "4/15 (三) 3:00 PM",
                 checkOut: "4/19 (日) 12:00 PM",
-                note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。抵達後先入住休息。",
+                note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。",
                 img: "https://i.imgur.com/1VzW6Qy.png",
-                map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
+                map: "https://naver.me/G8tS9lVj"
             },
             flight: {
                 code: "K6VFNM",
@@ -184,191 +129,137 @@
 
         const itineraryData = {
             1: { reminders: ["一出機場直接往巴士月台走", "飯店入住後直接休息，不要再逛街"], events: [
-                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。建議先在機場航廈內尋找售票機。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
-                { id: "d1-2", time: "23:50", title: "宵夜補給", location: "機場/飯店旁便利商店", icon: "fa-cookie-bite", note: "推薦：飯糰、香蕉牛奶、泡麵。今日不排正式晚餐。", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800" },
-                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "費用 17,000 韓元。目標搭乘 00:10 或 00:40 班次。", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
+                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
+                { id: "d1-2", time: "23:50", title: "宵夜補給", location: "便利商店", icon: "fa-cookie-bite", note: "推薦：飯糰、香蕉牛奶。", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800" },
+                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "費用 17,000 韓元。", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
             ], ...tripCommonData },
-            2: { reminders: ["09:20 前從飯店出門", "12:30 一定開始吃午餐", "13:30 一定往 Color of You 方向移動", "13:50 Color of You 準時報到", "21:00 後為弘大美妝/生活購物補時"], events: [
-                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1～2 小時", location: "弘大入口站 4 號出口", icon: "fa-shopping-bag", note: "如果你們要順逛快閃店、拍照、吃點東西，抓 1~2 小時比較剛好。這裡就在弘大商圈核心，適合當作起點或中繼點；週末會早開 30 分鐘，想逛限定快閃建議早點到。", img: "https://drive.google.com/file/d/16t8tW_9AO6bs6x5XCRuW1leXXG3nN1LO/view?usp=drive_link", map: "https://naver.me/xuCpV92L" },
-                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA 弘大店", stay: "35～60 分鐘", location: "AK PLAZA 2樓", icon: "fa-compact-disc", note: "這家是 AK PLAZA 弘大 2F 約 118 坪的 K-pop 社群型店鋪。主要賣專輯、手燈、官方周邊，也常有快閃活動。逛專輯周邊會比小店久一些。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90/place/1569002974" },
-                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：看到排隊短的就吃。周邊有湯飯、炸豬排、拉麵等多樣選擇。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
-                { id: "d2-color-check", time: "13:50", title: "Color of You 報到", icon: "fa-clipboard-check", note: "務必準時抵達進行預約確認。地點：東校路 209 3F。", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
-                { id: "d2-4", time: "14:00", title: "Color of You 鑑定", stay: "50 分鐘", location: "東校路 209 3F", icon: "fa-palette", note: "已訂位：訂單編號 #26KK239040517 (2026/4/16 14:00)。確認個人色彩與適合妝容。", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
-                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20～35 分鐘", icon: "fa-duck", note: "目前公開定位是以偶像小卡收納、卡冊、娃包等 K-pop 周邊收納用品為主，不是大型多樓層百貨，若要買收納用品這家很對題。", img: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=800", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C29%EA%B8%B8%2060" },
-                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship Store", stay: "45 分鐘～1.5 小時", icon: "fa-box-open", note: "這間比較偏 K-pop / KiT Album / 周邊選物型店舖，也有體驗與展示空間，適合排在弘大商圈順逛。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://naver.me/5yPsUODj" },
-                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45 分鐘～1.5 小時", icon: "fa-microphone", note: "屬於弘大很適合追星順逛的店，專輯、周邊、抽卡機一次看。有雜誌、留言牆與專區，慢慢挑選抓 1 小時左右很剛好。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://naver.me/5z52kl9b" },
-                { id: "d2-8", time: "17:40", title: "POCA SPOT Hongdae", stay: "45 分鐘～1.5 小時", icon: "fa-search", note: "主打 K-pop 小卡現場選購與當日取貨，還有 DIY 體驗。常見規則是 16:00 前下單可當日取貨，兩人慢慢挑卡或做 DIY 可抓到 1.5~2 小時。", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800", map: "https://naver.me/IFgVIEGd" },
-                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30～60 分鐘", icon: "fa-music", note: "店鋪性質偏 K-pop 推活小物/卡套/鑰匙圈配件選物店。如果你們兩人想慢慢挑卡套、掛飾、拍照，抓到 1 小時會比較剛好。", img: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A7%88%EC%9D%B4%EC%9E%BC%20%ED%99%8D%EB%8C%80" },
-                { id: "d2-dinner", time: "19:30", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 辣炒雞排 / 部隊鍋 / 炸雞。在弘大商圈內選擇豐富。", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800" },
-                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN Hongdae", stay: "30～45 分鐘", icon: "fa-shoe-prints", note: "這家是弘大很順路的女鞋店。一般快速挑款約 30~45 分鐘；如果兩人想分樓層慢慢試穿多雙鞋款，抓 1~1.5 小時比較保險。", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800", map: "https://naver.me/59U9dYPZ" },
-                { id: "d2-beauty", time: "21:15", title: "CHICOR / HEMEKO 弘大", stay: "45～75 分鐘", icon: "fa-spray-can", note: "CHICOR 是 1~3 層大店(約230品牌)，慢慢試色/看香氛約 1 小時；HEMEKO 是 1~2 層門市，集中韓國小眾美妝，試色看保養品約 40 分鐘。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://map.naver.com/v5/search/서울 마포구 홍익로 25" }
+            2: { reminders: ["09:20 前從飯店出門", "12:30 一定開始吃午餐", "13:30 一定往 Color of You 移動", "13:50 Color of You 報到"], events: [
+                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1~2小時", icon: "fa-shopping-bag", note: "商圈起點。週末會早開30分鐘。", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800", map: "https://naver.me/xuCpV92L" },
+                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA", stay: "35~60分鐘", location: "2樓", icon: "fa-compact-disc", note: "約118坪的 K-pop 社群店。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90/place/1569002974" },
+                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "周邊有湯飯、炸豬排。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
+                { id: "d2-4", time: "14:00", title: "Color of You", stay: "50分鐘", icon: "fa-palette", note: "已訂位：#26KK239040517。", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20~35分鐘", icon: "fa-duck", note: "主打小卡收納用品。", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C29%EA%B8%B8%2060" },
+                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship", stay: "45分鐘~1.5小時", icon: "fa-box-open", note: "KiT Album 及周邊選物店。", map: "https://naver.me/5yPsUODj" },
+                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45分鐘~1.5小時", icon: "fa-microphone", note: "專輯、周邊、抽卡機一次看。", map: "https://naver.me/5z52kl9b" },
+                { id: "d2-8", time: "17:40", title: "POCA SPOT Hongdae", stay: "45分鐘~1.5小時", icon: "fa-search", note: "16:00 前下單可當日取貨。", map: "https://naver.me/IFgVIEGd" },
+                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30~60分鐘", icon: "fa-music", note: "K-pop 推活選物店。", map: "https://map.naver.com/p/search/%EB%A7%88%EC%9D%B4%EC%9E%BC%20%ED%99%8D%EB%8C%80" },
+                { id: "d2-flex", time: "20:30", title: "晚上補貨", stay: "依體力", icon: "fa-plus-circle", note: "CHAAKAN 鞋店、CHICOR/HEMEKO 美妝。", map: "https://naver.me/59U9dYPZ" }
             ] },
-            3: { reminders: ["13:40 一定停下來吃午餐", "16:05 前後一定去 Brandy Melville，不要再往後拖", "19:40 一定吃晚餐", "20:40 後若腿痠，就直接回弘大"], events: [
-                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-home", note: "這家是 B1~3F 共四層，主打居家服飾、髮飾、收納包、浴室用品等，不是單一品類小店。定位偏 home/lifestyle。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
-                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-tint", note: "這家是 fwee 在聖水的品牌體驗空間，主打從氣墊到唇彩的多色展示與試用。不是單純買彩妝就走，重點是試色、依膚色挑色、體驗類活動。", img: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?q=80&w=800", map: "https://map.naver.com/p/search/%ED%93%8C%EC%95%84%EC%A7%80%ED%8A%B8%20%EC%84%B1%EC%88%98" },
-                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45 分鐘～1.5 小時", location: "聖水站 3 號出口", icon: "fa-heart", note: "若你們兩人會慢慢試色、拍照、逛兩層空間，可抓到 1~1.5 小時較剛好。這是依店型與現場體驗型空間推估。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://naver.me/G6RYOX1r" },
-                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：義大利麵 / 燉飯 / 漢堡 / 早午餐 / 韓式湯飯 / 麵包咖啡店。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
-                { id: "d3-5", time: "14:40", title: "rom&nd Pink Office", stay: "35～60 分鐘", location: "聖水站 3 號出口", icon: "fa-palette", note: "這家不只是買彩妝，還有個人色彩測試、調色/color mixing 等體驗。店內主打約 300+ 色號展示，還有 13 個聖水限定色。", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A1%AC%EC%95%A4%20%ED%95%91%ED%81%AC%EC%98%A4%ED%94%BC%EC%8A%A4/place/1256921738" },
-                { id: "d3-6", time: "15:30", title: "ROLAROLA Petit Maison Seongsu", stay: "20～35 分鐘", location: "聖水站 3 號出口", icon: "fa-tshirt", note: "這家是 2025/7/11 正式開幕的聖水店，屬於 ROLAROLA 第二個旗艦空間。店型重點是以季節主題策展方式呈現品牌精選單品。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EB%A1%9C%EB%9D%BC%EB%A1%9C%EB%9D%BC%20%EC%81%98%EB%9D%A0%EB%A9%94%EC%A2%85%EC%84%B1%EC%88%98" },
-                { id: "d3-7", time: "16:05", title: "Brandy Melville Seongsu", stay: "45～75 分鐘", location: "聖水站 3 號出口", icon: "fa-star", note: "韓國首店，因 BLACKPINK 穿搭話題而很紅。品牌以 onesize、偏小版型著名，建議現場一定要試穿，店內有試衣區。", img: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" },
-                { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear Seongsu", stay: "35～60 分鐘", location: "聖水站 4 號出口", icon: "fa-shoe-prints", note: "公開資料提到是 1~3 層的旗艦店，1 樓到 3 樓都有不同空間配置。逛鞋款、包款與季節商品通常不會太快。", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%EC%A0%90" },
-                { id: "d3-9", time: "18:10", title: "Verish Seongsu", stay: "30～50 分鐘", location: "聖水站 4 號出口", icon: "fa-shopping-bag", note: "Verish 聖水旗艦店，主打從 underwear 到 apparel 的完整線下體驗。如果會慢慢挑尺寸、材質、版型，抓到 50 分鐘比較剛好。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B2%A0%EB%A6%AC%EC%8B%9C%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
-                { id: "d3-10", time: "18:50", title: "BANILA CO Seongsu", stay: "30～45 分鐘", location: "聖水站 4 號出口", icon: "fa-spray-can", note: "品牌旗艦店，除了基本購物，也主打 BANILA CO 品牌識別的粉色空間與拍照感，通常會比一般小型美妝店多待一點時間。", img: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%BD%94%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4/place/20" },
-                { id: "d3-dinner", time: "19:40", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 鍋物 / 湯飯 / 炸豬排 / 餐酒館。", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800" },
-                { id: "d3-11", time: "20:40", title: "彈性加碼 (視體力)", stay: "依體力", icon: "fa-plus-circle", note: "AMUSE (30~50分)：有粉色主題空間、體驗區與拍照元素。<br>CUBE (10~20分)：經紀公司大樓朝聖，可去 1F 咖啡空間。<br>Daiso (15~25分)：臨時補買旅行用品、收納很方便。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EC%96%B4%EB%AE%A4%EC%A6%88%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" }
+            3: { reminders: ["13:40 一定停下來吃午餐", "16:05 前後一定去 Brandy Melville", "20:40 若腿痠就回弘大"], events: [
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35~60分鐘", icon: "fa-home", note: "B1~3F 居家生活店。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
+                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35~60分鐘", icon: "fa-tint", note: "彩妝體驗空間。", map: "https://map.naver.com/p/search/%ED%93%8C%EC%95%84%EC%A7%80%ED%8A%B8%20%EC%84%B1%EC%88%98" },
+                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45分鐘~1.5小時", icon: "fa-heart", note: "體驗型空間。", map: "https://naver.me/G6RYOX1r" },
+                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1小時", icon: "fa-utensils" },
+                { id: "d3-5", time: "14:40", title: "rom&nd Pink Office", stay: "35~60分鐘", icon: "fa-palette", note: "首爾旗艦店。", map: "https://map.naver.com/p/search/%EB%A1%AC%EC%95%A4%20%ED%95%91%ED%81%AC%EC%98%A4%ED%94%BC%EC%8A%A4" },
+                { id: "d3-6", time: "15:30", title: "ROLAROLA Petit Maison", stay: "20~35分鐘", icon: "fa-tshirt", map: "https://map.naver.com/p/search/%EB%A1%9C%EB%9D%BC%EB%A1%9C%EB%9D%BC%20%EC%81%98%EB%9D%A0%EB%A9%94%EC%A2%85%EC%84%B1%EC%88%98" },
+                { id: "d3-7", time: "16:05", title: "Brandy Melville", stay: "45~75分鐘", icon: "fa-star", note: "韓國首店。", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" },
+                { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear", stay: "35~60分鐘", icon: "fa-shoe-prints", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%EC%A0%90" },
+                { id: "d3-9", time: "18:10", title: "Verish Seongsu", stay: "30~50分鐘", icon: "fa-female", map: "https://map.naver.com/p/search/%EB%B2%A0%EB%A6%AC%EC%8B%9C%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
+                { id: "d3-10", time: "18:50", title: "BANILA CO Seongsu", stay: "30~45分鐘", icon: "fa-spray-can", map: "https://map.naver.com/p/search/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%BD%94%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
+                { id: "d3-flex", time: "20:40", title: "聖水加碼", stay: "視體力", icon: "fa-plus-circle", note: "AMUSE / CUBE / Daiso。", map: "https://map.naver.com/p/search/%EC%96%B4%EB%AE%A4%EC%A6%88%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" }
             ] },
-            4: { reminders: ["13:40 一定吃午餐或補小吃", "17:40 前一定進入最後一段飾品區", "19:00 若前面已逛太久，後面服飾鞋店直接砍掉", "20:30 後就回弘大，不留太晚"], events: [
-                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", location: "明洞站地下街 B-10", icon: "fa-music", note: "這家在明洞地下街，主打 K-pop 專輯、DVD、黑膠、禮盒。新舊專輯都有，而且常被提到價格比一些大店更便宜。店面不算大，但周邊密度高，很適合快速掃貨。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
-                { id: "d4-2", time: "11:30", title: "Myeong-dong CD SHOP", stay: "20～35 分鐘", location: "明洞站地下街 B-16,17", icon: "fa-compact-disc", note: "這家就在 C.T RECORD 附近，很適合一起比價再買。除了專輯也有周邊、小卡，店面不大但密度高，適合快速挖寶。", img: "https://images.unsplash.com/photo-1514525253344-f814d0743b17?q=80&w=800", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5?c=18.00.0.0.0.dh" },
-                { id: "d4-3", time: "12:00", title: "Buruttrak / Buru's Ddeurak", stay: "30～50 分鐘", location: "明洞站 4 號出口", icon: "fa-record-vinyl", note: "1979年開業的老店，算明洞很有代表性的唱片店之一。這家不是只賣當紅專輯，還常被提到有舊專輯、海報、周邊，甚至稀有品，比較容易久逛。", img: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD%EB%AA%85%EB%8F%99" },
-                { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35～60 分鐘", location: "明洞站 步行 3~5 分鐘", icon: "fa-store", note: "這家公開介紹就是兩層樓的大型 K-pop 周邊店，賣專輯、手燈、周邊、海報等，通常不會是10分鐘快閃型。外部評論普遍提到它品項很齊全。", img: "https://images.unsplash.com/photo-1578335345758-c0b7d722428f?q=80&w=800", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
-                { id: "d4-lunch", time: "13:40", title: "午餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：刀削麵 / 餃子 / 參雞湯 / 拌飯 / 湯飯。或糖餅 / 熱狗 / 魚板等小吃。", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" },
-                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25～40 分鐘", location: "明洞站 8 號出口", icon: "fa-spray-can", note: "這家是明洞街邊1樓美妝店，適合快速逛熱門韓妝、香氛與伴手禮型採買；如果你會慢慢試色，就抓到 40 分鐘較穩。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
-                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25～40 分鐘", location: "明洞站 6 號出口", icon: "fa-magic", note: "明洞店是 1~2 層的大型美妝店，主打可試色、可慢慢逛，但不像百貨型旗艦館需要待太久。集中多個韓國小眾美妝品牌。", img: "https://images.unsplash.com/photo-1596462502278-27bf85033e5a?q=80&w=800", map: "https://map.naver.com/p/search/%ED%97%A4%EB%A9%94%EC%BD%94%EB%AA%85%EB%8F%99%EC%A0%90/place/2086658338" },
-                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦店", stay: "20～35 分鐘", location: "明洞站 步行 3 分鐘", icon: "fa-wind", note: "2025年8月開出的新店。這家看起來是以香水試聞、選香、拍照型門市為主，不像大型百貨式慢逛店。", img: "https://images.unsplash.com/photo-1595425970377-c9703c48657a?q=80&w=800", map: "https://map.naver.com/p/search/%EB%B9%84%EB%B9%84%EC%95%99%EB%AA%85%EB%8F%99%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%BD%EC%8A%A4%ED%86%A0%EC%96%B4" },
-                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35～60 分鐘", location: "明洞 4 路 22", icon: "fa-ring", note: "東大門人氣飾品店在明洞開的分店。這家不是只賣耳環的小店，還有襪子、包包、帽子、服飾等大量配件，通常會比一般單一品類店待更久。", img: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%EB%AA%85%EB%8F%99%EC%A0%90/place/1319879223" },
-                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE 明洞站店", stay: "20～45 分鐘", location: "明洞站 6 號出口", icon: "fa-home", note: "位在 2F~3F，主打飾品、雜貨與服飾。就在明洞商圈核心，離明洞站很近。如果你們兩人會慢慢挑選，抓 1.5~2 小時會更剛好。", img: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3c?q=80&w=800", map: "https://naver.me/FXn6wHWL" },
-                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1～2 小時", location: "明洞站 6 號出口", icon: "fa-gem", note: "這間就在明洞站出口前，位置非常方便，看地址樓層資訊應該是 2F~4F 的多層賣場。慢慢挑飾品、襪子、小物、服飾配件，可抓久一點。", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800", map: "https://map.naver.com/p/search/미미라인 명동점" },
-                { id: "d4-flex", time: "19:00", title: "視體力補：M Playground / 鞋店 / 服飾", stay: "依體力", icon: "fa-plus-circle", note: "M Playground (1-1.5時)：平價潮流服飾。<br>SHOE MARKER (25-40分)：看熱門鞋款。<br>adidas (30-50分)：大型旗艦，有客製區。<br>JUUNEEDU (20-35分)：主打睡衣、居家服。", img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800", map: "https://naver.me/xWTIV9ia" },
-                { id: "d4-dinner", time: "20:00", title: "晚餐時間", stay: "1 小時", icon: "fa-utensils", note: "建議：烤肉 / 炸雞 / 豬腳 / 部隊鍋 / 牛骨湯 / 拉麵。", img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=800" }
+            4: { reminders: ["13:40 一定吃午餐", "17:40 前進入最後飾品區", "20:30 回弘大"], events: [
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20~35分鐘", icon: "fa-music", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
+                { id: "d4-2", time: "11:30", title: "CD SHOP", stay: "20~35分鐘", icon: "fa-compact-disc", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5" },
+                { id: "d4-3", time: "12:00", title: "Buruttrak", stay: "30~50分鐘", icon: "fa-record-vinyl", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD%EB%AA%85%EB%8F%99" },
+                { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35~60分鐘", icon: "fa-store", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4%EB%AA%85%EB%8F%99%0A%EC%A0%90" },
+                { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃", stay: "1小時", icon: "fa-utensils" },
+                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25~40分鐘", icon: "fa-spray-can", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
+                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25~40分鐘", icon: "fa-magic", map: "https://map.naver.com/p/search/%ED%97%A4%EB%A9%94%EC%BD%94%EB%AA%85%EB%8F%99%EC%A0%90/place/2086658338" },
+                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦", stay: "20~35分鐘", icon: "fa-wind", map: "https://map.naver.com/p/search/%EB%B9%84%EB%B9%84%20%EC%95%99%20%EB%AA%85%20%EB%8F%99" },
+                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35~60分鐘", icon: "fa-ring", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%EB%AA%85%EB%8F%99%EC%A0%90/place/1319879223" },
+                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE", stay: "20~45分鐘", icon: "fa-home", map: "https://naver.me/FXn6wHWL" },
+                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1~2小時", icon: "fa-gem", map: "https://map.naver.com/p/search/미미라인 명동점" },
+                { id: "d4-flex", time: "19:00", title: "明洞加碼", stay: "視體力", icon: "fa-plus-circle", note: "M Playground / 鞋店 / adidas / JUUNEEDU。", map: "https://naver.me/xWTIV9ia" }
             ] },
-            5: { reminders: ["11:20 一定完成退房寄行李", "17:10 一定停止購物", "17:30 一定回到飯店拿行李", "17:50 一定出發去首爾站", "18:25 一定到首爾站 AREX 區", "18:55 這班車不要錯過"], events: [
-                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", location: "Hotel The Designers Hongdae", icon: "fa-suitcase", note: "11:20 必完成。將行李寄放於櫃檯後，出門把握最後的逛街時間。", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
-                { id: "d5-lunch", time: "12:00", title: "早午餐", stay: "50 分鐘", icon: "fa-bread-slice", note: "建議選項：弘大周邊的炸豬排 / 湯飯 / 咖哩 / 拉麵 / 早午餐盤。", img: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800" },
-                { id: "d5-covernat", time: "12:50", title: "COVERNAT Flagship Hongdae", stay: "45 分鐘～1.5 小時", location: "弘大站 3 號出口", icon: "fa-tshirt", note: "這間是弘大很熱門的韓系休閒服飾旗艦店，店面有 1F 和 B1 兩層，適合排進合井—弘大一路順逛的購物行程。", img: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800", map: "https://naver.me/5giFTV55" },
-                { id: "d5-coyseio", time: "13:50", title: "COYSEIO Flagship Hapjeong", stay: "45 分鐘～1.5 小時", location: "弘大站 3 號出口", icon: "fa-shopping-bag", note: "這間偏女生服飾+生活選物型旗艦店，適合排在合井、弘大一帶一起順逛。", img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=800", map: "https://map.naver.com/p/search/코이세이오 플래그쉽 합정" },
-                { id: "d5-understar", time: "14:50", title: "UNS STATION [by understar]", stay: "40～70 分鐘", location: "弘大站 9 號出口", icon: "fa-female", note: "這間是弘大很適合順逛的服飾店，店面是多層女性服飾店。偏韓系女裝選品，也有鞋、包等品項，若會試穿可抓久一點。", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800", map: "https://map.naver.com/p/search/언더스타서울 서교" },
-                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA 弘大2店", stay: "25～40 分鐘", location: "弘大站 9 號出口", icon: "fa-shopping-basket", note: "這家是以基本款女裝、外掛陳列、狹長型店面為主；若是快速掃基本款約 25 分鐘，若要慢慢挑尺寸和搭配可抓到 40 分鐘。", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=800", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%EB%A7%88%ED%8F%AC%EA%B5%AC%EC%84%9C%EA%B5%90%EB%8F%99%20358-67/place/1371757291" },
-                { id: "d5-loof", time: "16:30", title: "LOOF Hongdae", stay: "35～60 分鐘", location: "弘大站 9 號出口", icon: "fa-compact-disc", note: "這間有兩層樓，1F以K-pop周邊/新商品/抽卡機為主，2F有專輯、雜誌、留言牆與部分團體專區。這間屬於弘大很適合追星順逛的店，專輯、周邊、抽卡機一次看。", img: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800", map: "https://naver.me/GkR3c9XW" },
-                { id: "d5-flex", time: "17:20", title: "視情況補：CHAAKAN / CHICOR / HEMEKO", stay: "10 分鐘", icon: "fa-plus-circle", note: "若時間允許最後補貨：<br>CHAAKAN (30-45分)：女鞋旗艦店。<br>CHICOR (45-75分)：大型美妝店。<br>HEMEKO (45-60分)：小眾美妝。", img: "https://images.unsplash.com/photo-1522338228045-9b68e7f4c6e1?q=80&w=800", map: "https://naver.me/59U9dYPZ" },
-                { id: "d5-bag", time: "17:30", title: "回飯店拿行李", stay: "20 分鐘", location: "Hotel The Designers Hongdae", icon: "fa-suitcase-rolling", note: "請務必遵守時間，領完行李準備前往首爾站。", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
-                { id: "d5-go", time: "17:50", title: "出發去首爾站", stay: "35 分鐘", icon: "fa-walking", note: "搭乘地鐵前往首爾站。請預留轉乘及拖著行李步行的時間。" },
-                { id: "d5-arex-wait", time: "18:25", title: "首爾站 AREX 區，準備進站", stay: "30 分鐘", location: "首爾站 B7F", icon: "fa-ticket-alt", note: "AREX 官方提醒：直達車可在發車前 30 分鐘進閘，最晚發車前 3 分鐘到月台。搭 18:55 抓 18:25 前到會最安心。", img: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=800", map: "https://map.naver.com/p/search/서울역" },
-                { id: "d5-arex", time: "18:55", title: "AREX 直達車", stay: "43 分鐘", location: "首爾站 B7F → 仁川機場", icon: "fa-train", note: "發車死線：18:55。你想逛得更鬆、更穩，搭這班最剛好！", img: "https://images.unsplash.com/photo-1532105956691-164993510522?q=80&w=800", map: "https://www.airportrailroad.com/ticket/rsv" },
-                { id: "d5-airport", time: "19:38", title: "抵達仁川機場 T1", stay: "登機", location: "인천국제공항 T1", icon: "fa-plane-departure", note: "抵達機場後，進行報到 / 托運 / 安檢 / 逛機場 / 候機。<br>若原本想在機場多逛 1~2 小時需搭 19:36 的車，現在搭 18:55 班次，你的機場免稅時間會非常充裕穩妥！回程航班 IT 603 將於 4/20 00:30 起飛。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/p/search/인천국제공항" }
-            ], ...tripCommonData }
+            5: { reminders: ["11:20 退房寄行李", "17:10 停止購物", "17:30 飯店拿行李", "18:55 AREX"], events: [
+                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", icon: "fa-suitcase", note: "領完行李準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
+                { id: "d5-lunch", time: "12:00", title: "早午餐", stay: "50分鐘", icon: "fa-bread-slice" },
+                { id: "d5-covernat", time: "12:50", title: "COVERNAT Flagship", stay: "45分鐘~1.5小時", icon: "fa-tshirt", map: "https://naver.me/5giFTV55" },
+                { id: "d5-coyseio", time: "13:50", title: "COYSEIO Flagship", stay: "45分鐘~1.5小時", icon: "fa-shopping-bag", map: "https://map.naver.com/p/search/코이세이오 플래그쉽 합정" },
+                { id: "d5-understar", time: "14:50", title: "UNS STATION", stay: "40~70分鐘", icon: "fa-female", map: "https://map.naver.com/p/search/언더스타서울 서교" },
+                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA 弘大2店", stay: "25~40分鐘", icon: "fa-shopping-basket", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%EB%A7%88%ED%8F%AC%EA%B5%AC%EC%84%9C%EA%B5%90%EB%8F%99%20358-67/place/1371757291" },
+                { id: "d5-loof", time: "16:30", title: "LOOF Hongdae", stay: "35~60分鐘", icon: "fa-compact-disc", map: "https://naver.me/GkR3c9XW" },
+                { id: "d5-flex", time: "17:20", title: "最後補貨", stay: "10分鐘", icon: "fa-plus-circle", note: "CHAAKAN / CHICOR / HEMEKO。", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%ED%99%8D%EC%9D%B5%EB%A1%9C%2025" },
+                { id: "d5-arex", time: "18:55", title: "AREX 直達車", stay: "43分鐘", location: "首爾站 B7F", icon: "fa-train", note: "發車死線：18:55。", map: "https://www.airportrailroad.com/ticket/rsv" },
+                { id: "d5-airport", time: "19:38", title: "仁川機場 T1", stay: "登機", icon: "fa-plane-departure", note: "候機。航班 IT 603。", map: "https://map.naver.com/p/search/인천국제공항" }
+            ] }
         };
 
         window.renderContent = () => {
             const content = document.getElementById('dayContent');
             const timeline = document.getElementById('timelineLine');
-            
             if (window.appState.currentDay === 0) {
                 timeline.style.display = 'none';
-                let html = `
-                    <div class="mb-6 bg-white p-4 rounded-2xl comic-border flex items-center gap-4 relative overflow-hidden">
-                        <div class="text-4xl drop-shadow-md">🐶</div>
-                        <div>
-                            <h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2>
-                            <p class="text-xs font-bold text-gray-500 mt-1">跟著 Snoopy 一起出發吧！🐾</p>
-                        </div>
-                        <i class="fas fa-bone absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
-                    </div>
-
-                    <!-- 超短版總覽 -->
-                    <div class="mb-8 bg-yellow-50 p-4 rounded-2xl comic-border relative">
-                        <div class="absolute -top-3 -right-2 text-2xl rotate-12 drop-shadow-sm">📌</div>
-                        <h3 class="text-sm font-black text-gray-800 mb-2 border-b-2 border-yellow-200 pb-1 inline-block">行程超短版 ⚡</h3>
-                        <ul class="text-[13px] font-bold text-gray-700 space-y-1.5 mt-1">
-                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/15</span> 弘大入住休息</li>
-                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/16</span> 弘大：AK / WITHMUU / Color of You / K-pop 周邊線 / 晚上鞋店美妝</li>
-                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/17</span> 聖水：美妝旗艦店＋服飾旗艦店</li>
-                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：唱片＋小卡＋美妝＋配件</li>
-                            <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/19</span> 弘大服飾收尾＋18:55 AREX 提早去機場</li>
-                        </ul>
-                    </div>
-
-                    <div class="space-y-8 pb-10">
-                `;
+                let html = `<div class="mb-6 bg-white p-4 rounded-2xl comic-border flex items-center gap-4 relative overflow-hidden">
+                    <div class="text-4xl drop-shadow-md">🐶</div>
+                    <div><h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2><p class="text-xs font-bold text-gray-500 mt-1">跟著 Snoopy 一起出發吧！🐾</p></div>
+                    <i class="fas fa-bone absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
+                </div>
+                <div class="mb-8 bg-yellow-50 p-4 rounded-2xl comic-border relative">
+                    <div class="absolute -top-3 -right-2 text-2xl rotate-12 drop-shadow-sm">📌</div>
+                    <h3 class="text-sm font-black text-gray-800 mb-2 border-b-2 border-yellow-200 pb-1 inline-block">行程超短版 ⚡</h3>
+                    <ul class="text-[13px] font-bold text-gray-700 space-y-1.5 mt-1">
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/15</span> 弘大入住休息</li>
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/16</span> 弘大：Color of You / K-pop 周邊線 / 鞋美妝</li>
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/17</span> 聖水：美妝旗艦店＋服飾旗艦店</li>
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：唱片＋小卡＋美妝＋配件</li>
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/19</span> 弘大服飾收尾＋提早去機場</li>
+                    </ul>
+                </div>
+                <div class="space-y-8 pb-10">`;
                 overviewData.forEach((day, idx) => {
-                    html += `
-                        <div class="bg-white rounded-2xl p-5 comic-border relative">
-                            <div class="absolute -top-3.5 -left-2 ${day.color} font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">${day.title}</div>
-                            <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">${day.emoji}</div>
-                            <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
-                                ${day.steps.map((step, sIdx) => `
-                                    <span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">${step}</span>
-                                    ${sIdx < day.steps.length - 1 ? `<i class="fas fa-caret-right text-gray-300 mx-0.5"></i>` : ''}
-                                `).join('')}
-                            </div>
+                    html += `<div class="bg-white rounded-2xl p-5 comic-border relative">
+                        <div class="absolute -top-3.5 -left-2 ${day.color} font-black px-4 py-1.5 rounded-xl border-2 border-gray-800 text-[11px] transform -rotate-3 shadow-sm z-10 tracking-widest">${day.title}</div>
+                        <div class="absolute -right-2 -bottom-2 text-2xl drop-shadow-sm opacity-80">${day.emoji}</div>
+                        <div class="mt-4 flex flex-wrap gap-2 items-center text-[12px] font-bold text-gray-700 leading-relaxed">
+                            ${day.steps.map((step, sIdx) => `<span class="bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-200 shadow-sm">${step}</span>${sIdx < day.steps.length - 1 ? `<i class="fas fa-caret-right text-gray-300 mx-0.5"></i>` : ''}`).join('')}
                         </div>
-                    `;
+                    </div>`;
                 });
                 html += `</div>`;
                 content.innerHTML = html;
                 return;
             }
-
             const dayData = itineraryData[window.appState.currentDay];
             if (!dayData) return;
-            
             timeline.style.display = (window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab !== 'itinerary' ? 'none' : 'block';
-
             if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'hotel') {
                 const h = dayData.hotel;
                 content.innerHTML = `<div class="spot-card p-6 border bg-white"><div class="flex justify-between items-start mb-4"><h2 class="text-xl font-bold">${h.name}</h2><i class="fas fa-hotel text-blue-500 text-2xl"></i></div><div class="space-y-4 text-sm"><p class="text-gray-500 font-bold">${h.addr}</p><div class="grid grid-cols-2 gap-3"><div class="bg-blue-50 p-3 rounded-xl">入住：${h.checkIn}</div><div class="bg-orange-50 p-3 rounded-xl">退房：${h.checkOut}</div></div><div class="relative group mt-4"><img src="${window.appState.imageOverrides['hotel'] || h.img}" class="w-full h-44 object-cover rounded-xl shadow-inner"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, 'hotel')"></label></div><p class="text-xs text-gray-500 italic p-3 bg-gray-50 rounded-lg mt-3">${h.note}</p></div></div>`;
             } else if ((window.appState.currentDay === 1 || window.appState.currentDay === 5) && window.appState.currentSubTab === 'flight') {
                 const f = tripCommonData.flight;
-                content.innerHTML = `
-                <div class="space-y-5">
-                    <!-- 去程航班 -->
+                content.innerHTML = `<div class="space-y-5">
                     <div class="boarding-pass rounded-2xl p-5 shadow-md border bg-white relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">去程</div>
-                        <div class="flex justify-between mb-3 items-center">
-                            <span class="text-orange-500 font-black italic text-lg">Tigerair</span>
-                            <span class="bg-black text-white px-2 py-1 rounded text-xs font-bold tracking-wider shadow-sm">訂位代號: ${f.code}</span>
-                        </div>
+                        <div class="flex justify-between mb-3 items-center"><span class="text-orange-500 font-black italic text-lg">Tigerair</span><span class="bg-black text-white px-2 py-1 rounded text-xs font-bold shadow-sm">代號: ${f.code}</span></div>
                         <div class="flex justify-between text-center items-center mb-2">
-                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500 font-medium">${f.out.depAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.out.dep}</div></div>
-                            <div class="text-orange-400 px-2 flex flex-col items-center justify-center w-24">
-                                <span class="text-[10px] text-gray-400 font-bold mb-1">${f.out.duration}</span>
-                                <div class="w-full relative flex items-center justify-center">
-                                    <div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div>
-                                    <i class="fas fa-plane text-orange-500 bg-white px-1 z-10"></i>
-                                </div>
-                                <span class="text-[10px] text-gray-500 font-bold mt-1">${f.out.no}</span>
-                            </div>
-                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500 font-medium">${f.out.arrAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.out.arr}</div></div>
+                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500">${f.out.depAir}</div><div class="font-bold text-xl">${f.out.dep}</div></div>
+                            <div class="text-orange-400 px-2 flex flex-col items-center w-24"><span class="text-[10px] text-gray-400">${f.out.duration}</span><div class="w-full relative flex items-center justify-center"><div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div><i class="fas fa-plane text-orange-500 bg-white px-1 z-10"></i></div><span class="text-[10px] text-gray-500">${f.out.no}</span></div>
+                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500">${f.out.arrAir}</div><div class="font-bold text-xl">${f.out.arr}</div></div>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold">
-                            <span class="bg-orange-50 text-orange-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.out.date}</span>
-                        </div>
+                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold"><span class="bg-orange-50 text-orange-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.out.date}</span></div>
                     </div>
-
-                    <!-- 回程航班 -->
                     <div class="boarding-pass rounded-2xl p-5 shadow-md border bg-white relative overflow-hidden">
                         <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">回程</div>
-                        <div class="flex justify-between mb-3 items-center">
-                            <span class="text-blue-500 font-black italic text-lg">Tigerair</span>
-                            <span class="bg-black text-white px-2 py-1 rounded text-xs font-bold tracking-wider shadow-sm">訂位代號: ${f.code}</span>
-                        </div>
+                        <div class="flex justify-between mb-3 items-center"><span class="text-blue-500 font-black italic text-lg">Tigerair</span><span class="bg-black text-white px-2 py-1 rounded text-xs font-bold shadow-sm">代號: ${f.code}</span></div>
                         <div class="flex justify-between text-center items-center mb-2">
-                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500 font-medium">${f.ret.depAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.ret.dep}</div></div>
-                            <div class="text-blue-400 px-2 flex flex-col items-center justify-center w-24">
-                                <span class="text-[10px] text-gray-400 font-bold mb-1">${f.ret.duration}</span>
-                                <div class="w-full relative flex items-center justify-center">
-                                    <div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div>
-                                    <i class="fas fa-plane text-blue-500 bg-white px-1 z-10"></i>
-                                </div>
-                                <span class="text-[10px] text-gray-500 font-bold mt-1">${f.ret.no}</span>
-                            </div>
-                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500 font-medium">${f.ret.arrAir}</div><div class="font-bold text-xl text-gray-900 mt-1">${f.ret.arr}</div></div>
+                            <div class="flex-1"><div class="font-black text-3xl">ICN</div><div class="text-[11px] text-gray-500">${f.ret.depAir}</div><div class="font-bold text-xl">${f.ret.dep}</div></div>
+                            <div class="text-blue-400 px-2 flex flex-col items-center w-24"><span class="text-[10px] text-gray-400">${f.ret.duration}</span><div class="w-full relative flex items-center justify-center"><div class="absolute w-full h-[1px] bg-gray-300 border-dashed border-t"></div><i class="fas fa-plane text-blue-500 bg-white px-1 z-10"></i></div><span class="text-[10px] text-gray-500">${f.ret.no}</span></div>
+                            <div class="flex-1"><div class="font-black text-3xl">TPE</div><div class="text-[11px] text-gray-500">${f.ret.arrAir}</div><div class="font-bold text-xl">${f.ret.arr}</div></div>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold">
-                            <span class="bg-blue-50 text-blue-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.ret.date}</span>
-                        </div>
+                        <div class="mt-4 pt-3 border-t border-dashed flex justify-between items-center text-xs text-gray-600 font-bold"><span class="bg-blue-50 text-blue-600 px-2 py-1 rounded-md"><i class="far fa-calendar-alt mr-1"></i> ${f.ret.date}</span></div>
                     </div>
                 </div>`;
             } else {
                 let html = `<div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-xl shadow-sm"><h2 class="text-[10px] font-bold text-amber-900 mb-2 uppercase tracking-widest">停損提醒</h2><ul class="space-y-2">${dayData.reminders.map(r => {
-                    const isRed = r.includes("一定") || r.includes("不要錯過");
+                    const isRed = r.includes("一定") || r.includes("不要錯過") || r.includes("死線");
                     return `<li class="flex items-start" style="${isRed ? 'color:red; font-weight:bold; font-size:1.1em;' : 'text-xs text-amber-800'}"><i class="fas fa-stopwatch mt-1 mr-2 text-amber-400"></i>${r}</li>`;
                 }).join('')}</ul></div>`;
-
                 dayData.events.forEach((event) => {
                     const isFood = event.icon.includes('utensils') || event.icon.includes('bowl') || event.icon.includes('cookie') || event.icon.includes('bread');
                     const currentImg = window.appState.imageOverrides[event.id] || event.img;
-                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full ${isFood ? 'bg-orange-400' : 'bg-blue-500'} border-4 border-white z-10 shadow-sm"></div><div class="spot-card border flex flex-col"><div class="h-44 relative group"><img src="${currentImg}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, '${event.id}')"></label></div><div class="p-4"><div class="flex items-start justify-between mb-2"><h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}</div><div class="flex flex-wrap items-center gap-2 mb-3"><span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>${event.stay ? `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">建議：${event.stay}</span>` : ''}</div><div class="${isFood ? 'bg-orange-50' : 'bg-gray-50'} p-3 rounded-xl"><p class="text-[10px] ${isFood ? 'text-orange-400' : 'text-gray-400'} font-bold uppercase mb-1 flex items-center"><i class="fas fa-info-circle mr-1"></i>備註</p><p class="text-xs text-gray-700 leading-relaxed">${event.note}</p></div></div></div></div>`;
+                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full ${isFood ? 'bg-orange-400' : 'bg-blue-500'} border-4 border-white z-10 shadow-sm"></div><div class="spot-card border flex flex-col"><div class="h-44 relative group"><img src="${currentImg}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, '${event.id}')"></label></div><div class="p-4"><div class="flex items-start justify-between mb-2"><h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}</div><div class="flex flex-wrap items-center gap-2 mb-3"><span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>${event.stay ? `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">建議：${event.stay}</span>` : ''}</div><div class="${isFood ? 'bg-orange-50' : 'bg-gray-50'} p-3 rounded-xl"><p class="text-[10px] ${isFood ? 'text-orange-400' : 'text-gray-400'} font-bold uppercase mb-1 flex items-center"><i class="fas fa-info-circle mr-1"></i>備註</p><p class="text-xs text-gray-700 leading-relaxed">${event.note || '無備註'}</p></div></div></div></div>`;
                 });
                 content.innerHTML = html;
             }
@@ -389,7 +280,6 @@
             window.renderContent();
         };
 
-        // Modal Toggle 控制
         window.toggleModal = (id) => {
             const modal = document.getElementById(id);
             const content = document.getElementById(id + 'Content');
@@ -400,19 +290,6 @@
                 modal.classList.add('opacity-0', 'pointer-events-none');
                 content.classList.add('scale-95');
             }
-        };
-
-        window.downloadApp = () => {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = '2026首爾家族旅遊.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
         };
 
         window.showDay(0);
