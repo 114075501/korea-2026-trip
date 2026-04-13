@@ -423,7 +423,6 @@
     import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
     import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-    // 你的專屬 Firebase 金鑰
     const firebaseConfig = {
         apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78",
         authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
@@ -439,42 +438,41 @@
     const db = getFirestore(app);
     const syncStatus = document.getElementById('syncStatus');
 
-    // 直接將功能掛載到 window，確保點擊時已經就緒
     window.handleUpload = async (input, spotId) => {
         if (!input.files[0]) return;
         
-        // 檢查是否已登入，若無則嘗試匿名登入
-        if (!auth.currentUser) {
-            try { await signInAnonymously(auth); } 
-            catch (e) { alert("連線失敗，請檢查網路"); return; }
-        }
+        try {
+            // 確保操作前已登入
+            if (!auth.currentUser) await signInAnonymously(auth);
 
-        syncStatus.innerText = '正在處理圖片...';
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image(); 
-            img.src = e.target.result;
-            img.onload = async () => {
-                const canvas = document.createElement('canvas');
-                let w = img.width; let h = img.height;
-                if (w > 1000) { h *= 1000 / w; w = 1000; }
-                canvas.width = w; canvas.height = h;
-                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                const compressed = canvas.toDataURL('image/jpeg', 0.5);
-                
-                try {
-                    await setDoc(doc(db, MASTER_SYNC_ID, spotId), { data: compressed }, { merge: true });
-                    syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
-                } catch (err) { 
-                    console.error(err);
-                    syncStatus.innerText = '同步失敗'; 
-                }
+            syncStatus.innerText = '正在處理圖片...';
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image(); 
+                img.src = e.target.result;
+                img.onload = async () => {
+                    const canvas = document.createElement('canvas');
+                    let w = img.width; let h = img.height;
+                    if (w > 1000) { h *= 1000 / w; w = 1000; }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    const compressed = canvas.toDataURL('image/jpeg', 0.5);
+                    
+                    try {
+                        await setDoc(doc(db, MASTER_SYNC_ID, spotId), { data: compressed }, { merge: true });
+                        syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
+                    } catch (err) { 
+                        alert("寫入失敗：請確認 Firestore 規則已發佈為測試模式");
+                        syncStatus.innerText = '同步失敗'; 
+                    }
+                };
             };
-        };
-        reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
+        } catch (e) {
+            alert("登入失敗：請確認 Firebase Console 已啟用「匿名登入」且已授權 github.io 網域");
+        }
     };
 
-    // 啟動資料監聽
     async function initListener() {
         try {
             await signInAnonymously(auth);
