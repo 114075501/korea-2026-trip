@@ -90,13 +90,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-blue-50 text-blue-800 p-4 rounded-xl flex items-start gap-3 border border-blue-100">
-                    <i class="fas fa-walking mt-1 text-blue-500 text-lg"></i>
-                    <div>
-                        <div class="font-bold mb-1">轉乘找什麼？</div>
-                        <p class="text-[12px] leading-relaxed">請跟著標示 <span class="bg-white px-1.5 py-0.5 rounded text-blue-600 font-bold border border-blue-200">Transfer / 환승</span> 一直走就對了！</p>
-                    </div>
-                </div>
             </div>
             <div class="p-4 border-t bg-gray-50 shrink-0">
                 <button onclick="window.toggleModal('subwayModal')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition shadow-md">我準備好搭車了！</button>
@@ -167,7 +160,7 @@
                 { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear", stay: "35~60分鐘", icon: "fa-shoe-prints", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%EC%A0%90" },
                 { id: "d3-9", time: "18:10", title: "Verish Seongsu", stay: "30~50分鐘", icon: "fa-female", map: "https://map.naver.com/p/search/%EB%B2%A0%EB%A6%AC%EC%8B%9C%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
                 { id: "d3-10", time: "18:50", title: "BANILA CO Seongsu", stay: "30~45分鐘", icon: "fa-spray-can", map: "https://map.naver.com/p/search/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%BD%94%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
-                { id: "d3-flex", time: "20:40", title: "聖水加碼", stay: "視體力", icon: "fa-plus-circle", note: "AMUSE / CUBE / Daiso。", map: "https://map.naver.com/p/search/%EC%96%B4%EB%AE%A4%EC%A6%88%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" }
+                { id: "d3-flex", time: "20:40", title: "聖水加碼", stay: "視體力", icon: "fa-plus-circle", note: "AMUSE / CUBE / Daiso。", map: "https://map.naver.com/p/search/%EC%9E%A5%EC%86%8C%EB%AA%85" }
             ] },
             4: { reminders: ["13:40 吃午餐", "17:40 一定進入最後飾品區", "20:30 回弘大"], events: [
                 { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20~35分鐘", icon: "fa-music", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
@@ -180,7 +173,7 @@
                 { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦", stay: "20~35分鐘", icon: "fa-wind", map: "https://map.naver.com/p/search/%EB%B9%84%20%EB%B9%84%20%EC%95%99%20%EB%AA%85%20%EB%8F%99" },
                 { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35~60分鐘", icon: "fa-ring", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%EB%AA%85%EB%8F%99%EC%A0%90/place/1319879223" },
                 { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE", stay: "20~45分鐘", icon: "fa-home", map: "https://naver.me/FXn6wHWL" },
-                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1~2小時", icon: "fa-gem", map: "https://map.naver.com/p/search/미미라인 명동점" },
+                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1~2小時", icon: "fa-gem", map: "https://map.naver.com/p/search/미미라인 명동點" },
                 { id: "d4-flex", time: "19:00", title: "明洞加碼", stay: "視體力", icon: "fa-plus-circle", note: "M Playground / 鞋店 / adidas / JUUNEEDU。", map: "https://naver.me/xWTIV9ia" }
             ] },
             5: { reminders: ["11:20 一定退房寄行李", "17:10 停止購物", "17:30 一定飯店拿行李", "18:55 一定 AREX"], events: [
@@ -205,9 +198,9 @@
             if (window.appState.currentDay === 0) {
                 timeline.style.display = 'none';
                 let html = `<div class="mb-6 bg-white p-4 rounded-2xl comic-border flex items-center gap-4 relative overflow-hidden">
-                    <div class="text-4xl drop-shadow-md">🐶</div>
-                    <div><h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2><p class="text-xs font-bold text-gray-500 mt-1">🐾🐾🐾🐾🐾🐾🐾🐾🐾</p></div>
-                    <i class="fas fa-bone absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
+                    <div class="text-4xl drop-shadow-md">🇰🇷</div>
+                    <div><h2 class="text-lg font-black text-gray-800 tracking-wide">首爾追星購物總覽</h2><p class="text-xs font-bold text-gray-500 mt-1">探索潮流首爾，紀錄全家人的精彩時刻！✨</p></div>
+                    <i class="fas fa-camera absolute -right-4 -bottom-4 text-6xl text-gray-100 opacity-50 rotate-12"></i>
                 </div>
                 <div class="mb-8 bg-yellow-50 p-4 rounded-2xl comic-border relative">
                     <div class="absolute -top-3 -right-2 text-2xl rotate-12 drop-shadow-sm">📌</div>
@@ -339,7 +332,7 @@
             window.modalOpen = false;
         };
 
-        // 滑動導航邏輯
+        // 滑動導覽邏輯
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -348,7 +341,7 @@
         }, { passive: true });
 
         document.addEventListener('touchend', e => {
-            if (window.modalOpen) return; // 如果視窗開啟中，不觸發滑動切換
+            if (window.modalOpen) return;
             touchEndX = e.changedTouches[0].screenX;
             handleGesture();
         }, { passive: true });
@@ -358,12 +351,10 @@
             const diff = touchStartX - touchEndX;
             if (Math.abs(diff) > threshold) {
                 if (diff > 0) {
-                    // 由右向左滑 -> 下一天
                     if (window.appState.currentDay < 5) {
                         window.showDay(window.appState.currentDay + 1);
                     }
                 } else {
-                    // 由左向右滑 -> 前一天
                     if (window.appState.currentDay > 0) {
                         window.showDay(window.appState.currentDay - 1);
                     }
