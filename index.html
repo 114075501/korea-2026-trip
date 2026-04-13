@@ -423,7 +423,7 @@
     import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
     import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-    // Firebase Configuration
+    // 你的專屬 Firebase 金鑰
     const firebaseConfig = {
         apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78",
         authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
@@ -433,75 +433,62 @@
         appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
     };
 
-    // Use a simpler ID for your own database to avoid deep nesting issues
     const MASTER_SYNC_ID = "seoul-2026"; 
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const syncStatus = document.getElementById('syncStatus');
 
-    window.handleUpload = (input, spotId) => {
-        if (window.cloudSaveImage) { 
-            window.cloudSaveImage(input, spotId); 
-        } else { 
-            alert("雲端同步初始化中，請稍後再試！"); 
+    // 直接將功能掛載到 window，確保點擊時已經就緒
+    window.handleUpload = async (input, spotId) => {
+        if (!input.files[0]) return;
+        
+        // 檢查是否已登入，若無則嘗試匿名登入
+        if (!auth.currentUser) {
+            try { await signInAnonymously(auth); } 
+            catch (e) { alert("連線失敗，請檢查網路"); return; }
         }
+
+        syncStatus.innerText = '正在處理圖片...';
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image(); 
+            img.src = e.target.result;
+            img.onload = async () => {
+                const canvas = document.createElement('canvas');
+                let w = img.width; let h = img.height;
+                if (w > 1000) { h *= 1000 / w; w = 1000; }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                const compressed = canvas.toDataURL('image/jpeg', 0.5);
+                
+                try {
+                    await setDoc(doc(db, MASTER_SYNC_ID, spotId), { data: compressed }, { merge: true });
+                    syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
+                } catch (err) { 
+                    console.error(err);
+                    syncStatus.innerText = '同步失敗'; 
+                }
+            };
+        };
+        reader.readAsDataURL(input.files[0]);
     };
 
-    async function startApp() {
+    // 啟動資料監聽
+    async function initListener() {
         try {
             await signInAnonymously(auth);
-            
-            // Listen for changes in the 'customImages' collection
             onSnapshot(collection(db, MASTER_SYNC_ID), (snap) => {
                 const news = {};
-                snap.forEach(d => {
-                    news[d.id] = d.data().data;
-                });
-                // Update the app's global state and force a re-render
+                snap.forEach(d => { news[d.id] = d.data().data; });
                 window.appState.imageOverrides = news; 
                 window.renderContent(); 
                 syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
             });
-
-            window.cloudSaveImage = async (input, spotId) => {
-                if (!input.files[0]) return;
-                syncStatus.innerText = '正在處理圖片...';
-                
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    const canvas = document.createElement('canvas');
-                    const img = new Image(); 
-                    img.src = e.target.result;
-                    img.onload = async () => {
-                        let w = img.width; let h = img.height;
-                        if (w > 1000) { h *= 1000 / w; w = 1000; }
-                        canvas.width = w; canvas.height = h;
-                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        // Compress to JPEG to stay under Firestore document size limits
-                        const compressed = canvas.toDataURL('image/jpeg', 0.5);
-                        
-                        try {
-                            // Save directly into the collection named after your trip
-                            await setDoc(doc(db, MASTER_SYNC_ID, spotId), 
-                                { data: compressed }, 
-                                { merge: true }
-                            );
-                        } catch (err) { 
-                            console.error("Upload error:", err);
-                            syncStatus.innerText = '同步失敗'; 
-                        }
-                    };
-                };
-                reader.readAsDataURL(input.files[0]);
-            };
-        } catch (e) {
-            console.error("Connection Error:", e);
-        }
+        } catch (e) { console.error("Listener Error:", e); }
     }
 
-    startApp();
+    initListener();
 </script>
 </body>
 </html>
