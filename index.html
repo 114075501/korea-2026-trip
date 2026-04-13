@@ -418,67 +418,24 @@
         window.showDay(0);
     </script>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
-        import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
-
-        // 家族專屬的固定同步 ID
-        const MASTER_SYNC_ID = "seoul-family-trip-2026-sync-v1"; 
-        
-        window.handleUpload = (input, spotId) => {
-            if (window.cloudSaveImage) { window.cloudSaveImage(input, spotId); }
-            else { alert("雲端連線中，請稍後再試！"); }
-        };
-
-        try {
-            const fbStr = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
-            if (!fbStr) throw new Error();
-            const config = JSON.parse(fbStr);
-            const appId = typeof __app_id !== 'undefined' ? __app_id : MASTER_SYNC_ID;
-
-            const app = initializeApp(config);
-            const auth = getAuth(app);
-            const db = getFirestore(app);
-
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else { await signInAnonymously(auth); }
-
-            onAuthStateChanged(auth, (u) => {
-                if (u) {
-                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'customImages'), (snap) => {
-                        const news = {}; snap.forEach(d => news[d.id] = d.data().data);
-                        window.appState.imageOverrides = news; window.renderContent(); 
-                    });
-                    
-                    window.cloudSaveImage = async (input, spotId) => {
-                        if (!input.files[0]) return;
-                        document.getElementById('syncStatus').innerText = '處理中...';
-                        const reader = new FileReader();
-                        reader.onload = async (e) => {
-                            const canvas = document.createElement('canvas');
-                            const img = new Image(); img.src = e.target.result;
-                            img.onload = async () => {
-                                let w = img.width; let h = img.height;
-                                if (w > 1000) { h *= 1000 / w; w = 1000; }
-                                canvas.width = w; canvas.height = h;
-                                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                                const compressed = canvas.toDataURL('image/jpeg', 0.6);
-                                try {
-                                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'customImages', spotId), { data: compressed }, { merge: true });
-                                    document.getElementById('syncStatus').innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
-                                } catch (err) { document.getElementById('syncStatus').innerText = '同步失敗'; }
-                            };
-                        };
-                        reader.readAsDataURL(input.files[0]);
-                    };
-                }
-            });
-        } catch (e) {
-            document.getElementById('env-warning').style.display = 'block';
-            document.getElementById('syncStatus').innerText = '離線預覽';
-        }
-    </script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+ 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjwIwbJwVI6vy7VOXwuz_ngNcFySgcW78",
+    authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
+    projectId: "seoul-trip-2026-a715f",
+    storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
+    messagingSenderId: "1022754455381",
+    appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
+  };
+ 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </body>
 </html>
