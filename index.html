@@ -19,6 +19,7 @@
         .change-img-btn { position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.75); color: white; border-radius: 99px; padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; z-index: 10; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
         .comic-border { border: 2px solid #1f2937; box-shadow: 3px 3px 0px 0px #1f2937; }
         .cursor-zoom-in { cursor: zoom-in; }
+        .cursor-zoom-out { cursor: zoom-out; }
         .line-pill { padding: 2px 10px; border-radius: 99px; font-size: 10px; font-weight: 800; color: white; display: inline-flex; align-items: center; margin-right: 4px; }
         .station-pill { padding: 2px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; display: inline-flex; align-items: center; }
     </style>
@@ -29,7 +30,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                 <div class="flex items-center gap-2">
                     <h1 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
-                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.8</span>
+                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.9</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="https://map.naver.com/p/favorite/myPlace/folder/37874fe68eb04839885b36cdc02e0f81?c=11.24,0,0,0,dh" target="_blank" class="whitespace-nowrap text-[10px] sm:text-[11px] bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full font-bold border border-amber-100 shadow-sm flex items-center transition hover:bg-amber-100">
@@ -77,7 +78,7 @@
             </div>
             <div class="p-5 overflow-y-auto space-y-6 text-gray-800 text-sm">
                 <div>
-                    <h3 class="text-indigo-700 font-black mb-3 flex items-center border-b-2 border-indigo-100 pb-1"><i class="fas fa-lightbulb mr-2"></i>核心觀念：地鐵分三層</h3>
+                    <h3 class="text-indigo-700 font-black mb-3 flex items-center border-b-2 border-indigo-100 pb-1"><i class="fas fa-lightbulb mr-2"></i>地鐵分三層</h3>
                     <div class="space-y-2 text-[11px]">
                         <p class="bg-blue-50 p-2 rounded-lg border border-blue-100 text-blue-700 font-bold">1. 市區主幹線 (1~9號線)：這趟最常用 2號(綠) 與 4號(淺藍)。</p>
                         <p class="bg-teal-50 p-2 rounded-lg border border-teal-100 text-teal-700 font-bold">2. 通勤區域線 (有名稱)：如 AREX、京義中央線。</p>
@@ -144,17 +145,18 @@
             ], ...tripCommonData },
             2: { reminders: ["09:20 前飯店出門", "12:30 吃午餐", "13:30 一定往 Color of You 移動", "13:50 Color of You 報到"], events: [
                 { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1~2小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / 步行約1分鐘", hours: "一至五 11:00-22:00 / 週末 10:30-22:00", icon: "fa-shopping-bag", note: "🕒 營業時間：11:00-22:00 (週末10:30-22:00)<br>商圈起點。週末會早開30分鐘。<br><br>GPT: 如果你們要順逛快閃店、拍照、吃點東西, 抓1~2小時比較剛好。這裡就在弘大商圈核心, 適合當作弘大逛街的起點或中繼點; 週末會比平日早開30分鐘, 想逛限定快閃的話建議早點到", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800", map: "https://naver.me/xuCpV92L" },
-                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA", stay: "35~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / AK PLAZA 2樓", hours: "11:00-22:00", icon: "fa-compact-disc", note: "🕒 營業時間：11:00-22:00<br>K-pop 社群型旗艦店。<br><br>GPT: 因為這家是 AK PLAZA弘大2F、約118坪的K-pop社群型店鋪, 逛專輯、手燈、周邊會比一般小店久一些。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA", stay: "35~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / AK PLAZA 2樓", hours: "11:00-22:00", icon: "fa-compact-disc", note: "🕒 營業時間：11:00-22:00<br>K-pop 社群型旗艦店。<br><br>GPT: 因為這家是 AK PLAZA弘大2F、約118坪的K-pop社群型店鋪, 逛專輯、手燈、周邊會比一般小店久一些。主要賣 K-pop專輯、手燈、官方周邊, 也常有活動或快閃。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "周邊有湯飯、炸豬排。" },
                 { id: "d2-4", time: "14:00", title: "Color of You", stay: "50分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "2號出口 / 步行約4分鐘", hours: "11:00-20:00 (休息 13:00-14:00)", icon: "fa-palette", note: "🕒 營業時間：11:00-20:00<br>已訂位：#26KK239040517。<br><br>GPT: 如果你們兩人都有要慢慢挑小卡、做DIY或等取貨, 可以抓到 1.5~2小時", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" }
             ] },
             3: { reminders: ["13:40 停下來吃午餐", "16:05 前後一定去 Brandy Melville"], events: [
-                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約1分鐘", hours: "10:00-23:00", icon: "fa-home", note: "🕒 營業時間：10:00-23:00<br>B1~3F 居家飾品旗艦店。<br><br>GPT: 因為這家是四層大型店, 主打居家服飾、髮飾等, 定位偏 lifestyle。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約1分鐘", hours: "10:00-23:00", icon: "fa-home", note: "🕒 營業時間：10:00-23:00<br>B1~3F 居家飾品旗艦店。<br><br>GPT: 因為這家是四層大型店, 主打居家服飾、髮飾等, 定位偏 lifestyle。可多留些時間慢慢挑選。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
                 { id: "d3-7", time: "16:05", title: "Brandy Melville", stay: "45~75分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約10分鐘", hours: "11:00-18:00 (Check IG)", icon: "fa-star", note: "🕒 營業時間：11:00-18:00<br>韓國首店，BP 同款熱門。<br><br>GPT: 品牌以onesize著名, 建議現場一定要試穿。", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" }
             ] },
             4: { reminders: ["13:40 吃午餐", "17:40 一定進入最後飾品區", "20:00 N首爾塔最晚 22:30 入場"], events: [
-                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 地下街 B-10", hours: "10:00-22:00", icon: "fa-music", note: "🕒 營業時間：10:00-22:00<br>專輯周邊掃貨點。<br><br>GPT: 這家在明洞地下街, 主打 K-pop 專輯、DVD、黑膠。價格比一些大店更便宜, 且新舊專輯都有。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4" },
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 地下街 B-10", hours: "10:00-22:00", icon: "fa-music", note: "🕒 營業時間：10:00-22:00<br>專輯周邊掃貨點。<br><br>GPT: 這家在明洞地下街, 價格比一些大店更便宜, 且新舊專輯都有。", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
                 { id: "d4-2", time: "11:30", title: "Myeong-dong CD SHOP", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 地下街 B-16,17", hours: "10:30-21:00 (日20:00)", icon: "fa-compact-disc", note: "🕒 營業時間：10:30-21:00<br>專輯周邊挖寶。<br><br>GPT: 這家就在 C.T RECORD 附近, 適合一起比價。店面不大但小卡密度高, 適合快速挖寶。", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5" },
-                { id: "d4-3", time: "12:00", title: "Buruttrak / Buru’s Ddeurak", stay: "30～50 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 步行約1~2分鐘", hours: "10:00-23:00", icon: "fa-record-vinyl", note: "🕒 營業時間：10:00-23:00<br>1979年開業之唱片老店。<br><br>GPT: 算明洞很有代表性的唱片店之一。不只是賣當紅專輯, 常被提到有舊專輯、海報、周邊, 甚至稀有品。", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD" },
+                { id: "d4-3", time: "12:00", title: "Buruttrak / Buru’s Ddeurak", stay: "30～50 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 步行約1~2分鐘", hours: "10:00-23:00", icon: "fa-record-vinyl", note: "🕒 營業時間：10:00-23:00<br>1979年開業之唱片老店。<br><br>GPT: 算明洞很有代表性的唱片店之一。不只是賣當紅專輯, 常被提到有舊專輯、海報、稀有品。", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD" },
                 { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35～60 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "步行約3~5分鐘", hours: "10:00-23:00", icon: "fa-store", note: "🕒 營業時間：10:00-23:00<br>兩層樓大型周邊店。<br><br>GPT: 賣專輯、手燈、周邊、海報等, 通常不會是10分鐘快閃型。品項很齊全。", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4" },
                 { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃時間", stay: "40～60 分鐘", icon: "fa-utensils", note: "建議：刀削麵 / 炸雞 / 小吃。" },
                 { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25～40 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 步行約4分鐘", hours: "10:30-23:30", icon: "fa-spray-can", note: "🕒 營業時間：10:30-23:30<br>美妝旗艦店。<br><br>GPT: 明洞街邊1樓美妝店, 適合快速逛熱門韓妝、香氛與伴手禮型採買。", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4" },
@@ -168,7 +170,7 @@
                 { id: "d4-return", time: "21:30", title: "下山 / 回明洞 / 回弘大", icon: "fa-taxi", note: "GPT: 若還想吃東西，可回明洞補餐；若已累，直接回弘大最順。" }
             ] },
             5: { reminders: ["11:20 一定完成退房寄行李", "17:30 一定回到飯店拿行李", "18:55 一定搭上 AREX"], events: [
-                { id: "d5-bag", time: "17:30", title: "飯店拿行李", stay: "20 分鐘", icon: "fa-suitcase-rolling", note: "遵守死線，準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
+                { id: "d5-bag", time: "17:30", title: "飯店拿行李", stay: "20 分鐘", icon: "fa-suitcase-rolling", note: "遵守死線，準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너斯홍대" },
                 { id: "d5-arex", time: "18:55", title: "AREX 直達車", stay: "43分鐘", lines: ["AREX"], station: "首爾站 / 서울역", exit: "B7F 月台 / 提早30分進站", hours: "發車死線 18:55", icon: "fa-train", map: "https://www.airportrailroad.com/ticket/rsv" }
             ], ...tripCommonData }
         };
@@ -285,8 +287,21 @@
         import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
         import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
-        const firebaseConfig = { apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78", authDomain: "seoul-trip-2026-a715f.firebaseapp.com", projectId: "seoul-trip-2026-a715f", storageBucket: "seoul-trip-2026-a715f.firebasestorage.app", messagingSenderId: "1022754455381", appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc" };
-        const MASTER_SYNC_ID = "seoul-2026"; const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const syncStatus = document.getElementById('syncStatus');
+        // Restored Firebase Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCjwIwbJwVI6vy7VOXwuz_ngNcFySgcW78",
+          authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
+          projectId: "seoul-trip-2026-a715f",
+          storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
+          messagingSenderId: "1022754455381",
+          appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
+        };
+
+        const MASTER_SYNC_ID = "seoul-2026"; 
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const syncStatus = document.getElementById('syncStatus');
 
         window.handleUpload = async (input, spotId) => {
             if (!input.files[0]) return;
@@ -299,7 +314,8 @@
                     img.onload = async () => {
                         const canvas = document.createElement('canvas'); let w = img.width; let h = img.height;
                         if (w > 1000) { h *= 1000 / w; w = 1000; }
-                        canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        canvas.width = w; canvas.height = h;
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                         const compressed = canvas.toDataURL('image/jpeg', 0.5);
                         await setDoc(doc(db, MASTER_SYNC_ID, spotId), { data: compressed }, { merge: true });
                         syncStatus.innerHTML = '<i class="fas fa-cloud mr-1"></i>雲端已同步';
