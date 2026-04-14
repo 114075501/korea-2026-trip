@@ -45,7 +45,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                 <div class="flex items-center gap-2">
                     <h1 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
-                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.20</span>
+                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.23</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="https://map.naver.com/p/favorite/myPlace/folder/37874fe68eb04839885b36cdc02e0f81?c=11.24,0,0,0,dh" target="_blank" class="whitespace-nowrap text-[10px] sm:text-[11px] bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full font-bold border border-amber-100 shadow-sm flex items-center transition hover:bg-amber-100">
@@ -59,7 +59,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="flex space-x-6 overflow-x-auto no-scrollbar border-b border-gray-100" id="dayTabs">
                 <button onclick="window.showDay(0)" id="tab0" class="tab-btn pb-2 whitespace-nowrap text-sm tab-active flex items-center gap-1"><i class="fas fa-paw"></i> 總覽</button>
                 <button onclick="window.showDay(1)" id="tab1" class="tab-btn pb-2 whitespace-nowrap text-sm">4/15 (三)</button>
@@ -108,10 +107,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
-                    <div class="font-bold text-emerald-800 flex items-center mb-1 text-[13px]"><i class="fas fa-exchange-alt mr-2"></i>轉乘找什麼？</div>
-                    <p class="text-[12px] leading-relaxed text-emerald-700 font-medium">只要跟著標示 <span class="bg-white px-1.5 py-0.5 rounded font-black border border-emerald-200">Transfer</span> 或 <span class="bg-white px-1.5 py-0.5 rounded font-black border border-emerald-200 text-emerald-600 text-[10px]">환승</span> 走就對了！</p>
-                </div>
             </div>
             <div class="p-4 border-t bg-gray-50 shrink-0">
                 <button onclick="window.toggleModal('subwayModal')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition shadow-md text-sm">我準備好搭車了！</button>
@@ -132,14 +127,14 @@
             { title: "DAY 1 (4/15) 啟程", emoji: "✈️", color: "bg-[#FFD100] text-black", steps: ["機場", "弘大飯店", "休息"] },
             { title: "DAY 2 (4/16) 弘大", emoji: "🛍️", color: "bg-[#E3000F] text-white", steps: ["AK PLAZA", "Color of You", "K-pop 購物線"] },
             { title: "DAY 3 (4/17) 聖水", emoji: "☕", color: "bg-[#00a84d] text-white", steps: ["nyu nyu", "Fwee", "rom&nd", "Brandy", "Rockfish"] },
-            { title: "DAY 4 (4/18) 明洞", emoji: "💄", color: "bg-[#00a1e9] text-white", steps: ["唱片行挖寶", "美妝配件", "首爾塔夜景"] },
+            { title: "DAY 4 (4/18) 明洞", emoji: "💄", color: "bg-[#00a1e9] text-white", steps: ["C.T RECORD → Myeong-dong CD SHOP → Buruttrak → K-MECCA → 午餐 / 小吃 → CHICOR → HEMEKO → BiBiANG → nyu nyu → NYUNYU HOUSE → MIMILINE → 首爾塔夜景"] },
             { title: "DAY 5 (4/19) 賦歸", emoji: "🎒", color: "bg-purple-500 text-white", steps: ["退房", "弘大補貨", "18:55 AREX"] }
         ];
 
         const tripCommonData = {
             pnr: "K6VFNM",
             hotel: {
-                name: "Hotel The Designers Hongdae", addr: "서울 마포구 양화로 86", checkIn: "4/15 (三) 3:00 PM", checkOut: "4/19 (日) 12:00 PM", note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。", img: "https://i.imgur.com/1VzW6Qy.png", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
+                name: "Hotel The Designers Hongdae", addr: "서울 마포구 양化로 86", checkIn: "4/15 (三) 3:00 PM", checkOut: "4/19 (日) 12:00 PM", note: "2號線/6號線 弘大站/合井站 3號出口 步行約2~3分鐘。", img: "https://i.imgur.com/1VzW6Qy.png", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대"
             },
             flights: [
                 { type: "去程 DEPARTURE", date: "2026 / 04 / 15 (三)", no: "IT 602", from: "TPE", fromCity: "TAIPEI", fromName: "台北 (桃園) T1", dep: "20:00", to: "ICN", toCity: "SEOUL", toName: "首爾 (仁川) T1", arr: "23:30", duration: "2h 30m" },
@@ -149,66 +144,32 @@
 
         const itineraryData = {
             1: { reminders: ["23:30 抵達仁川 T1", "目標搭 00:10 或 00:40 N6002 深夜巴士進弘大", "一出機場直接往巴士月台走", "飯店入住後直接休息"], events: [
-                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", icon: "fa-plane-arrival", note: "🕒 24H<br>航班 IT602 抵達。建議先在航廈內尋找售票機。費用 17,000 韓元。", map: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD" },
-                { id: "d1-2", time: "23:50", title: "宵夜補給", icon: "fa-cookie-bite", note: "便利商店直接處理：飯糰 / 三明治 / 優格 / 香蕉牛奶 / 泡麵 / 礦泉水。" },
-                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", icon: "fa-bus", note: "【N6002指南】目標搭乘 00:10 或 00:40 班次。下車站點: 在 Hongdae 下車。", map: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B3%B5%ED%95%ADN6002" }
+                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", lines: ["AREX"], station: "仁川機場 T1", hours: "24H", icon: "fa-plane-arrival", note: "🕒 營業時間：24H<br>航班 IT602 抵達。GPT: 建議先在航廈內尋找售票機。費用 17,000 韓元。", map: "https://map.naver.com/p/search/인천국제공항" },
+                { id: "d1-2", time: "23:50", title: "宵夜補給", icon: "fa-cookie-bite", note: "便利商店直接處理：飯糰 / 三明治 / 優格 / 香蕉牛奶 / 泡麵 / 礦泉水。<br><br>GPT: 弘大飯店旁也有 CU/GS25 便利商店。" },
+                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", icon: "fa-bus", note: "【N6002指南】目標搭乘 00:10 或 00:40 班次。下車站點: 在 Hongdae 下車。", map: "https://map.naver.com/p/search/인천공항N6002" }
             ], ...tripCommonData },
-            2: { reminders: ["13:30 一定往 Color of You 方向移動", "20:30 後若累，CHAAKAN 跟美妝二選一"], events: [
-                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1～2時", lines: ["2號線", "京義中央線"], station: "弘大入口站", exit: "4號出口 / 步行約1分", hours: "11:00-22:00", icon: "fa-shopping-bag", note: "🕒 11:00-22:00<br>GPT: 週末早開30分鐘, 適合當作起點。", map: "https://naver.me/xuCpV92L" },
-                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA 弘大店", stay: "35~60分", lines: ["2號線", "京義中央線"], station: "弘大入口站", exit: "4號出口 / AK 2F", hours: "11:00-22:00", icon: "fa-compact-disc", note: "🕒 11:00-22:00<br>GPT: 逛專輯、手燈會比一般小店久。", map: "https://map.naver.com/p/search/위드뮤%20AK%20PLAZA%20홍대점" },
-                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "建議：炸豬排 / 湯飯 / 拌飯 / 貝果咖啡店。" },
-                { id: "d2-4", time: "14:00", title: "Color of You 鑑定", stay: "50分", lines: ["2號線"], station: "弘大入口站", exit: "2號出口 / 步行4分", hours: "11:00-20:00", icon: "fa-palette", note: "🕒 11:00-20:00<br>GPT: 已訂位: #26KK239040517。", map: "https://map.naver.com/p/search/컬러오브유%20홍대점" },
-                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20~35分", lines: ["AREX"], station: "弘大入口站", exit: "7號出口 / 步行2-3分", hours: "10:00-22:00", icon: "fa-duck", note: "🕒 10:00-22:00<br>GPT: 偶像小卡收納、娃包專門店。" },
-                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship", stay: "45分～1.5時", lines: ["2號線"], station: "弘大入口站", exit: "7號出口 / 步行2-3分", hours: "12:00-21:00", icon: "fa-box-open", note: "🕒 12:00-21:00" },
-                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45分～1.5時", lines: ["2號線"], station: "弘大入口站", exit: "7號出口 / 步行5分", hours: "12:00-21:00", icon: "fa-microphone", note: "🕒 12:00-21:00" },
-                { id: "d2-poca", time: "17:40", title: "POCA SPOT Hongdae", stay: "45分～1.5時", lines: ["2號線"], station: "弘大入口站", exit: "7號出口 / 步行3分", hours: "12:00-20:00", icon: "fa-search", note: "🕒 12:00-20:00" },
-                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30～60分", lines: ["2號線"], station: "弘大入口站", exit: "7號出口 / 步行5分", hours: "12:00-21:00", icon: "fa-music", note: "🕒 12:00-21:00" },
-                { id: "d2-dinner", time: "19:30", title: "晚餐時間", stay: "1小時", icon: "fa-utensils", note: "建議：烤肉 / 辣炒雞排 / 部隊鍋 / 炸雞。" },
-                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN Hongdae", stay: "30～45分", lines: ["2號線"], station: "弘大入口站", exit: "18號出口 / 步行8分", hours: "12:00-22:00", icon: "fa-shoe-prints", note: "🕒 12:00-22:00<br>GPT: 慢慢試穿建議抓 1 小時。", map: "https://naver.me/59U9dYPZ" },
-                { id: "d2-beauty", time: "21:15", title: "CHICOR / HEMEKO 弘大", stay: "45~75分", lines: ["2號線"], station: "弘大入口站", exit: "8號 / 7號出口", hours: "至 23:30 / 02:00", icon: "fa-spray-can", note: "美妝收尾。GPT: CHICOR 大店約 150 坪。" }
+            2: { reminders: ["何時該硬停手去下一站", "12:30 開始吃午餐", "*13:20 一定往 Color of You 方向移動", "15:10 Color of You 結束後，不回頭，直接接 7 號出口 K-pop 線", "*20:30 後若已累，就 CHAAKAN 跟美妝二選一，不再全逛"], events: [
+                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1～2小時", lines: ["2號線", "京義中央線"], station: "弘大入口站", exit: "4號出口 / 步行約1分", hours: "11:00-22:00", icon: "fa-shopping-bag", note: "🕒 11:00-22:00<br>商圈起點。GPT: 如果你們要順逛快閃店、拍照、吃點東西，抓 1～2 小時比較剛好。這裡就在弘大商圈核心，適合當作弘大逛街的起點或中繼點；週末會比平日早開 30 分鐘，想逛限定快閃的話建議早點到。", map: "https://naver.me/xuCpV92L" },
+                { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "建議選項：炸豬排 / 湯飯 / 拌飯 / 拉麵 / 咖哩 / 貝果咖啡店。" },
+                { id: "d2-4", time: "14:00", title: "Color of You 鑑定", stay: "50分", lines: ["2號線"], station: "弘大入口站", exit: "2號出口 / 步行4分", hours: "11:00-20:00", icon: "fa-palette", note: "🕒 11:00-20:00<br>已訂位：#26KK239040517。GPT: 如果你們兩人都有要慢慢挑小卡、做 DIY 或等取貨，可以抓到 1.5~2 小時。", map: "https://map.naver.com/p/search/컬러오브유%20홍대점" },
+                { id: "d2-dinner", time: "19:30", title: "晚餐時間", stay: "1小時", icon: "fa-utensils", note: "建議選項：烤肉 / 辣炒雞排 / 部隊鍋 / 紫菜飯捲＋辣炒年糕 / 炸雞 / 湯飯。" },
+                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN Hongdae", stay: "30～45分", lines: ["2號線"], station: "弘大入口站", exit: "18號出口 / 步行8分", hours: "12:00-22:00", icon: "fa-shoe-prints", note: "🕒 12:00-22:00<br>GPT: 如果你們兩個想慢慢試穿、分樓層逛款式，抓 1~1.5 小時比較保險。這家很順路。", map: "https://naver.me/59U9dYPZ" }
             ] },
-            3: { reminders: ["16:05 前後一定去 Brandy Melville", "20:40 後若腿痠就直接回弘大"], events: [
-                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行1分", hours: "10:00-23:00", icon: "fa-home", note: "🕒 10:00-23:00<br>GPT: B1~3F 共四層居家生活選物。", map: "https://map.naver.com/p/search/뉴뉴하우스%20성수역점" },
-                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35～60分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行6-7分", hours: "11:00-21:00", icon: "fa-tint", note: "🕒 11:00-21:00<br>GPT: 試色體驗活動待較久。" },
-                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45分～1.5時", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行6分", hours: "11:00-21:00", icon: "fa-heart", note: "🕒 11:00-21:00" },
-                { id: "d3-lunch", time: "13:40", title: "午餐時間", icon: "fa-utensils", note: "選項：義大利麵 / 燉飯 / 湯飯。" },
-                { id: "d3-4", time: "14:40", title: "rom&nd Pink Office", stay: "35～60分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行7分", hours: "11:00-21:00", icon: "fa-palette", note: "🕒 11:00-21:00" },
-                { id: "d3-5", time: "15:30", title: "ROLAROLA Petit Maison", stay: "20～35分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行7-8分", hours: "11:00-21:00", icon: "fa-tshirt", note: "🕒 11:00-21:00" },
-                { id: "d3-6", time: "16:05", title: "Brandy Melville", stay: "45～75分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行10分", hours: "11:00-18:00", icon: "fa-star", note: "🕒 11:00-18:00<br>GPT: 韓國首店。版型偏小一定要試穿。", map: "https://map.naver.com/p/search/브랜디멜빌" },
-                { id: "d3-7", time: "17:20", title: "Rockfish Weatherwear", stay: "35～60分", lines: ["2號線"], station: "聖水站", exit: "4號出口 / 步行4分", hours: "11:30-22:00", icon: "fa-shoe-prints", note: "🕒 11:30-22:00" },
-                { id: "d3-8", time: "18:10", title: "Verish Seongsu", stay: "30～50分", lines: ["2號線"], station: "聖水站", exit: "4號出口 / 步行5分", hours: "11:00-20:00", icon: "fa-female", note: "🕒 11:00-20:00" },
-                { id: "d3-9", time: "18:50", title: "BANILA CO Seongsu", stay: "30～45分", lines: ["2號線"], station: "聖水站", exit: "4號出口 / 步行4分", hours: "11:00-21:00", icon: "fa-spray-can", note: "🕒 11:00-21:00" },
-                { id: "d3-dinner", time: "19:40", title: "晚餐時間", icon: "fa-utensils", note: "建議：烤肉 / 鍋物 / 炸豬排。" },
-                { id: "d3-10", time: "20:40", title: "加碼：AMUSE / CUBE / Daiso", lines: ["2號線"], station: "聖水 / 뚝섬역", icon: "fa-plus-circle", note: "累了就直接回弘大休息。" }
+            3: { reminders: ["13:40 停下來吃午餐", "*16:05 前後一定去 Brandy Melville，不要再往後拖", "19:40 吃晚餐，不要硬塞更多店", "*20:40 後若腿痠，就直接回弘大"], events: [
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35～60分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行1分", hours: "10:00-23:00", icon: "fa-home", note: "🕒 10:00-23:00<br>GPT: B1~3F 共四層，主打居家服飾、髮飾等。定位偏 home/lifestyle。", map: "https://map.naver.com/p/search/뉴뉴하우스%20성수역점" },
+                { id: "d3-lunch", time: "13:40", title: "午餐時間", icon: "fa-utensils", note: "建議選項：義大利麵 / 燉飯 / 漢堡 / 早午餐 / 韓式湯飯 / 麵包咖啡店。" },
+                { id: "d3-6", time: "16:05", title: "Brandy Melville", stay: "45～75分", lines: ["2號線"], station: "聖水站", exit: "3號出口 / 步行10分", hours: "11:00-18:00", icon: "fa-star", note: "🕒 11:00-18:00<br>GPT: 韓國首店。品牌以 onesize、偏小版型著名，建議現場一定要試穿，店內有試衣區。", map: "https://map.naver.com/p/search/브랜迪멜빌" },
+                { id: "d3-dinner", time: "19:40", title: "晚餐時間", icon: "fa-utensils", note: "建議選項：烤肉 / 鍋物 / 湯飯 / 炸豬排 / 餐酒館。" },
+                { id: "d3-bonus", time: "20:40", title: "彈性加碼 (視體力)", lines: ["2號線"], station: "聖水 / 뚝섬역", icon: "fa-plus-circle", note: "GPT: 累了就直接回弘大休息。不要硬塞更多店。" }
             ] },
-            4: { reminders: ["17:40 一定進入最後飾品區", "20:00 N首爾塔最晚 22:30 入場"], events: [
-                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35分", lines: ["4號線"], station: "明洞站", exit: "4號出口 / 地下街 B-10", hours: "10:00-22:00", icon: "fa-music", note: "🕒 10:00-22:00<br>GPT: 新舊專輯都有且價格親民。", map: "https://map.naver.com/p/search/씨티%20레코드%20명동" },
-                { id: "d4-2", time: "11:30", title: "CD SHOP", stay: "20～35分", lines: ["4號線"], station: "明洞站", exit: "8號出口 / 地下街 B-16", icon: "fa-compact-disc", note: "小卡密度高挖寶。" },
-                { id: "d4-3", time: "12:00", title: "Buruttrak", stay: "30～50分", lines: ["4號線"], station: "明洞站", exit: "4號出口 / 步行1-2分", hours: "10:00-23:00", icon: "fa-record-vinyl", note: "🕒 10:00-23:00<br>GPT: 代表性唱片老店。" },
-                { id: "d4-4", time: "12:45", title: "K-MECCA", stay: "35～60分", lines: ["4號線"], station: "明洞站", exit: "步行3-5分", hours: "10:00-23:00", icon: "fa-store", note: "兩層樓大店。" },
-                { id: "d4-lunch", time: "13:40", title: "午餐時間", icon: "fa-utensils", note: "明洞大街特色小吃。" },
-                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25～40分", lines: ["4號線"], station: "明洞站", exit: "8號出口 / 步行4分", icon: "fa-spray-can", note: "可慢慢試色逛逛。" },
-                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25～40分", lines: ["4號線"], station: "明洞站", exit: "6號出口 / 步行3-4分", icon: "fa-magic", note: "小眾美妝旗艦。" },
-                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞店", stay: "20～35分", lines: ["4號線"], station: "明洞站", exit: "步行3分", icon: "fa-wind", note: "拍照選香門市。" },
-                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35～60分", lines: ["4號線"], station: "明洞站", exit: "6-7號出口 / 步行4分", icon: "fa-ring", note: "配件量極大。" },
-                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE", stay: "20～45分", lines: ["4號線"], station: "明洞站", exit: "6號出口 / 步行1-3分", icon: "fa-home", note: "飾品雜貨選物。" },
-                { id: "d4-10", time: "17:40", title: "MIMILINE", stay: "1～2時", lines: ["4號線"], station: "明洞站", exit: "6號出口 / 步行1分", icon: "fa-gem", note: "超大賣場慢慢挑。" },
-                { id: "d4-move-tower", time: "19:20", title: "往首爾塔移動", icon: "fa-walking", note: "往 Pacific Hotel 方向接纜車。" },
-                { id: "d4-tower", time: "20:00", title: "N Seoul Tower", stay: "1-1.5時", station: "南山", hours: "週六至 23:00", icon: "fa-tower-observation", note: "🕒 週六至 23:00<br>GPT: 最晚建議 22:30 入場。", map: "https://map.naver.com/p/search/N서울타워" },
-                { id: "d4-return", time: "21:30", title: "下山 / 回弘大", icon: "fa-taxi", note: "結束明洞巡禮。" }
+            4: { reminders: ["13:40 一定停下來吃午餐或補小吃", "*17:40 一定進 MIMILINE，不要再拖", "*19:20 一定離開明洞主街，往首爾塔方向移動", "*20:00 前後一定要到首爾塔區域", "若 20:00 還在明洞逛街，就直接放棄首爾塔，不要兩邊都卡", "若你要上觀景台，最晚抓 22:30 前入場，因為官方寫明觀景台可於閉館前 30 分鐘入場。(nseoultower.co.kr)"], events: [
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35分", lines: ["4號線"], station: "明洞站", exit: "4號出口 / 地下街 B-10", icon: "fa-music", note: "🕒 10:00-22:00<br>GPT: 新舊專輯都有且價格親民。", map: "https://map.naver.com/p/search/씨티%20레코드%20명동" },
+                { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃時間", stay: "40～60分", icon: "fa-utensils", note: "明洞中午可直接就近處理，不要為了吃而走太遠：刀削麵、餃子、參雞湯、湯飯、拌飯、炸豬排。本就很適合走「邊逛邊補」模式：糖餅、韓式熱狗、魚板、雞蛋糕、烤魷魚、烤肉串、炸物。" },
+                { id: "d4-tower", time: "20:00", title: "N Seoul Tower / 首爾塔", stay: "60～90分", station: "南山", hours: "週六至 23:00", icon: "fa-tower-observation", note: "🕒 週六至 23:00<br>GPT: 最晚建議 22:30 入場。", map: "https://map.naver.com/p/search/N서울타워" },
+                { id: "d4-dinner", title: "晚餐時間 (二選一)", icon: "fa-utensils", note: "方案 A：明洞先吃再上首爾塔 (適合怕餓、想穩穩看夜景的人)。<br>方案 B：首爾塔結束後再吃 (適合想先衝夜景、把傍晚黃金時間留給首爾塔的人)。" }
             ] },
             5: { reminders: ["11:20 一定完成退房", "17:30 一定回飯店拿行李", "18:55 一定搭上 AREX"], events: [
-                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", icon: "fa-suitcase", note: "11:20 必完成。" },
-                { id: "d5-brunch", time: "12:00", title: "早午餐時間", icon: "fa-bread-slice", note: "炸豬排 / 湯飯 / 咖哩。" },
-                { id: "d5-covernat", time: "12:50", title: "COVERNAT", stay: "1-1.5時", lines: ["2號線"], station: "弘大站", exit: "3號出口 / 步行5-6分", icon: "fa-tshirt", note: "🕒 12:00-22:00" },
-                { id: "d5-coyseio", time: "13:50", title: "COYSEIO", stay: "1-1.5時", lines: ["2號線"], station: "合井站", exit: "3號出口 / 步行5-6分", icon: "fa-shopping-bag", note: "🕒 12:00-21:00" },
-                { id: "d5-understar", time: "14:50", title: "UNDERSTAR", stay: "40-70分", lines: ["2號線"], station: "弘大站", exit: "9號出口 / 步行6-7分", icon: "fa-female", note: "🕒 11:00-23:00" },
-                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA", stay: "25-40分", lines: ["2號線"], station: "弘大站", exit: "9號出口 / 步行5-6分", icon: "fa-shopping-basket", note: "🕒 12:00-23:00" },
-                { id: "d5-loof", time: "16:30", title: "LOOF", stay: "35-60分", lines: ["2號線"], station: "弘大站", exit: "9號出口 / 步行5分", icon: "fa-compact-disc", note: "🕒 11:00-23:00" },
-                { id: "d5-stop", time: "17:20", title: "停止購物", icon: "fa-hand-paper", note: "準備回飯店拿行李。" },
-                { id: "d5-bag", time: "17:30", title: "拿行李", icon: "fa-suitcase-rolling", note: "準備前往首爾站。" },
-                { id: "d5-arex", time: "18:55", title: "AREX 直達車", lines: ["AREX"], station: "首爾站", exit: "B7F 月台", hours: "18:55 發車", icon: "fa-train", note: "18:25 抵達首爾站。", map: "https://www.airportrailroad.com/ticket/rsv" },
-                { id: "d5-airport", time: "19:38", title: "抵達機場", icon: "fa-plane-departure", note: "報到候機。回程 IT 603。" }
+                { id: "d5-arex", time: "18:55", title: "AREX 直達車", lines: ["AREX"], station: "首爾站", exit: "B7F 月台", icon: "fa-train", note: "18:25 抵達首爾站。", map: "https://www.airportrailroad.com/ticket/rsv" }
             ], ...tripCommonData }
         };
 
@@ -238,8 +199,9 @@
                 html += `</div>`; content.innerHTML = html;
             } else {
                 let html = `<div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-xl shadow-sm"><ul class="space-y-2">${dayData.reminders.map(r => {
-                    const isRed = r.includes("一定") || r.includes("最晚") || r.includes("二選一") || r.includes("直接回弘大");
-                    return `<li class="flex items-start" style="${isRed ? 'color:red; font-weight:bold;' : 'text-xs text-amber-800'}"><i class="fas fa-stopwatch mt-1 mr-2 text-amber-400"></i>${r}</li>`;
+                    const isRed = r.includes("*") || r.includes("一定") || r.includes("最晚") || r.includes("直接放棄") || r.includes("二選一") || r.includes("直接回弘大");
+                    const displayText = r.replace("*", "");
+                    return `<li class="flex items-start" style="${isRed ? 'color:red; font-weight:bold;' : 'text-xs text-amber-800'}"><i class="fas fa-stopwatch mt-1 mr-2 text-amber-400"></i>${displayText}</li>`;
                 }).join('')}</ul></div>`;
                 dayData.events.forEach((event) => {
                     const currentImg = window.appState.imageOverrides[event.id] || event.img;
@@ -248,7 +210,10 @@
                         event.lines.forEach(line => { subwayTagsHtml += `<span class="line-pill mr-1" style="background:${subwayColors[line] || "#9ca3af"}">${line}</span>`; });
                         if (event.station) subwayTagsHtml += `<span class="station-pill mr-1">${event.station}</span>`;
                     }
-                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-white z-10 shadow-sm"></div><div class="spot-card border flex flex-col"><div class="h-44 relative group"><img src="${currentImg}" class="w-full h-full object-cover cursor-zoom-in" onclick="window.openImage('${currentImg}')" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, '${event.id}')"></label></div><div class="p-4"><div class="flex justify-between items-start mb-1"><h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}</div><div class="flex flex-wrap items-center gap-1 mb-3"><span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>${event.stay ? `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full mr-1">停留：${event.stay}</span>` : ''}${subwayTagsHtml}</div>${event.exit ? `<div class="bg-indigo-50 p-2 rounded-xl mb-3 text-[11px] text-indigo-700 font-bold flex items-center"><i class="fas fa-map-marker-alt mr-2 text-indigo-400"></i>${event.exit}</div>` : ''}<div class="bg-gray-50 p-3 rounded-xl text-xs text-gray-700 leading-relaxed">${event.note}</div></div></div></div>`;
+                    html += `<div class="relative pl-10"><div class="absolute left-[12px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-white z-10 shadow-sm"></div><div class="spot-card border flex flex-col"><div class="h-44 relative group"><img src="${currentImg}" class="w-full h-full object-cover cursor-zoom-in" onclick="window.openImage('${currentImg}')" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800'"><label class="change-img-btn"><i class="fas fa-camera"></i>更換圖片<input type="file" class="hidden" onchange="window.handleUpload(this, '${event.id}')"></label></div><div class="p-4"><div class="flex justify-between items-start mb-1"><h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}</div><div class="flex flex-wrap items-center gap-1 mb-3">`;
+                    if (event.time && event.time !== "--:--") html += `<span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>`;
+                    if (event.stay && event.stay !== "0 分鐘") html += `<span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full mr-1">停留：${event.stay}</span>`;
+                    html += `${subwayTagsHtml}</div>${event.exit ? `<div class="bg-indigo-50 p-2 rounded-xl mb-3 text-[11px] text-indigo-700 font-bold flex items-center"><i class="fas fa-map-marker-alt mr-2 text-indigo-400"></i>${event.exit}</div>` : ''}<div class="bg-gray-50 p-3 rounded-xl text-xs text-gray-700 leading-relaxed">${event.note}</div></div></div></div>`;
                 });
                 content.innerHTML = html;
             }
@@ -289,12 +254,12 @@
         import { getFirestore, doc, setDoc, onSnapshot, collection } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
         const firebaseConfig = {
-          apiKey: "AIzaSyCjwIwbJwVI6vy7VOXwuz_ngNcFySgcW78",
-          authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
-          projectId: "seoul-trip-2026-a715f",
-          storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
-          messagingSenderId: "1022754455381",
-          appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
+            apiKey: "AIzaSyCjwiIwbJvVI6vy7VOXwuz_ngNcFySgcW78",
+            authDomain: "seoul-trip-2026-a715f.firebaseapp.com",
+            projectId: "seoul-trip-2026-a715f",
+            storageBucket: "seoul-trip-2026-a715f.firebasestorage.app",
+            messagingSenderId: "1022754455381",
+            appId: "1:1022754455381:web:40ab320fe12bd7e97b39dc"
         };
 
         const MASTER_SYNC_ID = "seoul-2026"; const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const syncStatus = document.getElementById('syncStatus');
