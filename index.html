@@ -29,7 +29,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                 <div class="flex items-center gap-2">
                     <h1 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">🇰🇷 首爾追星購物之旅</h1>
-                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.2</span>
+                    <span id="version-tag" class="text-[8px] bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded shrink-0">v1.4</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="https://map.naver.com/p/favorite/myPlace/folder/37874fe68eb04839885b36cdc02e0f81?c=11.24,0,0,0,dh" target="_blank" class="whitespace-nowrap text-[10px] sm:text-[11px] bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full font-bold border border-amber-100 shadow-sm flex items-center transition hover:bg-amber-100">
@@ -68,32 +68,107 @@
         </div>
     </main>
 
-    <!-- 地鐵指南 Modal -->
+    <!-- 地鐵指南懶人包 Modal -->
     <div id="subwayModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[85vh] overflow-hidden shadow-2xl flex flex-col transform scale-95 transition-transform duration-300" id="subwayModalContent">
             <div class="bg-indigo-600 text-white p-4 flex justify-between items-center shrink-0">
-                <h2 class="text-lg font-bold flex items-center"><i class="fas fa-subway mr-2"></i>韓國地鐵小常識</h2>
+                <h2 class="text-lg font-bold flex items-center"><i class="fas fa-subway mr-2"></i>首爾地鐵無腦搭乘懶人包</h2>
                 <button onclick="window.toggleModal('subwayModal')" class="text-white hover:text-indigo-200"><i class="fas fa-times text-xl"></i></button>
             </div>
             <div class="p-5 overflow-y-auto space-y-6 text-gray-800 text-sm">
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 shadow-sm">
-                    <h3 class="text-amber-800 font-bold mb-2 flex items-center text-base"><i class="fas fa-star text-amber-500 mr-2"></i>專屬無腦搭乘密技</h3>
-                    <p class="text-amber-900 leading-relaxed text-[13px] font-medium">認得以下三條線即可應付多數移動：</p>
-                    <div class="mt-3 space-y-2">
-                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
-                            <div class="w-7 h-7 rounded-full bg-[#00a84d] text-white flex items-center justify-center font-bold text-xs">2</div>
-                            <span class="font-bold text-[13px]">2號線 (綠色): 弘大 / 聖水</span>
+                
+                <!-- 核心觀念 -->
+                <div>
+                    <h3 class="text-indigo-700 font-black mb-3 flex items-center border-b-2 border-indigo-100 pb-1">
+                        <i class="fas fa-lightbulb mr-2"></i>核心觀念：地鐵分三層
+                    </h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                            <div class="font-bold text-blue-800 text-xs mb-1">1. 市區主幹線 (1~9號線)</div>
+                            <p class="text-[11px] text-blue-600">最常用的數字線，這趟認準 <span class="font-bold">2號(綠)</span> 與 <span class="font-bold">4號(淺藍)</span>。</p>
                         </div>
-                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
-                            <div class="w-7 h-7 rounded-full bg-[#00a1e9] text-white flex items-center justify-center font-bold text-xs">4</div>
-                            <span class="font-bold text-[13px]">4號線 (淺藍): 明洞商圈</span>
+                        <div class="bg-teal-50 p-3 rounded-xl border border-teal-100">
+                            <div class="font-bold text-teal-800 text-xs mb-1">2. 通勤區域線 (有名字)</div>
+                            <p class="text-[11px] text-teal-600">如 <span class="font-bold">AREX 機場快線</span>、<span class="font-bold">京義中央線</span>，一樣都在官方圖上。</p>
                         </div>
-                        <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border shadow-sm">
-                            <div class="w-7 h-7 rounded-full bg-[#0090d2] text-white flex items-center justify-center font-bold text-[8px]">AREX</div>
-                            <span class="font-bold text-[13px]">機場快線 (藍): 機場 / 首爾站</span>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                            <div class="font-bold text-gray-800 text-xs mb-1">3. 輕軌/支線 (區域內)</div>
+                            <p class="text-[11px] text-gray-600">小型接駁線，我們行程較少用到。</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- 三秒辨識法 -->
+                <div>
+                    <h3 class="text-rose-600 font-black mb-3 flex items-center border-b-2 border-rose-100 pb-1">
+                        <i class="fas fa-eye mr-2"></i>三秒辨識法 (外國人救星)
+                    </h3>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shrink-0 font-bold">1</div>
+                            <div>
+                                <div class="font-bold">看顏色</div>
+                                <p class="text-[11px] text-gray-500">韓國地鐵顏色分明，認準顏色絕對不會走錯月台。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shrink-0 font-bold">2</div>
+                            <div>
+                                <div class="font-bold">看線名/標誌</div>
+                                <p class="text-[11px] text-gray-500">大字標示幾號線，或英文縮寫 (如 A 代表 AREX)。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold">3</div>
+                            <div class="bg-indigo-50 p-2 rounded-lg border border-indigo-100">
+                                <div class="font-bold text-indigo-800">看「站號」 (最強攻略)</div>
+                                <p class="text-[11px] text-indigo-700">聽不懂韓文沒關係！每站都有 3 位數編號，如弘大是 <span class="font-black">239</span>，認數字最準！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 這趟旅行必認的三條線 -->
+                <div class="bg-amber-50 rounded-2xl p-4 border border-amber-200 shadow-inner">
+                    <h3 class="text-amber-800 font-black mb-3 flex items-center">
+                        <i class="fas fa-star mr-2 text-amber-500"></i>本趟行程必認線路
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl shadow-sm border border-amber-100">
+                            <div class="w-7 h-7 rounded-full bg-[#00a84d] text-white flex items-center justify-center font-bold text-xs">2</div>
+                            <div>
+                                <div class="font-bold text-xs text-gray-800">2號線 (綠色)</div>
+                                <div class="text-[10px] text-gray-500">去弘大、聖水的生命線！</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl shadow-sm border border-amber-100">
+                            <div class="w-7 h-7 rounded-full bg-[#00a1e9] text-white flex items-center justify-center font-bold text-xs">4</div>
+                            <div>
+                                <div class="font-bold text-xs text-gray-800">4號線 (淺藍)</div>
+                                <div class="text-[10px] text-gray-500">明洞購物、首爾塔必搭。</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl shadow-sm border border-amber-100">
+                            <div class="w-7 h-7 rounded-full bg-[#0090d2] text-white flex items-center justify-center font-bold text-[8px] leading-none text-center">AREX</div>
+                            <div>
+                                <div class="font-bold text-xs text-gray-800">機場快線 (藍色)</div>
+                                <div class="text-[10px] text-gray-500">機場到首爾站，直達又快速。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 轉乘提示 -->
+                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                    <div class="font-bold text-emerald-800 flex items-center mb-1">
+                        <i class="fas fa-exchange-alt mr-2"></i>轉乘找什麼？
+                    </div>
+                    <p class="text-[12px] leading-relaxed text-emerald-700">
+                        轉乘時不要慌，只要跟著這兩個單字走：<br>
+                        <span class="bg-white px-2 py-0.5 rounded font-black border border-emerald-200">Transfer</span> 或 <span class="bg-white px-2 py-0.5 rounded font-black border border-emerald-200">환승 (Hwan-seung)</span>
+                    </p>
+                </div>
+
             </div>
             <div class="p-4 border-t bg-gray-50 shrink-0">
                 <button onclick="window.toggleModal('subwayModal')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition shadow-md">我準備好搭車了！</button>
@@ -110,7 +185,6 @@
     <script>
         window.appState = { currentDay: 0, currentSubTab: 'itinerary', imageOverrides: {} };
 
-        // 地鐵線路顏色配置
         const subwayColors = {
             "2號線": "#00a84d",
             "4號線": "#00a1e9",
@@ -123,7 +197,7 @@
             { title: "DAY 1 (4/15) 啟程", emoji: "✈️", color: "bg-[#FFD100] text-black", steps: ["機場", "弘大飯店", "休息"] },
             { title: "DAY 2 (4/16) 弘大", emoji: "🛍️", color: "bg-[#E3000F] text-white", steps: ["AK PLAZA", "WITHMUU", "Color of You", "K-pop 購物", "鞋美妝"] },
             { title: "DAY 3 (4/17) 聖水", emoji: "☕", color: "bg-[#00a84d] text-white", steps: ["nyu nyu House", "Fwee", "Heart Percent", "rom&nd", "ROLAROLA", "Brandy Melville", "Rockfish"] },
-            { title: "DAY 4 (4/18) 明洞", emoji: "💄", color: "bg-[#00a1e9] text-white", steps: ["唱片行", "K-MECCA", "CHICOR", "HEMEKO", "nyu nyu", "MIMILINE"] },
+            { title: "DAY 4 (4/18) 明洞", emoji: "💄", color: "bg-[#00a1e9] text-white", steps: ["唱片行", "K-MECCA", "CHICOR", "nyu nyu", "MIMILINE", "首爾塔夜景"] },
             { title: "DAY 5 (4/19) 賦歸", emoji: "🎒", color: "bg-purple-500 text-white", steps: ["退房", "弘大補貨", "首爾站", "AREX", "機場"] }
         ];
 
@@ -146,59 +220,58 @@
 
         const itineraryData = {
             1: { reminders: ["一出機場直接往巴士月台走", "飯店入住後直接休息，不要再逛街"], events: [
-                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
+                { id: "d1-1", time: "23:30", title: "抵達仁川 T1", location: "인천국제공항 T1", icon: "fa-plane-arrival", note: "航班 IT602 抵達後前往地下一樓巴士站。<br><br>GPT: 建議先在機場航廈內尋找售票機。", img: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=800", map: "https://map.naver.com/v5/search/인천국제공항" },
                 { id: "d1-2", time: "23:50", title: "宵夜補給", location: "便利商店", icon: "fa-cookie-bite", note: "推薦：飯糰、香蕉牛奶。<br><br><b>韓國前三便利店：</b><br>1. CU：前 Family Mart<br>2. GS25：在地日常首選<br>3. eMart24 / 711 分居第三", img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800" },
-                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "【N6002路線訊息指南】<br>时间表 : 23:40/0:10/0:40/1:20/3:40/4:20<br>乘車地點: 30號成車場(B1F)<br>下車站點: 在 Hongdae 下車 -> 搭Taxi 到飯店", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
+                { id: "d1-3", time: "00:10", title: "N6002 深夜巴士", location: "地下 1 樓 30 號乘車場", icon: "fa-bus", note: "【N6002路線訊息指南】<br>时间表 : 23:40/0:10/0:40/1:20/3:40/4:20<br>乘車地點: 30號成車場(B1F)<br>下車站點: 在 Hongdae 下車 -> 搭Taxi 到飯店<br><br>GPT: 費用 17,000 韓元。目標搭乘 00:10 或 00:40 班次。", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800", map: "https://map.naver.com/v5/search/인천공항N6002" }
             ], ...tripCommonData },
-            2: { reminders: ["09:20 前飯店出門", "12:30 吃午餐", "13:30 一定往 Color of You 移動", "13:50 Color of You 報到"], events: [
-                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1~2小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / 步行約1分鐘", hours: "一至五 11:00-22:00 / 週末 10:30-22:00", icon: "fa-shopping-bag", note: "商圈起點。週末會早開30分鐘。", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800", map: "https://naver.me/xuCpV92L" },
-                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA", stay: "35~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / AK PLAZA 2樓", hours: "11:00-22:00", icon: "fa-compact-disc", note: "K-pop 社群型旗艦店。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+            2: { reminders: ["09:20 前飯店出門", "12:30 開始吃午餐", "13:30 一定往 Color of You 移動", "13:50 Color of You 報到"], events: [
+                { id: "d2-1", time: "10:40", title: "AK PLAZA Hongdae", stay: "1~2小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / 步行約1分鐘", hours: "一至五 11:00-22:00 / 週末 10:30-22:00", icon: "fa-shopping-bag", note: "商圈起點。週末會早開30分鐘。<br><br>GPT: 如果你們要順逛快閃店、拍照、吃點東西, 抓1~2小時比較剛好。這裡就在弘大商圈核心, 適合當作弘大逛街的起點或中繼點; 週末會比平日早開30分鐘, 想逛限定快閃的話建議早點到", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800", map: "https://naver.me/xuCpV92L" },
+                { id: "d2-2", time: "11:40", title: "WITHMUU AK PLAZA", stay: "35~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "4號出口 / AK PLAZA 2樓", hours: "11:00-22:00", icon: "fa-compact-disc", note: "K-pop 社群型旗艦店。<br><br>GPT: 因為這家是 AK PLAZA弘大2F、約118坪的K-pop社群型店鋪, 逛專輯、手燈、周邊會比一般小店久一些。主要賣 K-pop專輯、手燈、官方周邊, 也常有活動或快閃。", map: "https://map.naver.com/p/search/%EC%9C%84%EB%93%9C%EB%AE%A4%20AK%20PLAZA%20%ED%99%8D%EB%8C%80%EC%A0%90" },
                 { id: "d2-lunch", time: "12:30", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "周邊有湯飯、炸豬排。" },
-                { id: "d2-4", time: "14:00", title: "Color of You", stay: "50分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "2號出口 / 步行約4分鐘", hours: "11:00-20:00 (休息 13:00-14:00)", icon: "fa-palette", note: "已訂位：#26KK239040517。", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
-                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20~35分鐘", lines: ["AREX", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約2~3分鐘", hours: "10:00-22:00", icon: "fa-duck", note: "主打偶像小卡收納用品。", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C29%EA%B8%B8%2060" },
-                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約2~3分鐘", hours: "12:00-21:00", icon: "fa-box-open", note: "KiT Album 及周邊選物店。", map: "https://naver.me/5yPsUODj" },
-                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約5分鐘", hours: "12:00-21:00", icon: "fa-microphone", note: "專輯、周邊、抽卡機一次看。", map: "https://naver.me/5z52kl9b" },
-                { id: "d2-8", time: "17:40", title: "POCA SPOT Hongdae", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約3分鐘", hours: "12:00-20:00", icon: "fa-search", note: "K-pop 小卡選購專門店。", map: "https://naver.me/IFgVIEGd" },
-                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約5分鐘", hours: "12:00-21:00", icon: "fa-music", note: "K-pop 推活選物店。", map: "https://map.naver.com/p/search/%EB%A7%88%EC%9D%B4%EC%9E%BC%20%ED%99%8D%EB%8C%80" },
-                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN 鞋店", stay: "30~45分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "18號出口 / 步行約8分鐘", hours: "12:00-22:00", icon: "fa-shoe-prints", note: "弘大熱門平價女鞋。", map: "https://naver.me/59U9dYPZ" },
-                { id: "d2-beauty", time: "21:15", title: "美妝補貨", stay: "45~75分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "8號出口 (CHICOR) / 7號出口 (HEMEKO)", hours: "至 23:30 (CHICOR) / 02:00 (HEMEKO)", icon: "fa-spray-can", note: "弘大美妝一級戰區。", map: "https://map.naver.com/v5/search/서울 마포구 홍익로 25" }
+                { id: "d2-4", time: "14:00", title: "Color of You", stay: "50分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "2號出口 / 步行約4分鐘", hours: "11:00-20:00 (休息 13:00-14:00)", icon: "fa-palette", note: "已訂位：#26KK239040517。<br><br>GPT: 已訂位: 訂單編號#26KK239040517 2026/4/16 AM 14:00 如果你們兩人都有要慢慢挑小卡、做DIY或等取貨, 可以抓到 1.5~2小時", map: "https://map.naver.com/p/search/%EC%BB%AC%EB%9F%AC%EC%98%A4%EB%B8%8C%EC%9C%A0%20%ED%99%8D%EB%8C%80%EC%A0%90" },
+                { id: "d2-ducky", time: "15:10", title: "Ducky World", stay: "20~35分鐘", lines: ["AREX", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約2~3分鐘", hours: "10:00-22:00", icon: "fa-duck", note: "主打偶像小卡收納用品。<br><br>GPT: 這家目前公開定位是以偶像小卡收納用品為主, 不是大型多樓層百貨型店面, 所以通常不用抓太久。", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C29%EA%B8%B8%2060" },
+                { id: "d2-kit", time: "15:40", title: "KiTbetter Flagship", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約2~3分鐘", hours: "12:00-21:00", icon: "fa-box-open", note: "KiT Album 及周邊選物店。<br><br>GPT: 這間比較偏 K-pop / KIT Album/周邊選物型店舖, 也有體驗與展示空間, 適合排在弘大商圈順逛", map: "https://naver.me/5yPsUODj" },
+                { id: "d2-idol", time: "16:40", title: "idOLSTORE Hongdae", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約5分鐘", hours: "12:00-21:00", icon: "fa-microphone", note: "專輯、周邊、抽卡機一次看。<br><br>GPT: 屬於弘大很適合追星順逛的店, 專輯、周邊、抽卡機一次看。慢慢挑選抓 1 小時左右很剛好。", map: "https://naver.me/5z52kl9b" },
+                { id: "d2-8", time: "17:40", title: "POCA SPOT Hongdae", stay: "45分鐘~1.5小時", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約3分鐘", hours: "12:00-20:00", icon: "fa-search", note: "K-pop 小卡現場選購專門店。<br><br>GPT: 這家很適合排在弘大商圈順逛, 主打 K-pop小卡選購與當日取貨; 若要當天取貨, 常見規則是 16:00 前下單可當日取", map: "https://naver.me/IFgVIEGd" },
+                { id: "d2-jam", time: "18:40", title: "My Jam", stay: "30~60分鐘", lines: ["2號線", "京義中央線"], station: "弘大入口站 / 홍대입구역", exit: "7號出口 / 步行約5分鐘", hours: "12:00-21:00", icon: "fa-music", note: "K-pop 推活選物店。<br><br>GPT: 店鋪性質偏 K-pop 推活小物/卡套/鑰匙配件選物店。如果你們兩人想慢慢挑卡套、掛飾、拍照, 再抓到1小時會比較剛好。", map: "https://map.naver.com/p/search/%EB%A7%88%EC%9D%B4%EC%9E%BC%20%ED%99%8D%EB%8C%80" },
+                { id: "d2-chaakan", time: "20:30", title: "CHAAKAN 鞋店", stay: "30~45分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "18號出口 / 步行約8分鐘", hours: "12:00-22:00", icon: "fa-shoe-prints", note: "弘大熱門平價女鞋。<br><br>GPT: 這家是弘大很順路的鞋店, 適合排在弘大商圈逛街時一起去。如果您們兩個想慢慢試穿, 抓 1~1.5 小時比較保險。", map: "https://naver.me/59U9dYPZ" },
+                { id: "d2-beauty", time: "21:15", title: "美妝補貨 (CHICOR/HEMEKO)", stay: "45~75分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "8號出口(CHICOR) / 7號出口(HEMEKO)", hours: "至 23:30 / 02:00", icon: "fa-spray-can", note: "兩大美妝店巡禮。<br><br>GPT: CHICOR 是 1~3 層大店, 集結約230個品牌; 如果會試色、比價, 抓1小時左右最剛好。", map: "https://map.naver.com/v5/search/서울 마포구 홍익로 25" }
             ] },
             3: { reminders: ["13:40 停下來吃午餐", "16:05 前後一定去 Brandy Melville"], events: [
-                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約1分鐘", hours: "10:00-23:00", icon: "fa-home", note: "B1~3F 居家飾品旗艦店。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
-                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約6~7分鐘", hours: "11:00-21:00", icon: "fa-tint", note: "fwee 彩妝體驗空間。", map: "https://map.naver.com/p/search/%ED%93%8C%EC%95%84%EC%A7%80%ED%8A%B8%20%EC%84%B1%EC%88%98" },
-                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45分鐘~1.5小時", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約6分鐘", hours: "11:00-21:00", icon: "fa-heart", note: "兩層樓彩妝體驗空間。", map: "https://naver.me/G6RYOX1r" },
-                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "聖水洞特色午餐。" },
-                { id: "d3-5", time: "14:40", title: "rom&nd Pink Office", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約7分鐘", hours: "11:00-21:00", icon: "fa-palette", note: "rom&nd 首爾旗艦店。", map: "https://map.naver.com/p/search/%EB%A1%AC%EC%95%A4%20%ED%95%91%ED%81%AC%EC%98%A4%ED%94%BC%EC%8A%A4" },
+                { id: "d3-1", time: "11:00", title: "nyu nyu House Seongsu", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約1分鐘", hours: "10:00-23:00", icon: "fa-home", note: "B1~3F 居家生活飾品旗艦店。<br><br>GPT: 因為這家是四層大型店, 主打居家服飾、髮飾等, 定位偏 lifestyle。可多留些時間慢慢挑選。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%84%B1%EC%88%98%EC%97%AD%EC%A0%90" },
+                { id: "d3-2", time: "11:45", title: "Fwee AGIT", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約6~7分鐘", hours: "11:00-21:00", icon: "fa-tint", note: "fwee 彩妝品牌體驗空間。<br><br>GPT: 重點是試色、體驗鑰匙圈製作等類活動, 通常會比一般快閃美妝店待久一點。", map: "https://map.naver.com/p/search/%ED%93%8C%EC%95%84%EC%A7%80%ED%8A%B8%20%EC%84%B1%EC%88%98" },
+                { id: "d3-3", time: "12:35", title: "Heart Percent Seongsu", stay: "45分鐘~1.5小時", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約6分鐘", hours: "11:00-21:00", icon: "fa-heart", note: "超人氣彩妝體驗空間。<br><br>GPT: 若你們兩人會慢慢試色、拍照、逛兩層空間, 可抓到1~1.5小時較剛好。適合聖水洞半日巡禮。", map: "https://naver.me/G6RYOX1r" },
+                { id: "d3-lunch", time: "13:40", title: "午餐時間", stay: "1小時", icon: "fa-utensils", note: "聖水洞特色餐飲。" },
+                { id: "d3-5", time: "14:40", title: "rom&nd Pink Office", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約7分鐘", hours: "11:00-21:00", icon: "fa-palette", note: "rom&nd 首爾旗艦店。<br><br>GPT: 包含色彩測試、調色體驗。店內主打約300+色號展示, 還有 13 個聖水限定色。", map: "https://map.naver.com/p/search/%EB%A1%AC%EC%95%A4%20%ED%95%91%ED%81%AC%EC%98%A4%ED%94%BC%EC%8A%A4" },
                 { id: "d3-6", time: "15:30", title: "ROLAROLA Petit Maison", stay: "20~35分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約7~8分鐘", hours: "11:00-21:00", icon: "fa-tshirt", map: "https://map.naver.com/p/search/%EB%A1%9C%EB%9D%BC%EB%A1%9C%EB%9D%BC%20%EC%81%98%EB%9D%A0%EB%A9%94%EC%A2%85%EC%84%B1%EC%88%98" },
-                { id: "d3-7", time: "16:05", title: "Brandy Melville", stay: "45~75分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約10分鐘", hours: "11:00-18:00 (Check IG)", icon: "fa-star", note: "韓國首店，BP 同款熱門。", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" },
-                { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "4號出口 / 步行約4分鐘", hours: "11:30-22:00", icon: "fa-shoe-prints", note: "聖水 3 層樓旗艦店。", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%EC%A0%90" },
-                { id: "d3-9", time: "18:10", title: "Verish Seongsu", stay: "30~50分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "4號出口 / 步行約5分鐘", hours: "11:00-20:00", icon: "fa-female", note: "精緻內衣至服飾體驗。", map: "https://map.naver.com/p/search/%EB%B2%A0%EB%A6%AC%EC%8B%9C%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
-                { id: "d3-10", time: "18:50", title: "BANILA CO Seongsu", stay: "30~45分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "4號出口 / 步行約4分鐘", hours: "11:00-21:00", icon: "fa-spray-can", note: "標誌性粉色空間。", map: "https://map.naver.com/p/search/%EB%B0%94%EB%8B%90%EB%9D%BC%EC%BD%94%20%EC%84%B1%EC%88%98%20%ED%94%8C%EB%9E%98%EA%B7%B8%EC%8B%AD%20%EC%8A%A4%ED%86%A0%EC%96%B4" },
-                { id: "d3-flex", time: "20:40", title: "聖水加碼 (視體力)", stay: "視情況", lines: ["2號線", "12號線"], station: "聖水站 / 뚝섬역", exit: "1號出口 (CUBE) / 5號出口 (AMUSE)", hours: "10:00-19:00 (CUBE) / 11:00-20:30 (AMUSE)", icon: "fa-plus-circle", note: "AMUSE, CUBE, Daiso。", map: "https://map.naver.com/p/search/%EC%9E%A5%EC%86%8C%EB%AA%85" }
+                { id: "d3-7", time: "16:05", title: "Brandy Melville", stay: "45~75分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "3號出口 / 步行約10分鐘", hours: "11:00-18:00 (Check IG)", icon: "fa-star", note: "韓國首店，BP 同款熱門。<br><br>GPT: 聖水熱門服飾店, 有試衣區, 若想慢慢挑、試穿, 抓1小時左右比較實際。品牌以onesize著名, 建議現場一定要試穿。", map: "https://map.naver.com/p/search/%EB%B8%8C%EB%9E%9C%EB%94%94%EB%A9%9C%EB%B9%8C/place/1979523978" },
+                { id: "d3-8", time: "17:20", title: "Rockfish Weatherwear", stay: "35~60分鐘", lines: ["2號線"], station: "聖水站 / 성수역", exit: "4號出口 / 步行約4分鐘", hours: "11:30-22:00", icon: "fa-shoe-prints", note: "聖水 3 層樓旗艦店。<br><br>GPT: 3層樓的旗艦店, 1樓到3樓都有不同空間配置, 逛鞋款與季節商品通常不會太快。", map: "https://map.naver.com/p/search/%EB%9D%BD%ED%94%BC%EC%89%AC%EC%9B%A8%EB%8D%94%EC%9B%A8%EC%96%B4%20%EC%84%B1%EC%88%98%A0%EC%A0%90" }
             ] },
-            4: { reminders: ["13:40 吃午餐", "17:40 一定進入最後飾品區"], events: [
-                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20~35分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 步行約1分鐘內 (地下街 B-10)", hours: "10:00-22:00", icon: "fa-music", note: "專輯周邊掃貨點。", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
-                { id: "d4-2", time: "11:30", title: "CD SHOP", stay: "20~35分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 地下街 B-16,17", hours: "10:30-21:00 (週日至20:00)", icon: "fa-compact-disc", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5" },
-                { id: "d4-3", time: "12:00", title: "Buruttrak", stay: "30~50分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 步行約1~2分鐘", hours: "10:00-23:00 (週日至23:00)", icon: "fa-record-vinyl", note: "1979年開業之唱片老店。", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD%EB%AA%85%EB%8F%99" },
-                { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35~60分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "步行約3~5分鐘", hours: "10:00-23:00", icon: "fa-store", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4%EB%AA%85%EB%8F%99%0A%EC%A0%90" },
-                { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃", stay: "1小時", icon: "fa-utensils", note: "明洞特色食肆。" },
-                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25~40分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 步行約4分鐘", hours: "10:30-23:30", icon: "fa-spray-can", note: "美妝與香氛採買。", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
-                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25~40分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約3~4分鐘", hours: "10:00-02:00", icon: "fa-magic", note: "明洞美妝旗艦店。", map: "https://map.naver.com/p/search/%ED%97%A4%EB%A9%94%EC%BD%94%EB%AA%85%EB%8F%99%EC%A0%90/place/2086658338" },
-                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦", stay: "20~35分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "步行約3分鐘", hours: "11:00-22:30", icon: "fa-wind", note: "拍照型香氛選物店。", map: "https://map.naver.com/p/search/%EB%B9%84%20%EB%B9%84%20%EC%95%99%20%EB%AA%85%20%EB%8F%99" },
-                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35~60分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6-7號出口 / 步行約4分鐘", hours: "10:00-23:00", icon: "fa-ring", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%EB%AA%85%EB%8F%99%EC%A0%90/place/1319879223" },
-                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE", stay: "20~45分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約1~3分鐘", hours: "09:00-23:00", icon: "fa-home", note: "飾品、雜貨與服飾選品。", map: "https://naver.me/FXn6wHWL" },
-                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1~2小時", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約1分鐘", hours: "09:00-23:00", icon: "fa-gem", note: "多層大型飾品賣場。", map: "https://map.naver.com/p/search/미미라인 명동점" },
-                { id: "d4-flex", time: "19:00", title: "明洞加碼", stay: "視體力", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約3分鐘", hours: "至 22:00", icon: "fa-plus-circle", note: "M Playground, adidas, JUUNEEDU。" }
+            4: { reminders: ["13:40 吃午餐", "17:40 一定進入最後飾品區", "20:00 N首爾塔最晚入場 22:30"], events: [
+                { id: "d4-1", time: "11:00", title: "C.T RECORD", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명動驛", exit: "4號出口 / 地下街 B-10", hours: "10:00-22:00", icon: "fa-music", note: "🕒 營業時間：10:00-22:00<br>專輯周邊掃貨點。<br><br>GPT: 這家在明洞地下街, 主打 K-pop 專輯、DVD、黑膠。價格比一些大店更便宜。", map: "https://map.naver.com/p/search/%EC%94%A8%ED%8B%B0%EB%A0%88%EC%BD%94%EB%93%9C%EB%AA%85%EB%8F%99" },
+                { id: "d4-2", time: "11:30", title: "Myeong-dong CD SHOP", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 地下街 B-16,17", hours: "10:30-21:00 (週日至20:00)", icon: "fa-compact-disc", note: "🕒 營業時間：10:30-21:00 (日20:00)<br>專輯周邊挖寶。<br><br>GPT: 這家就在 C.T RECORD 附近, 適合一起比價。店面不大但小卡密度高。", map: "https://map.naver.com/p/search/%EB%AA%85%EB%8F%99 CD %EC%83%B5" },
+                { id: "d4-3", time: "12:00", title: "Buruttrak / Buru’s Ddeurak", stay: "30～50 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "4號出口 / 步行約1~2分鐘", hours: "10:00-23:00", icon: "fa-record-vinyl", note: "🕒 營業時間：10:00-23:00<br>1979年開業之唱片老店。<br><br>GPT: 算明洞很有代表性的唱片店之一。不只是賣當紅專輯, 常被提到有舊專輯、海報、稀有品。", map: "https://map.naver.com/p/search/%EB%B6%80%EB%A3%A8%EC%9D%98%EB%9C%A8%EB%9D%BD%EB%AA%85%EB%8F%99" },
+                { id: "d4-4", time: "12:45", title: "K-MECCA 明洞店", stay: "35～60 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "步行約3~5分鐘", hours: "10:00-23:00", icon: "fa-store", note: "🕒 營業時間：10:00-23:00<br>兩層樓大型周邊店。<br><br>GPT: 賣專輯、手燈、周邊、海報等, 通常不會是10分鐘快閃型。品項很齊全。", map: "https://map.naver.com/p/search/%EC%BC%80%EC%9D%B4%EB%A9%94%EC%B9%B4%EB%AA%85%EB%8F%99%0A%EC%A0%90" },
+                { id: "d4-lunch", time: "13:40", title: "午餐 / 小吃時間", stay: "40～60 分鐘", icon: "fa-utensils", note: "明洞大街特色食肆。" },
+                { id: "d4-5", time: "14:40", title: "CHICOR Myeongdong", stay: "25～40 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "8號出口 / 步行約4分鐘", hours: "10:30-23:30", icon: "fa-spray-can", note: "🕒 營業時間：10:30-23:30<br>美妝與香氛採買。<br><br>GPT: 明洞街邊1樓美妝店, 適合快速逛熱門韓妝、香氛與伴手禮。", map: "https://map.naver.com/p/search/%EC%8B%9C%EC%BD%94%EB%A5%B4%EB%AA%85%EB%8F%99%EC%A0%90" },
+                { id: "d4-6", time: "15:10", title: "HEMEKO 明洞店", stay: "25～40 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約3~4分鐘", hours: "10:00-02:00", icon: "fa-magic", note: "🕒 營業時間：10:00-02:00<br>明洞美妝旗艦店。<br><br>GPT: 兩層樓小眾美妝旗艦。比弘大、東大門分店規模更大, 有深夜營業優勢。", map: "https://map.naver.com/p/search/%ED%97%A4%EB%A9%94%EC%BD%94%EB%AA%85%EB%8F%99%EC%A0%90/place/2086658338" },
+                { id: "d4-7", time: "15:40", title: "BiBiANG 明洞旗艦店", stay: "20～35 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "步行約3分鐘", hours: "11:00-22:30", icon: "fa-wind", note: "🕒 營業時間：11:00-22:30<br>拍照型香氛選物店。<br><br>GPT: 以香水試聞、選香、拍照型門市為主。", map: "https://map.naver.com/p/search/%EB%B9%84%20%EB%B9%84%20%EC%95%99%20%EB%AA%85%20%EB%8F%99" },
+                { id: "d4-8", time: "16:10", title: "nyu nyu 明洞店", stay: "35～60 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6-7號出口 / 步行約4分鐘", hours: "10:00-23:00", icon: "fa-ring", note: "🕒 營業時間：10:00-23:00<br>東大門人氣飾品店分店。<br><br>GPT: 除了耳環, 還有襪子、包包、帽子、服飾等大量配件。", map: "https://map.naver.com/p/search/%EB%89%B4%EB%89%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%AA%85%EB%8F%99%EC%A0%90" },
+                { id: "d4-9", time: "17:00", title: "NYUNYU HOUSE 明洞站店", stay: "20～45 分鐘", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約1~3分鐘", hours: "09:00-23:00", icon: "fa-home", note: "🕒 營業時間：09:00-23:00<br>飾品、雜貨與服飾選品。<br><br>GPT: 位在 2F~3F, 屬於 NYUNYU 系列的明洞站分店。", map: "https://naver.me/FXn6wHWL" },
+                { id: "d4-10", time: "17:40", title: "MIMILINE Myeongdong", stay: "1～2 小時", lines: ["4號線"], station: "明洞站 / 명동역", exit: "6號出口 / 步行約1分鐘", hours: "09:00-23:00", icon: "fa-gem", note: "🕒 營業時間：09:00-23:00<br>多層大型飾品賣場。<br><br>GPT: 2F~4F 超大型賣場, 位置非常方便。", map: "https://map.naver.com/p/search/미미라인 명동점" },
+                { id: "d4-move-tower", time: "19:20", title: "往首爾塔方向移動", stay: "約 30～40 分鐘", icon: "fa-walking", note: "移動＋排隊緩衝。<br><br>GPT: 往 明洞站 3 號出口 / Pacific Hotel 方向走，再接南山纜車動線。", map: "https://map.naver.com/v5/search/%EB%82%A8%EC%82%B0%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4" },
+                { id: "d4-tower", time: "20:00", title: "N Seoul Tower / 首爾塔", stay: "60～90 分鐘", lines: ["4號線"], station: "明洞站 / 南山", hours: "週六觀景台至 23:00", icon: "fa-tower-observation", note: "🕒 營業時間：週六觀景台到 23:00<br>首爾地標與浪漫夜景。<br><br>GPT: 若要上觀景台，最晚建議 22:30 前 入場。(nseoultower.co.kr)", map: "https://map.naver.com/p/search/N서울타워" },
+                { id: "d4-return", time: "21:30", title: "下山 / 回明洞 / 回弘大", icon: "fa-taxi", note: "GPT: 若還想吃東西，可回明洞簡單補一餐；若已累，直接回弘大最順。" }
             ] },
             5: { reminders: ["11:20 一定退房寄行李", "17:30 一定飯店拿行李", "18:55 一定 AREX"], events: [
-                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", icon: "fa-suitcase", note: "領完行李準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너스홍代" },
-                { id: "d5-lunch", time: "12:00", title: "早午餐", stay: "50分鐘", icon: "fa-bread-slice", note: "弘大最後美食時間。" },
-                { id: "d5-covernat", time: "12:50", title: "COVERNAT Flagship", stay: "45分鐘~1.5小時", lines: ["2號線", "6號線"], station: "弘大站 / 合井站", exit: "3號出口 / 步行約5-6分鐘", hours: "12:00-22:00", icon: "fa-tshirt", map: "https://naver.me/5giFTV55" },
-                { id: "d5-coyseio", time: "13:50", title: "COYSEIO Flagship", stay: "45分鐘~1.5小時", lines: ["2號線", "6號線"], station: "弘大站 / 合井站", exit: "3號出口 / 步行約5-6分鐘", hours: "12:00-21:00", icon: "fa-shopping-bag", map: "https://map.naver.com/p/search/코이세이오 플래그쉽 합정" },
-                { id: "d5-understar", time: "14:50", title: "UNS STATION", stay: "40~70分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約6-7分鐘", hours: "11:00-23:00", icon: "fa-female", map: "https://map.naver.com/p/search/언더스타서울 서교" },
-                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA 弘大2店", stay: "25~40分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約5-6分鐘", hours: "12:00-23:00", icon: "fa-shopping-basket", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%EB%A7%88%ED%8F%AC%EA%B5%AC%EC%84%9C%EA%B5%90%EB%8F%99%20358-67" },
-                { id: "d5-loof", time: "16:30", title: "LOOF Hongdae", stay: "35~60分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約5分鐘", hours: "11:00-23:00", icon: "fa-compact-disc", map: "https://naver.me/GkR3c9XW" },
-                { id: "d5-bag", time: "17:30", title: "飯店拿行李", stay: "20 分鐘", icon: "fa-suitcase-rolling", note: "遵守死線，準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너스홍대" },
+                { id: "d5-1", time: "11:20", title: "退房 / 寄放行李", stay: "死線", icon: "fa-suitcase", note: "領完行李準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너斯홍대" },
+                { id: "d5-lunch", time: "12:00", title: "早午餐時間", stay: "50分鐘", icon: "fa-bread-slice", note: "弘大最後美食巡禮。" },
+                { id: "d5-covernat", time: "12:50", title: "COVERNAT Flagship", stay: "45分鐘~1.5小時", exit: "3號出口 / 步行約5-6分鐘", hours: "12:00-22:00", icon: "fa-tshirt", note: "🕒 營業時間：12:00-22:00<br>熱門韓系休閒服飾。<br><br>GPT: 弘大熱門旗艦店, 店面有1F和B1兩層。", map: "https://naver.me/5giFTV55" },
+                { id: "d5-coyseio", time: "13:50", title: "COYSEIO Flagship", stay: "45分鐘~1.5小時", exit: "3號出口 / 步行約5-6分鐘", hours: "12:00-21:00", icon: "fa-shopping-bag", note: "🕒 營業時間：12:00-21:00<br>女生服飾及生活選物。", map: "https://map.naver.com/p/search/코이세이오 플래그쉽 합정" },
+                { id: "d5-understar", time: "14:50", title: "UNS STATION", stay: "40~70分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約6-7分鐘", hours: "11:00-23:00", icon: "fa-female", note: "🕒 營業時間：11:00-23:00<br>韓系女裝選品。", map: "https://map.naver.com/p/search/언더스타서울 서교" },
+                { id: "d5-ormusea", time: "15:50", title: "OR MUSEA 弘大2店", stay: "25~40分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約5-6分鐘", hours: "12:00-23:00", icon: "fa-shopping-basket", note: "🕒 營業時間：12:00-23:00<br>基本款女裝。", map: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%EB%A7%88%ED%8F%AC%EA%B5%AC%EC%84%9C%EA%B5%90%EB%8F%99%20358-67" },
+                { id: "d5-loof", time: "16:30", title: "LOOF Hongdae", stay: "35~60分鐘", lines: ["2號線"], station: "弘大入口站 / 홍대입구역", exit: "9號出口 / 步行約5分鐘", hours: "11:00-23:00", icon: "fa-compact-disc", note: "🕒 營業時間：11:00-23:00<br>兩層追星店。", map: "https://naver.me/GkR3c9XW" },
+                { id: "d5-bag", time: "17:30", title: "飯店拿行李", stay: "20 分鐘", icon: "fa-suitcase-rolling", note: "遵守死線，準備前往首爾站。", map: "https://map.naver.com/v5/search/호텔더디자이너斯홍대" },
                 { id: "d5-arex", time: "18:55", title: "AREX 直達車", stay: "43分鐘", lines: ["AREX"], station: "首爾站 / 서울역", exit: "B7F 月台 / 提早30分進站", hours: "發車死線 18:55", icon: "fa-train", map: "https://www.airportrailroad.com/ticket/rsv" },
                 { id: "d5-airport", time: "19:38", title: "仁川機場 T1", stay: "登機", icon: "fa-plane-departure", note: "回程航班 IT 603。", map: "https://map.naver.com/p/search/인천국제공항" }
             ], ...tripCommonData }
@@ -221,7 +294,7 @@
                         <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/15</span> 弘大入住休息</li>
                         <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/16</span> 弘大：Color of You / K-pop 購物</li>
                         <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/17</span> 聖水：品牌旗艦店巡禮</li>
-                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：專輯＋小卡＋美妝購物</li>
+                        <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/18</span> 明洞：專輯＋美妝＋首爾塔夜景</li>
                         <li><span class="text-yellow-600 mr-1 bg-yellow-100 px-1.5 py-0.5 rounded">4/19</span> 弘大最後補貨＋提早去機場</li>
                     </ul>
                 </div>
@@ -288,13 +361,13 @@
                     const isFood = event.icon.includes('utensils') || event.icon.includes('bowl') || event.icon.includes('cookie') || event.icon.includes('bread');
                     const currentImg = window.appState.imageOverrides[event.id] || event.img;
                     
-                    // 營業時間置頂處理
+                    // 營業時間與備註合併
                     let noteContent = event.note || '';
                     if (event.hours) {
                         noteContent = `🕒 <b>營業時間：</b>${event.hours}<br><br>${noteContent}`;
                     }
 
-                    // 地鐵標籤處理
+                    // 地鐵標籤 HTML
                     let subwayHtml = '';
                     if (event.lines) {
                         subwayHtml = `<div class="flex flex-wrap items-center gap-1 mb-2">`;
@@ -318,7 +391,7 @@
                             <div class="p-4">
                                 <div class="flex items-start justify-between mb-2">
                                     <h3 class="text-md font-bold text-gray-900 leading-tight">${event.title}</h3>
-                                    ${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap">地圖</a>` : ''}
+                                    ${event.map ? `<a href="${event.map}" target="_blank" class="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-100 whitespace-nowrap transition hover:bg-emerald-100">地圖</a>` : ''}
                                 </div>
                                 <div class="flex flex-wrap items-center gap-2 mb-3">
                                     <span class="text-[11px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full"><i class="fas fa-clock mr-1"></i>${event.time}</span>
@@ -398,6 +471,7 @@
             window.modalOpen = false;
         };
 
+        // 滑動邏輯
         let touchStartX = 0;
         let touchEndX = 0;
         document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
